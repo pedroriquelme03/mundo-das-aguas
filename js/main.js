@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Fleet slider
+  // Fleet slider (carrossel só em ecrãs ≤1024px; em desktop mostram-se os 3 cards)
   (function () {
     var track = document.getElementById('fleetTrack');
     var prevBtn = document.getElementById('fleetPrev');
@@ -72,6 +72,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var total = cards.length;
     var startX = 0;
     var isDragging = false;
+    var fleetBreakpoint = 1024;
+    var autoPlay = null;
+    var slider = document.getElementById('fleetSlider');
+
+    function isFleetCarousel() {
+      return window.innerWidth <= fleetBreakpoint;
+    }
 
     for (var i = 0; i < total; i++) {
       var dot = document.createElement('button');
@@ -82,7 +89,25 @@ document.addEventListener('DOMContentLoaded', function () {
       dotsContainer.appendChild(dot);
     }
 
+    function clearAutoPlay() {
+      if (autoPlay) {
+        clearInterval(autoPlay);
+        autoPlay = null;
+      }
+    }
+
+    function startAutoPlay() {
+      clearAutoPlay();
+      if (isFleetCarousel()) {
+        autoPlay = setInterval(function () { goTo(current + 1); }, 6000);
+      }
+    }
+
     function goTo(index) {
+      if (!isFleetCarousel()) {
+        track.style.removeProperty('transform');
+        return;
+      }
       if (index < 0) index = total - 1;
       if (index >= total) index = 0;
       current = index;
@@ -90,6 +115,16 @@ document.addEventListener('DOMContentLoaded', function () {
       var dots = dotsContainer.querySelectorAll('.fleet-slider__dot');
       dots.forEach(function (d) { d.classList.remove('active'); });
       dots[current].classList.add('active');
+    }
+
+    function onResizeFleet() {
+      if (isFleetCarousel()) {
+        goTo(current);
+        startAutoPlay();
+      } else {
+        clearAutoPlay();
+        track.style.removeProperty('transform');
+      }
     }
 
     prevBtn.addEventListener('click', function () { goTo(current - 1); });
@@ -102,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
 
     track.addEventListener('touchend', function (e) {
-      if (!isDragging) return;
+      if (!isDragging || !isFleetCarousel()) return;
       isDragging = false;
       var diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
@@ -111,20 +146,23 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Auto-play
-    var autoPlay = setInterval(function () { goTo(current + 1); }, 6000);
-    var slider = document.getElementById('fleetSlider');
-    slider.addEventListener('mouseenter', function () { clearInterval(autoPlay); });
-    slider.addEventListener('mouseleave', function () {
-      autoPlay = setInterval(function () { goTo(current + 1); }, 6000);
+    startAutoPlay();
+    slider.addEventListener('mouseenter', clearAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
+
+    window.addEventListener('resize', function () {
+      onResizeFleet();
     });
 
     // Keyboard
     slider.setAttribute('tabindex', '0');
     slider.addEventListener('keydown', function (e) {
+      if (!isFleetCarousel()) return;
       if (e.key === 'ArrowLeft') goTo(current - 1);
       if (e.key === 'ArrowRight') goTo(current + 1);
     });
+
+    onResizeFleet();
   })();
 
   // Scroll animations

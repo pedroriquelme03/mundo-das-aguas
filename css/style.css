@@ -699,6 +699,31 @@ section .section-title, section .section-subtitle { text-align: center; }
 }
 .fleet-card__btns { display: flex; gap: 8px; flex-wrap: wrap; }
 
+/* Frota: três cards visíveis em ecrãs largos (sem carrossel) */
+@media (min-width: 1025px) {
+  .fleet-slider__track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    transform: none !important;
+    will-change: auto;
+  }
+  .fleet-card {
+    flex: unset;
+    width: auto;
+    grid-template-columns: 1fr;
+  }
+  .fleet-card > img {
+    min-height: 200px;
+    max-height: 240px;
+    object-position: center center;
+  }
+  .fleet-slider__arrow,
+  .fleet-slider__dots {
+    display: none;
+  }
+}
+
 /* FLEET DIFFERENTIALS */
 .fleet__differentials {
   padding: 40px;
