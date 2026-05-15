@@ -115,9 +115,16 @@ document.addEventListener('DOMContentLoaded', function () {
         : 'none';
     }
 
+    function viewportContentWidth() {
+      var cs = window.getComputedStyle(viewport);
+      var pl = parseFloat(cs.paddingLeft) || 0;
+      var pr = parseFloat(cs.paddingRight) || 0;
+      return Math.max(0, viewport.clientWidth - pl - pr);
+    }
+
     function updateCardWidths() {
       var spv = slidesPerView();
-      var w = viewport.getBoundingClientRect().width;
+      var w = viewportContentWidth();
       if (spv === 3) {
         var cardW = (w - (spv - 1) * gapPx) / spv;
         viewport.style.setProperty('--fleet-card-w', Math.max(0, cardW) + 'px');
@@ -128,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function slideStepPx() {
       var spv = slidesPerView();
-      var w = viewport.getBoundingClientRect().width;
+      var w = viewportContentWidth();
       if (spv === 1) return w;
       var cardW = (w - (spv - 1) * gapPx) / spv;
       return cardW + gapPx;

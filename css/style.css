@@ -592,6 +592,7 @@ section .section-title, section .section-subtitle { text-align: center; }
   --fleet-gap: 24px;
   /* Espaço para a box-shadow dos cards não ser cortada pelo overflow */
   padding-bottom: 36px;
+  padding-inline: 24px;
 }
 .fleet-slider__track {
   display: flex;
