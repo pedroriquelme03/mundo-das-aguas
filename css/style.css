@@ -592,7 +592,7 @@ section .section-title, section .section-subtitle { text-align: center; }
   --fleet-gap: 24px;
   /* Espaço para a box-shadow dos cards não ser cortada pelo overflow */
   padding-bottom: 36px;
-  padding-inline: 24px;
+  padding-inline: 36px;
 }
 .fleet-slider__track {
   display: flex;
@@ -607,7 +607,8 @@ section .section-title, section .section-subtitle { text-align: center; }
   grid-template-columns: 1fr 1fr;
   background: #fff;
   border-radius: var(--radius);
-  overflow: hidden;
+  /* visible: overflow hidden no próprio card cortava a box-shadow nas laterais */
+  overflow: visible;
   box-shadow: var(--shadow-lg);
   text-align: left;
 }
@@ -619,6 +620,7 @@ section .section-title, section .section-subtitle { text-align: center; }
   max-height: 440px;
   object-fit: cover;
   object-position: center 70%;
+  border-radius: var(--radius) 0 0 var(--radius);
 }
 .fleet-slider__arrow {
   position: absolute;
@@ -666,7 +668,12 @@ section .section-title, section .section-subtitle { text-align: center; }
   border-color: var(--primary);
   transform: scale(1.15);
 }
-.fleet-card__body { padding: 24px 24px 28px; min-width: 0; }
+.fleet-card__body {
+  padding: 24px 24px 28px;
+  min-width: 0;
+  background: #fff;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
 .fleet-card__body h4 { font-size: 1.1rem; margin-bottom: 4px; }
 .fleet-card__cat {
   display: inline-block;
@@ -721,6 +728,10 @@ section .section-title, section .section-subtitle { text-align: center; }
     min-height: 200px;
     max-height: 240px;
     object-position: center center;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .fleet-card__body {
+    border-radius: 0 0 var(--radius) var(--radius);
   }
 }
 
@@ -1161,7 +1172,13 @@ section .section-title, section .section-subtitle { text-align: center; }
   .organizers__image { order: -1; }
 
   .fleet-card { grid-template-columns: 1fr; }
-  .fleet-card > img { min-height: 220px; }
+  .fleet-card > img {
+    min-height: 220px;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .fleet-card__body {
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
   .fleet-slider__arrow--prev { left: 8px; }
   .fleet-slider__arrow--next { right: 8px; }
   .fleet-slider__arrow { width: 40px; height: 40px; }
