@@ -24,6 +24,100 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Hero search — categorias e destinos
+  (function () {
+    var heroData = {
+      compras: {
+        label: 'Compras',
+        destinos: ['Paraguai', 'Brás', 'Goiânia', '25 de Março']
+      },
+      religioso: {
+        label: 'Religioso',
+        destinos: ['Aparecida', 'Canção Nova', 'Trindade', 'Retiros']
+      },
+      pescarias: {
+        label: 'Pescarias',
+        destinos: ['Argentina', 'Pantanal', 'Rios', 'Pousadas']
+      },
+      lazer: {
+        label: 'Família e Lazer',
+        destinos: ['Praias', 'Gramado', 'Foz do Iguaçu', 'Parques']
+      },
+      corporativo: {
+        label: 'Corporativo',
+        destinos: ['Convenções', 'Feiras', 'Equipes', 'Eventos']
+      },
+      educacional: {
+        label: 'Educacional',
+        destinos: ['Visitas técnicas', 'Universidades', 'Escolas']
+      }
+    };
+    var tabs = document.querySelectorAll('.hero-search__tab');
+    var input = document.getElementById('heroSearchInput');
+    var datalist = document.getElementById('heroDestinosList');
+    var form = document.getElementById('heroSearchForm');
+    var activeCategory = 'compras';
+    if (!tabs.length || !input || !form) return;
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      var data = heroData[cat];
+      if (!data) return;
+      tabs.forEach(function (tab) {
+        var isActive = tab.dataset.category === cat;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+      input.placeholder = 'Ex.: ' + data.destinos[0];
+      if (datalist) {
+        datalist.innerHTML = '';
+        data.destinos.forEach(function (dest) {
+          var opt = document.createElement('option');
+          opt.value = dest;
+          datalist.appendChild(opt);
+        });
+      }
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        setCategory(tab.dataset.category);
+        input.focus();
+      });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var data = heroData[activeCategory];
+      var destino = input.value.trim();
+      var msg = 'Olá! Gostaria de informações sobre excursões de ' + data.label.toLowerCase();
+      if (destino) msg += ' para ' + destino;
+      msg += '.';
+      window.open('https://wa.me/5545999677835?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+
+    setCategory('compras');
+  })();
+
+  // Flip cards — serviços (versão teste)
+  document.querySelectorAll('.flip-card').forEach(function (card) {
+    function toggleFlip(e) {
+      if (e.target.closest('a')) return;
+      var willFlip = !card.classList.contains('is-flipped');
+      document.querySelectorAll('.flip-card.is-flipped').forEach(function (other) {
+        if (other !== card) other.classList.remove('is-flipped');
+      });
+      card.classList.toggle('is-flipped', willFlip);
+    }
+    card.addEventListener('click', toggleFlip);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFlip(e);
+      }
+    });
+  });
+
   // Tabs
   var tabBtns = document.querySelectorAll('.tab-btn');
   tabBtns.forEach(function (btn) {
