@@ -99,24 +99,19 @@ document.addEventListener('DOMContentLoaded', function () {
     setCategory('compras');
   })();
 
-  // Flip cards — serviços (versão teste)
-  document.querySelectorAll('.flip-card').forEach(function (card) {
-    function toggleFlip(e) {
-      if (e.target.closest('a')) return;
-      var willFlip = !card.classList.contains('is-flipped');
-      document.querySelectorAll('.flip-card.is-flipped').forEach(function (other) {
-        if (other !== card) other.classList.remove('is-flipped');
+  // Flip cards — toque em dispositivos sem hover
+  if (!window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.flip-card').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return;
+        var flipped = card.classList.contains('is-flipped');
+        document.querySelectorAll('.flip-card.is-flipped').forEach(function (other) {
+          if (other !== card) other.classList.remove('is-flipped');
+        });
+        card.classList.toggle('is-flipped', !flipped);
       });
-      card.classList.toggle('is-flipped', willFlip);
-    }
-    card.addEventListener('click', toggleFlip);
-    card.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleFlip(e);
-      }
     });
-  });
+  }
 
   // Tabs
   var tabBtns = document.querySelectorAll('.tab-btn');
