@@ -29,27 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var heroData = {
       compras: {
         label: 'Compras',
+        whatsappIntro: 'excursões de compras',
         destinos: ['Paraguai', 'Brás', 'Goiânia', '25 de Março']
       },
-      religioso: {
-        label: 'Religioso',
-        destinos: ['Aparecida', 'Canção Nova', 'Trindade', 'Retiros']
+      turismo: {
+        label: 'Turismo',
+        whatsappIntro: 'excursões e viagens de turismo',
+        destinos: ['Aparecida', 'Gramado', 'Foz do Iguaçu', 'Praias', 'Pescarias']
       },
-      pescarias: {
-        label: 'Pescarias',
-        destinos: ['Argentina', 'Pantanal', 'Rios', 'Pousadas']
-      },
-      lazer: {
-        label: 'Família e Lazer',
-        destinos: ['Praias', 'Gramado', 'Foz do Iguaçu', 'Parques']
-      },
-      corporativo: {
-        label: 'Corporativo',
-        destinos: ['Convenções', 'Feiras', 'Equipes', 'Eventos']
-      },
-      educacional: {
-        label: 'Educacional',
-        destinos: ['Visitas técnicas', 'Universidades', 'Escolas']
+      fretamento: {
+        label: 'Fretamento',
+        whatsappIntro: 'fretamento',
+        destinos: ['Empresas e eventos', 'Igrejas e caravanas', 'Escolas', 'Roteiro personalizado']
       }
     };
     var tabs = document.querySelectorAll('.hero-search__tab');
@@ -90,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       var data = heroData[activeCategory];
       var destino = input.value.trim();
-      var msg = 'Olá! Gostaria de informações sobre excursões de ' + data.label.toLowerCase();
+      var msg = 'Olá! Gostaria de informações sobre ' + data.whatsappIntro;
       if (destino) msg += ' para ' + destino;
       msg += '.';
       window.open('https://wa.me/5545999677835?text=' + encodeURIComponent(msg), '_blank', 'noopener');
