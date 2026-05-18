@@ -148,6 +148,174 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Slider — Depoimentos / avaliações
+  (function () {
+    var track = document.getElementById('testimonialsTrack');
+    var viewport = track && track.parentElement;
+    var prevBtn = document.getElementById('testimonialsPrev');
+    var nextBtn = document.getElementById('testimonialsNext');
+    var dotsContainer = document.getElementById('testimonialsDots');
+    var slider = document.getElementById('testimonialsSlider');
+    if (!track || !viewport) return;
+
+    var cards = track.querySelectorAll('.testimonial-card');
+    var total = cards.length;
+    var index = 0;
+    var gap = 24;
+    var autoTimer = null;
+
+    function slidesPerView() {
+      if (window.innerWidth >= 1024) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
+    }
+
+    function maxIndex() {
+      return Math.max(0, total - slidesPerView());
+    }
+
+    function slideStepPx() {
+      var card = cards[0];
+      if (!card) return viewport.offsetWidth;
+      return card.offsetWidth + gap;
+    }
+
+    function goTo(i) {
+      index = Math.max(0, Math.min(i, maxIndex()));
+      track.style.transform = 'translateX(-' + (index * slideStepPx()) + 'px)';
+      if (dotsContainer) {
+        dotsContainer.querySelectorAll('.testimonials-slider__dot').forEach(function (dot, di) {
+          dot.classList.toggle('active', di === index);
+          dot.setAttribute('aria-selected', di === index ? 'true' : 'false');
+        });
+      }
+    }
+
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      for (var d = 0; d <= maxIndex(); d++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'testimonials-slider__dot' + (d === 0 ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Grupo de avaliações ' + (d + 1));
+        dot.setAttribute('aria-selected', d === 0 ? 'true' : 'false');
+        (function (di) {
+          dot.addEventListener('click', function () { goTo(di); resetAuto(); });
+        })(d);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); resetAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { next(); resetAuto(); });
+
+    function resetAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = setInterval(function () {
+        goTo(index >= maxIndex() ? 0 : index + 1);
+      }, 6000);
+    }
+
+    if (slider) {
+      slider.addEventListener('mouseenter', function () {
+        if (autoTimer) clearInterval(autoTimer);
+      });
+      slider.addEventListener('mouseleave', resetAuto);
+    }
+
+    window.addEventListener('resize', function () {
+      if (dotsContainer) {
+        var oldIndex = index;
+        dotsContainer.innerHTML = '';
+        for (var d2 = 0; d2 <= maxIndex(); d2++) {
+          var dot2 = document.createElement('button');
+          dot2.type = 'button';
+          dot2.className = 'testimonials-slider__dot';
+          dot2.setAttribute('role', 'tab');
+          dot2.setAttribute('aria-label', 'Grupo de avaliações ' + (d2 + 1));
+          (function (di) {
+            dot2.addEventListener('click', function () { goTo(di); resetAuto(); });
+          })(d2);
+          dotsContainer.appendChild(dot2);
+        }
+        goTo(Math.min(oldIndex, maxIndex()));
+      } else {
+        goTo(Math.min(index, maxIndex()));
+      }
+    });
+
+    goTo(0);
+    resetAuto();
+  })();
+
+  // Carrossel — Para Organizadores (1 foto por vez, tamanho fixo)
+  (function () {
+    var track = document.getElementById('organizersTrack');
+    var viewport = track && track.parentElement;
+    var prevBtn = document.getElementById('organizersPrev');
+    var nextBtn = document.getElementById('organizersNext');
+    var dotsContainer = document.getElementById('organizersDots');
+    if (!track || !viewport) return;
+
+    var slides = track.querySelectorAll('.organizers__slide');
+    var total = slides.length;
+    var index = 0;
+    var autoTimer = null;
+
+    function goTo(i) {
+      index = (i + total) % total;
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      if (dotsContainer) {
+        dotsContainer.querySelectorAll('.organizers__carousel-dot').forEach(function (dot, di) {
+          dot.classList.toggle('active', di === index);
+          dot.setAttribute('aria-selected', di === index ? 'true' : 'false');
+        });
+      }
+    }
+
+    function next() { goTo(index + 1); }
+    function prev() { goTo(index - 1); }
+
+    if (dotsContainer) {
+      for (var d = 0; d < total; d++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'organizers__carousel-dot' + (d === 0 ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Foto ' + (d + 1));
+        dot.setAttribute('aria-selected', d === 0 ? 'true' : 'false');
+        (function (di) {
+          dot.addEventListener('click', function () { goTo(di); resetAuto(); });
+        })(d);
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { prev(); resetAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { next(); resetAuto(); });
+
+    function resetAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+      autoTimer = setInterval(next, 5000);
+    }
+
+    var carousel = document.getElementById('organizersCarousel');
+    if (carousel) {
+      carousel.addEventListener('mouseenter', function () {
+        if (autoTimer) clearInterval(autoTimer);
+      });
+      carousel.addEventListener('mouseleave', resetAuto);
+    }
+
+    window.addEventListener('resize', function () { goTo(index); });
+    goTo(0);
+    resetAuto();
+  })();
+
   // Fleet slider: mobile 1 card; desktop (≥1025px) 3 cards visíveis + setas/pontos + loop
   (function () {
     var track = document.getElementById('fleetTrack');
