@@ -125,19 +125,29 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Active nav on scroll
-  var sections = document.querySelectorAll('section[id]');
-  var navLinks = document.querySelectorAll('.nav-link');
-  window.addEventListener('scroll', function () {
-    var scrollPos = window.scrollY + 100;
-    sections.forEach(function (sec) {
-      if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
-        navLinks.forEach(function (l) { l.classList.remove('active'); });
-        var target = document.querySelector('.nav-link[href="#' + sec.id + '"]');
-        if (target) target.classList.add('active');
-      }
+  // Navegação ativa — páginas separadas (data-page no body)
+  var currentPage = document.body.dataset.page;
+  if (currentPage) {
+    document.querySelectorAll('.nav-link[data-nav]').forEach(function (link) {
+      link.classList.toggle('active', link.dataset.nav === currentPage);
     });
-  });
+  } else {
+    // Single-page: destaque por scroll
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    if (sections.length && navLinks.length) {
+      window.addEventListener('scroll', function () {
+        var scrollPos = window.scrollY + 100;
+        sections.forEach(function (sec) {
+          if (sec.offsetTop <= scrollPos && sec.offsetTop + sec.offsetHeight > scrollPos) {
+            navLinks.forEach(function (l) { l.classList.remove('active'); });
+            var target = document.querySelector('.nav-link[href="#' + sec.id + '"]');
+            if (target) target.classList.add('active');
+          }
+        });
+      });
+    }
+  }
 
   // Slider — Depoimentos / avaliações
   (function () {

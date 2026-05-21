@@ -1665,3 +1665,100 @@ section .section-title, section .section-subtitle { text-align: center; }
   .fleet__badges { gap: 8px; }
   .fleet__badge { font-size: .75rem; padding: 6px 12px; }
 }
+
+/* ========== PÁGINAS INTERNAS ========== */
+.page-banner {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 0 56px;
+  overflow: hidden;
+  background: var(--primary);
+}
+.page-banner__bg {
+  position: absolute;
+  inset: 0;
+}
+.page-banner__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.page-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10,37,64,.88) 0%, rgba(10,110,138,.75) 100%);
+}
+.page-banner__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  max-width: 720px;
+}
+.page-banner__content .section-tag {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+}
+.page-banner__content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.page-banner__content p {
+  font-size: 1.05rem;
+  opacity: .92;
+  line-height: 1.6;
+}
+.page-main > section:first-child {
+  padding-top: 72px;
+}
+.page-links {
+  background: var(--bg-alt);
+}
+.page-links__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.page-links__card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.page-links__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+.page-links__card h3 {
+  font-size: 1.15rem;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.page-links__card p {
+  font-size: .9rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.page-links__card span {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+@media (max-width: 900px) {
+  .page-links__grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .page-banner { min-height: 220px; padding: 100px 0 40px; }
+  .page-links__grid { grid-template-columns: 1fr; }
+}

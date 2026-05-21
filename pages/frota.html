@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Frota própria com ônibus leito, semi-leito e executivo para excursões e fretamentos nacionais e Mercosul.">
+  <title>Frota | Mundo das Águas Turismo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="frota">
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <img src="../images/logogomarca-mundo.png" alt="Turismo Mundo das Águas" class="header__logo-img" width="220" height="56">
+      </a>
+      <nav class="header__nav" id="mainNav">
+        <a href="../index.html" class="nav-link" data-nav="home">Home</a>
+        <a href="quem-somos.html" class="nav-link" data-nav="quem-somos">Quem Somos</a>
+        <a href="servicos.html" class="nav-link" data-nav="servicos">Serviços</a>
+        <a href="frota.html" class="nav-link active" data-nav="frota">Frota</a>
+        <a href="blog.html" class="nav-link" data-nav="blog">Blog</a>
+        <a href="contato.html" class="nav-link" data-nav="contato">Contato</a>
+      </nav>
+      <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre excursões e viagens." class="btn btn--whatsapp header__cta" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="header__burger" id="burgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="../index.html" class="mobile-nav__link">Home</a>
+    <a href="quem-somos.html" class="mobile-nav__link">Quem Somos</a>
+    <a href="servicos.html" class="mobile-nav__link">Serviços</a>
+    <a href="frota.html" class="mobile-nav__link">Frota</a>
+    <a href="blog.html" class="mobile-nav__link">Blog</a>
+    <a href="contato.html" class="mobile-nav__link">Contato</a>
+    <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre excursões e viagens." class="btn btn--whatsapp mobile-nav__wa" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+
+
+  <section class="page-banner">
+    <div class="page-banner__bg">
+      <img src="../images/035d97bc-8fcb-4c09-bb91-2128a63953c9.JPG" alt="Estrutura preparada para diferentes tipos de excursões" loading="eager">
+      <div class="page-banner__overlay"></div>
+    </div>
+    <div class="container page-banner__content">
+      <span class="section-tag">Nossa Frota</span>
+      <h1>Estrutura preparada para diferentes tipos de excursões</h1>
+      <p>Transporte organizado para viagens, eventos, caravanas e roteiros personalizados.</p>
+    </div>
+  </section>
+
+  <main class="page-main">
+<section class="fleet" id="frota">
+      <div class="container">
+        
+
+        <div class="fleet__badges">
+          <span class="fleet__badge">Frota própria</span>
+          <span class="fleet__badge">Viagens nacionais e Mercosul</span>
+          <span class="fleet__badge">Estrutura para grupos</span>
+          <span class="fleet__badge">Experiência desde 1997</span>
+        </div>
+
+        <div class="fleet-slider" id="fleetSlider">
+          <button class="fleet-slider__arrow fleet-slider__arrow--prev" id="fleetPrev" aria-label="Anterior">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="fleet-slider__viewport">
+            <div class="fleet-slider__track" id="fleetTrack">
+              <div class="fleet-card" data-modal="modal-1210">
+                <img src="../img/onibus/1210_frota_1210_externa_(1).jpeg" alt="Marcopolo G8 1210 - Leito Cama" loading="lazy">
+                <div class="fleet-card__body">
+                  <h4>Marcopolo G8 1210</h4>
+                  <span class="fleet-card__cat">Leito Cama</span>
+                  <div class="fleet-card__features">
+                    <span>Wi-Fi</span><span>USB</span><span>Ar-condicionado</span><span>Banheiro</span><span>Geladeira</span>
+                  </div>
+                  <div class="fleet-card__tags">
+                    <span class="tag">Longas viagens</span>
+                    <span class="tag">Grupo grande</span>
+                  </div>
+                  <div class="fleet-card__btns">
+                    <button class="btn btn--outline btn--sm" onclick="openModal('modal-1210')">Ver estrutura</button>
+                    <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar orçamento para o ônibus 1210." class="btn btn--primary btn--sm" target="_blank" rel="noopener">Solicitar orçamento</a>
+                  </div>
+                </div>
+              </div>
+              <div class="fleet-card" data-modal="modal-1204">
+                <img src="../img/onibus/1204_frota_1204_externa_(3).jpeg" alt="Marcopolo G7 1204 - Semi-Leito" loading="lazy">
+                <div class="fleet-card__body">
+                  <h4>Marcopolo G7 1204</h4>
+                  <span class="fleet-card__cat">Semi-Leito</span>
+                  <div class="fleet-card__features">
+                    <span>Wi-Fi</span><span>USB</span><span>Ar-condicionado</span><span>Banheiro</span>
+                  </div>
+                  <div class="fleet-card__tags">
+                    <span class="tag">Turismo</span>
+                    <span class="tag">Compras</span>
+                  </div>
+                  <div class="fleet-card__btns">
+                    <button class="btn btn--outline btn--sm" onclick="openModal('modal-1204')">Ver estrutura</button>
+                    <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar orçamento para o ônibus 1204." class="btn btn--primary btn--sm" target="_blank" rel="noopener">Solicitar orçamento</a>
+                  </div>
+                </div>
+              </div>
+              <div class="fleet-card" data-modal="modal-1200">
+                <img src="../img/onibus/1200_frota_1200_externa_(2b).jpeg" alt="Marcopolo 1200 - Executivo" loading="lazy">
+                <div class="fleet-card__body">
+                  <h4>Marcopolo 1200</h4>
+                  <span class="fleet-card__cat">Executivo</span>
+                  <div class="fleet-card__features">
+                    <span>USB</span><span>Ar-condicionado</span><span>Banheiro</span>
+                  </div>
+                  <div class="fleet-card__tags">
+                    <span class="tag">Corporativo</span>
+                    <span class="tag">Igrejas</span>
+                  </div>
+                  <div class="fleet-card__btns">
+                    <button class="btn btn--outline btn--sm" onclick="openModal('modal-1200')">Ver estrutura</button>
+                    <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar orçamento para o ônibus 1200." class="btn btn--primary btn--sm" target="_blank" rel="noopener">Solicitar orçamento</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="fleet-slider__arrow fleet-slider__arrow--next" id="fleetNext" aria-label="Próximo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="fleet-slider__dots" id="fleetDots"></div>
+        </div>
+
+        <!-- DIFERENCIAIS -->
+        <div class="fleet__differentials">
+          <h3>Por que viajar com a Mundo das Águas?</h3>
+          <div class="fleet__diff-grid">
+            <div class="diff-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Frota própria</div>
+            <div class="diff-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Experiência desde 1997</div>
+            <div class="diff-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Atendimento humanizado</div>
+            <div class="diff-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Estrutura operacional</div>
+            <div class="diff-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Viagens nacionais e Mercosul</div>
+            <div class="diff-item"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Equipe preparada para grupos</div>
+          </div>
+        </div>
+
+        <!-- FAQ FROTA -->
+        <div class="faq" id="faq-frota">
+          <h3>Dúvidas sobre fretamentos</h3>
+          <div class="faq__item">
+            <button class="faq__question">Como funciona o fretamento?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>A Mundo das Águas realiza fretamentos para diferentes tipos de grupos, como empresas, igrejas, escolas, eventos, caravanas, pescarias e viagens personalizadas. Nossa equipe auxilia na organização do transporte conforme destino, quantidade de passageiros e necessidade da viagem.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Qual a capacidade dos veículos?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>A frota conta com diferentes categorias de veículos, incluindo ônibus leito, semi-leito, executivos, micro-ônibus e vans, atendendo desde grupos menores até excursões de grande porte.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Vocês fazem viagens interestaduais?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>Sim. A Mundo das Águas realiza viagens estaduais e interestaduais para diferentes destinos do Brasil.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Atendem Mercosul?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>Sim. Também operamos roteiros e fretamentos para destinos do Mercosul, incluindo Paraguai e Argentina.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Existe Wi-Fi nos ônibus?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>Alguns veículos da frota possuem Wi-Fi, tomadas USB e outros itens de conforto. As características variam conforme a categoria do veículo selecionado.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">Como solicitar orçamento?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>Você pode solicitar orçamento diretamente pelo WhatsApp ou através do formulário da página, informando destino, data da viagem, quantidade de passageiros e tipo de grupo.</p></div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question">É possível personalizar o roteiro?<span class="faq__arrow">+</span></button>
+            <div class="faq__answer"><p>Sim. A Mundo das Águas organiza viagens personalizadas conforme a necessidade do grupo, incluindo destinos, horários, embarques e tipo de transporte ideal para a viagem.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+  </main>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a href="../index.html" class="footer__logo">
+            <img src="../images/logogomarca-mundo.png" alt="Turismo Mundo das Águas" class="footer__logo-img" width="220" height="56">
+          </a>
+          <p>Especialistas em turismo rodoviário e logística de grupos desde 1997.</p>
+          <p>Foz do Iguaçu - PR</p>
+        </div>
+        <div class="footer__links">
+          <h4>Navegação</h4>
+          <a href="../index.html">Home</a>
+          <a href="quem-somos.html">Quem Somos</a>
+          <a href="servicos.html">Serviços</a>
+          <a href="frota.html">Frota</a>
+          <a href="blog.html">Blog</a>
+          <a href="contato.html">Contato</a>
+        </div>
+        <div class="footer__links">
+          <h4>Serviços</h4>
+          <a href="servicos.html">Excursões</a>
+          <a href="servicos.html">Fretamentos</a>
+          <a href="servicos.html">Compras</a>
+          <a href="servicos.html">Turismo Religioso</a>
+          <a href="servicos.html">Pescarias</a>
+          <a href="servicos.html">Encomendas</a>
+        </div>
+        <div class="footer__links">
+          <h4>Institucional</h4>
+          <a href="politica-privacidade.html">Política de Privacidade</a>
+          <a href="termos-uso.html">Termos de Uso</a>
+          <a href="venda-veiculos.html">Venda de Veículos</a>
+        </div>
+        <div class="footer__contact">
+          <h4>Contato</h4>
+          <p>WhatsApp: (45) 99967-7835</p>
+          <p>Telefone: (45) 3523-3060</p>
+          <p>atendimento@mundodasaguas.com.br</p>
+          <p>Seg a Sex: 08h às 18h | Sáb: 08h às 12h</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Mundo das Águas Turismo. Todos os direitos reservados.</p>
+        <p class="footer__credit">Desenvolvido por <a href="https://pedroriquelme.com.br" target="_blank" rel="noopener noreferrer">Pedro Riquelme</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre excursões e viagens." class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+<!-- MODALS -->
+  <div class="modal-overlay" id="modal-1210">
+    <div class="modal">
+      <button class="modal__close" onclick="closeModal('modal-1210')">&times;</button>
+      <div class="modal__gallery">
+        <img src="../img/onibus/layout_1210.png" alt="Layout Ônibus 1210">
+      </div>
+      <div class="modal__body">
+        <h3>Marcopolo G8 1210 - Leito Cama</h3>
+        <div class="modal__info">
+          <span>Capacidade: 44 poltronas (piso superior) + 12 (piso inferior)</span>
+          <span>Categoria: Leito Cama</span>
+        </div>
+        <div class="modal__features">
+          <span>Wi-Fi</span><span>USB individual</span><span>Ar-condicionado</span><span>Banheiro</span><span>Geladeira</span><span>TV multimídia</span><span>Poltronas reclináveis</span>
+        </div>
+        <div class="modal__ideal">
+          <h4>Ideal para:</h4>
+          <ul>
+            <li>Excursões longas</li>
+            <li>Romarias</li>
+            <li>Empresas</li>
+            <li>Turismo de compras</li>
+            <li>Grupos personalizados</li>
+          </ul>
+        </div>
+        <div class="modal__ctas">
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar orçamento para o ônibus 1210 Leito Cama." class="btn btn--primary" target="_blank" rel="noopener">Solicitar orçamento</a>
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de mais informações sobre o ônibus 1210." class="btn btn--whatsapp" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-1204">
+    <div class="modal">
+      <button class="modal__close" onclick="closeModal('modal-1204')">&times;</button>
+      <div class="modal__gallery">
+        <img src="../img/onibus/layout_1204.png" alt="Layout Ônibus 1204">
+      </div>
+      <div class="modal__body">
+        <h3>Marcopolo G7 1204 - Semi-Leito</h3>
+        <div class="modal__info">
+          <span>Categoria: Semi-Leito</span>
+        </div>
+        <div class="modal__features">
+          <span>Wi-Fi</span><span>USB</span><span>Ar-condicionado</span><span>Banheiro</span><span>Poltronas reclináveis</span>
+        </div>
+        <div class="modal__ideal">
+          <h4>Ideal para:</h4>
+          <ul>
+            <li>Turismo</li>
+            <li>Compras</li>
+            <li>Caravanas</li>
+            <li>Viagens médias</li>
+          </ul>
+        </div>
+        <div class="modal__ctas">
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar orçamento para o ônibus 1204 Semi-Leito." class="btn btn--primary" target="_blank" rel="noopener">Solicitar orçamento</a>
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de mais informações sobre o ônibus 1204." class="btn btn--whatsapp" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-1200">
+    <div class="modal">
+      <button class="modal__close" onclick="closeModal('modal-1200')">&times;</button>
+      <div class="modal__gallery">
+        <img src="../img/onibus/1200_frota_1200_externa_(2b).jpeg" alt="Ônibus 1200">
+      </div>
+      <div class="modal__body">
+        <h3>Marcopolo 1200 - Executivo</h3>
+        <div class="modal__info">
+          <span>Categoria: Executivo</span>
+        </div>
+        <div class="modal__features">
+          <span>USB</span><span>Ar-condicionado</span><span>Banheiro</span><span>Poltronas confortáveis</span>
+        </div>
+        <div class="modal__ideal">
+          <h4>Ideal para:</h4>
+          <ul>
+            <li>Corporativo</li>
+            <li>Igrejas e caravanas</li>
+            <li>Escolas</li>
+            <li>Viagens regionais</li>
+          </ul>
+        </div>
+        <div class="modal__ctas">
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar orçamento para o ônibus 1200 Executivo." class="btn btn--primary" target="_blank" rel="noopener">Solicitar orçamento</a>
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de mais informações sobre o ônibus 1200." class="btn btn--whatsapp" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar no WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>
