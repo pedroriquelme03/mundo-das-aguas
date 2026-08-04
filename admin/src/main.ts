@@ -456,7 +456,7 @@ async function renderExcursoesFull(root: HTMLElement) {
   const rows = await listExcursoesFull();
   const list = document.getElementById('list')!;
   if (!rows.length) {
-    list.innerHTML = `<div class="card empty">Nenhuma excursão/pacote cadastrado. Ao salvar, a página <code>pages/excursao.html?slug=...</code> passa a funcionar.</div>`;
+    list.innerHTML = `<div class="card empty">Nenhuma excursão/pacote cadastrado. Ao salvar, a página <code>/excursao?slug=...</code> passa a funcionar.</div>`;
     return;
   }
   list.innerHTML = `<table class="table"><thead><tr>
@@ -473,7 +473,7 @@ async function renderExcursoesFull(root: HTMLElement) {
       <td>${r.destaque_home ? 'Sim' : '—'}</td>
       <td>${r.ativo ? '<span class="dot dot--on"></span>Sim' : '<span class="dot"></span>Não'}</td>
       <td class="actions">
-        <a class="btn btn--sm" href="../pages/excursao.html?slug=${encodeURIComponent(r.slug)}" target="_blank" rel="noopener">Ver</a>
+        <a class="btn btn--sm" href="/excursao?slug=${encodeURIComponent(r.slug)}" target="_blank" rel="noopener">Ver</a>
         ${canWrite() ? `
           <button class="btn btn--sm" data-edit="${r.id}">Editar</button>
           <button class="btn btn--sm btn--danger" data-del="${r.id}">Excluir</button>` : ''}
@@ -613,7 +613,7 @@ async function renderFrota(root: HTMLElement) {
   const rows = await listFrota();
   const list = document.getElementById('list')!;
   if (!rows.length) {
-    list.innerHTML = `<div class="card empty">Nenhum veículo cadastrado. Cadastre para alimentar a página <code>pages/frota.html</code>.</div>`;
+    list.innerHTML = `<div class="card empty">Nenhum veículo cadastrado. Cadastre para alimentar a página <code>/frota</code>.</div>`;
     return;
   }
   list.innerHTML = `<table class="table"><thead><tr>
@@ -883,7 +883,7 @@ async function renderBlog(root: HTMLElement) {
     <td>${r.mais_lidos ? 'Sim' : '—'}</td>
     <td>${r.ativo ? '<span class="dot dot--on"></span>Sim' : '<span class="dot"></span>Não'}</td>
     <td class="actions">
-      <a class="btn btn--sm" href="../pages/blog-artigo.html?slug=${encodeURIComponent(r.slug)}" target="_blank" rel="noopener">Ver</a>
+      <a class="btn btn--sm" href="/blog/artigo?slug=${encodeURIComponent(r.slug)}" target="_blank" rel="noopener">Ver</a>
       ${canWrite() ? `
         <button class="btn btn--sm" data-edit="${r.id}">Editar</button>
         <button class="btn btn--sm btn--danger" data-del="${r.id}">Excluir</button>` : ''}
@@ -1058,7 +1058,7 @@ function openBioForm(row?: BioLink) {
       <form class="card modal" id="exForm">
         <h3>${isEdit ? 'Editar' : 'Novo'} botão da bio</h3>
         <label>Título *<input name="titulo" required value="${esc(row?.titulo || '')}"></label>
-        <label>URL / caminho *<input name="url" required value="${esc(row?.url || '')}" placeholder="/pages/frota.html ou https://..."></label>
+        <label>URL / caminho *<input name="url" required value="${esc(row?.url || '')}" placeholder="/frota ou https://..."></label>
         <div class="grid2">
           <label>Estilo<select name="estilo">${estilos}</select></label>
           <label>Ordem<input type="number" name="ordem" value="${row?.ordem ?? 0}"></label>
@@ -1067,7 +1067,7 @@ function openBioForm(row?: BioLink) {
           <label class="check"><input type="checkbox" name="nova_aba" ${row?.nova_aba !== false ? 'checked' : ''}> Abrir em nova aba</label>
           <label class="check"><input type="checkbox" name="ativo" ${row?.ativo !== false ? 'checked' : ''}> Ativo</label>
         </div>
-        <p class="muted" style="font-size:.8rem;margin:0">Use caminhos do site (ex.: /pages/contato.html) ou URLs completas (WhatsApp, redes).</p>
+        <p class="muted" style="font-size:.8rem;margin:0">Use caminhos do site (ex.: /contato) ou URLs completas (WhatsApp, redes).</p>
         <p class="error" id="formError" hidden></p>
         <div class="modal__actions">
           <button type="button" class="btn btn--ghost" id="cancelBtn">Cancelar</button>

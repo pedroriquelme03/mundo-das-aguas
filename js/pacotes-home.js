@@ -41,8 +41,7 @@ if (!grid || !cfg.url || !cfg.anonKey) {
       ? `<img src="${esc(foto)}" alt="${esc(ex.nome)}" loading="lazy">`
       : `<div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div>`;
     const faixa = ex.faixa_destaque ? `<span class="destino-card__faixa">${esc(ex.faixa_destaque)}</span>` : '';
-    const base = location.pathname.includes('/pages/') ? '' : 'pages/';
-    const href = `${base}excursao.html?slug=${encodeURIComponent(ex.slug)}`;
+    const href = `/excursao?slug=${encodeURIComponent(ex.slug)}`;
     const wa = ex.link_reserva || `https://wa.me/${WA}?text=${encodeURIComponent('Olá! Gostaria de informações sobre: ' + ex.nome)}`;
 
     return `

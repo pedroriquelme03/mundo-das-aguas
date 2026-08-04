@@ -8,13 +8,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="linktree-page">
+  <div class="linktree__aurora" aria-hidden="true"></div>
   <div class="linktree">
     <header class="linktree__head">
-      <img src="../images/logogomarca-mundo.png" alt="Mundo das Águas Turismo" class="linktree__logo" width="200" height="52">
-      <p>Fretamento, excursões e turismo rodoviário · Foz do Iguaçu</p>
+      <div class="linktree__avatar">
+        <img src="/images/logogomarca-mundo.png" alt="Mundo das Águas Turismo" class="linktree__logo" width="200" height="52">
+      </div>
+      <h1 class="linktree__title">Mundo das Águas Turismo</h1>
+      <p class="linktree__tag">Fretamento, excursões e turismo rodoviário</p>
+      <span class="linktree__pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Foz do Iguaçu – PR
+      </span>
     </header>
     <nav class="linktree__list" id="bioLinks" aria-label="Links rápidos">
       <p class="linktree__loading">Carregando links…</p>
@@ -28,6 +36,6 @@
       bucket: 'excursoes'
     };
   </script>
-  <script type="module" src="../js/bio.js"></script>
+  <script type="module" src="/js/bio.js"></script>
 </body>
 </html>

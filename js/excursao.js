@@ -152,7 +152,7 @@ function render(ex, related) {
           <p>${esc(ex.nome)} — ${esc(periodo)}</p>
           <div class="cta-final__btns">
             <a href="${esc(reservaHref(ex))}" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">Reservar pelo WhatsApp</a>
-            <a href="contato.html" class="btn btn--white btn--lg">Falar com a equipe</a>
+            <a href="/contato" class="btn btn--white btn--lg">Falar com a equipe</a>
           </div>
         </div>
       </section>
@@ -176,7 +176,7 @@ function render(ex, related) {
                 <div class="destino-card__body">
                   <h3 class="destino-card__title">${esc(r.nome)}</h3>
                   <p class="destino-card__local">${esc(r.cidade_estado || '')}</p>
-                  <a href="excursao.html?slug=${encodeURIComponent(r.slug)}" class="btn btn--outline">Saiba mais</a>
+                  <a href="/excursao?slug=${encodeURIComponent(r.slug)}" class="btn btn--outline">Saiba mais</a>
                 </div>
               </article>`;
             }).join('')}
@@ -193,7 +193,7 @@ function renderError(msg) {
       <div class="container page-banner__content">
         <h1>Excursão não encontrada</h1>
         <p>${esc(msg)}</p>
-        <a href="servicos.html" class="btn btn--white" style="margin-top:16px">Ver serviços</a>
+        <a href="/servicos" class="btn btn--white" style="margin-top:16px">Ver serviços</a>
       </div>
     </section>`;
 }
@@ -201,7 +201,7 @@ function renderError(msg) {
 async function load() {
   if (!root) return;
   if (!slug) {
-    renderError('Informe o slug na URL, por exemplo: excursao.html?slug=aparecida');
+    renderError('Informe o slug na URL, por exemplo: /excursao?slug=aparecida');
     return;
   }
   if (!cfg.url || !cfg.anonKey) {

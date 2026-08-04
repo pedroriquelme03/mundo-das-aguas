@@ -4,31 +4,41 @@
   "installCommand": "echo skip-root-install",
   "buildCommand": "node scripts/vercel-build.mjs",
   "outputDirectory": "public",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    {
-      "source": "/admin",
-      "destination": "/admin/",
-      "permanent": false
-    },
-    {
-      "source": "/pages/links.html",
-      "destination": "/bio",
-      "permanent": true
-    },
-    {
-      "source": "/pages/links",
-      "destination": "/bio",
-      "permanent": true
-    },
-    {
-      "source": "/links",
-      "destination": "/bio",
-      "permanent": true
-    },
-    {
-      "source": "/links.html",
-      "destination": "/bio",
-      "permanent": true
-    }
+    { "source": "/admin", "destination": "/admin/", "permanent": false },
+    { "source": "/pages/links.html", "destination": "/bio", "permanent": true },
+    { "source": "/pages/links", "destination": "/bio", "permanent": true },
+    { "source": "/links", "destination": "/bio", "permanent": true },
+    { "source": "/links.html", "destination": "/bio", "permanent": true },
+    { "source": "/pages/frota.html", "destination": "/frota", "permanent": true },
+    { "source": "/pages/frota", "destination": "/frota", "permanent": true },
+    { "source": "/pages/quem-somos.html", "destination": "/quem-somos", "permanent": true },
+    { "source": "/pages/quem-somos", "destination": "/quem-somos", "permanent": true },
+    { "source": "/pages/blog.html", "destination": "/blog", "permanent": true },
+    { "source": "/pages/blog", "destination": "/blog", "permanent": true },
+    { "source": "/pages/blog-artigo.html", "destination": "/blog/artigo", "permanent": true },
+    { "source": "/pages/blog-artigo", "destination": "/blog/artigo", "permanent": true },
+    { "source": "/pages/contato.html", "destination": "/contato", "permanent": true },
+    { "source": "/pages/contato", "destination": "/contato", "permanent": true },
+    { "source": "/pages/servicos.html", "destination": "/servicos", "permanent": true },
+    { "source": "/pages/servicos", "destination": "/servicos", "permanent": true },
+    { "source": "/pages/reservas.html", "destination": "/reservas", "permanent": true },
+    { "source": "/pages/reservas", "destination": "/reservas", "permanent": true },
+    { "source": "/pages/excursao.html", "destination": "/excursao", "permanent": true },
+    { "source": "/pages/excursao", "destination": "/excursao", "permanent": true },
+    { "source": "/pages/venda-veiculos.html", "destination": "/venda-veiculos", "permanent": true },
+    { "source": "/pages/venda-veiculos", "destination": "/venda-veiculos", "permanent": true },
+    { "source": "/pages/politica-privacidade.html", "destination": "/politica-privacidade", "permanent": true },
+    { "source": "/pages/politica-privacidade", "destination": "/politica-privacidade", "permanent": true },
+    { "source": "/pages/termos-uso.html", "destination": "/termos-uso", "permanent": true },
+    { "source": "/pages/termos-uso", "destination": "/termos-uso", "permanent": true },
+    { "source": "/pages/blog-bras.html", "destination": "/blog/bras", "permanent": true },
+    { "source": "/pages/blog-aparecida.html", "destination": "/blog/aparecida", "permanent": true },
+    { "source": "/pages/blog-dicas-viagem.html", "destination": "/blog/dicas-viagem", "permanent": true },
+    { "source": "/pages/blog-mercosul.html", "destination": "/blog/mercosul", "permanent": true },
+    { "source": "/pages/blog-paraguai.html", "destination": "/blog/paraguai", "permanent": true },
+    { "source": "/pages/blog-pescaria.html", "destination": "/blog/pescaria", "permanent": true }
   ]
 }

@@ -1,4 +1,4 @@
-// Artigo do Blog — pages/blog-artigo.html?slug=
+// Artigo do Blog — blog/artigo?slug=
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const cfg = window.MDA_SUPABASE || {};
@@ -89,14 +89,14 @@ function render(post, related) {
             <h2>Artigos relacionados</h2>
             <div class="blog__grid blog__grid--related">
               ${related.map((r) => `
-                <a class="blog-mais__item" href="blog-artigo.html?slug=${encodeURIComponent(r.slug)}">
+                <a class="blog-mais__item" href="/blog/artigo?slug=${encodeURIComponent(r.slug)}">
                   <span class="blog-card__cat">${esc(CAT_LABEL[r.categoria] || r.categoria)}</span>
                   <strong>${esc(r.titulo)}</strong>
                 </a>`).join('')}
             </div>
           </aside>` : ''}
 
-          <p style="margin-top:28px"><a href="blog.html" class="btn btn--outline">← Voltar ao Blog</a></p>
+          <p style="margin-top:28px"><a href="/blog" class="btn btn--outline">← Voltar ao Blog</a></p>
         </div>
       </article>
     </main>`;
@@ -109,7 +109,7 @@ function renderError(msg) {
       <div class="container page-banner__content">
         <h1>Artigo não encontrado</h1>
         <p>${esc(msg)}</p>
-        <a href="blog.html" class="btn btn--white" style="margin-top:16px">Voltar ao Blog</a>
+        <a href="/blog" class="btn btn--white" style="margin-top:16px">Voltar ao Blog</a>
       </div>
     </section>`;
 }

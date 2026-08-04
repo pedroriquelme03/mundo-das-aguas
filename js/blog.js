@@ -35,7 +35,7 @@ function fotoUrl(path) {
 }
 
 function href(post) {
-  return `blog-artigo.html?slug=${encodeURIComponent(post.slug)}`;
+  return `/blog/artigo?slug=${encodeURIComponent(post.slug)}`;
 }
 
 function cardHtml(post, featured = false) {
