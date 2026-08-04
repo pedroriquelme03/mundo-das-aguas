@@ -1473,9 +1473,18 @@ section .section-title, section .section-subtitle { text-align: center; }
 .linktree {
   max-width: 420px; margin: 0 auto; padding: 48px 20px 40px; text-align: center;
 }
-.linktree__head img { margin: 0 auto 14px; filter: brightness(0) invert(1); }
+.linktree__logo {
+  display: block;
+  margin: 0 auto 16px;
+  width: min(220px, 70vw);
+  height: auto;
+  object-fit: contain;
+  filter: none;
+}
+.linktree__head img { margin: 0 auto 14px; }
 .linktree__head p { color: rgba(255,255,255,.85); font-size: .92rem; margin-bottom: 28px; }
 .linktree__list { display: grid; gap: 12px; }
+.linktree__loading { color: rgba(255,255,255,.8); font-size: .9rem; }
 .linktree__btn {
   display: block; padding: 14px 18px; border-radius: var(--radius-sm);
   background: rgba(255,255,255,.95); color: var(--primary); font-weight: 700; font-size: .95rem;
@@ -2245,6 +2254,88 @@ section .section-title, section .section-subtitle { text-align: center; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Carrossel de destinos — 3 cards por vez */
+.destinos-slider {
+  position: relative;
+  margin-top: 40px;
+}
+.destinos-slider__viewport {
+  overflow: hidden;
+  padding-bottom: 4px;
+}
+.destinos-slider__track {
+  display: flex;
+  gap: var(--destino-gap, 24px);
+  transition: transform .45s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform;
+}
+.destinos-slider__track > .destino-card {
+  flex: 0 0 var(--destino-card-w, calc((100% - 48px) / 3));
+  width: var(--destino-card-w, calc((100% - 48px) / 3));
+  min-width: 0;
+  max-width: 100%;
+}
+.destinos-slider__track > .destinos__empty {
+  flex: 1 1 100%;
+  width: 100%;
+}
+.destinos-slider__arrow {
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transition: all var(--transition);
+}
+.destinos-slider__arrow:hover:not(:disabled) {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-50%) scale(1.06);
+}
+.destinos-slider__arrow:disabled {
+  opacity: .35;
+  cursor: default;
+}
+.destinos-slider__arrow--prev { left: -18px; }
+.destinos-slider__arrow--next { right: -18px; }
+.destinos-slider__dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+  min-height: 14px;
+}
+.destinos-slider__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.destinos-slider__dot.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.15);
+}
+.destinos-slider--single .destinos-slider__arrow,
+.destinos-slider--single .destinos-slider__dots {
+  display: none;
+}
+
 .destino-card {
   background: #fff;
   border-radius: var(--radius);
@@ -2432,6 +2523,8 @@ section .section-title, section .section-subtitle { text-align: center; }
   .frota-home.sec-blue { padding-top: 120px; }
   .destinos__grid { grid-template-columns: repeat(2, 1fr); }
   .frota-home__gallery { grid-template-columns: repeat(2, 1fr); }
+  .destinos-slider__arrow--prev { left: 4px; }
+  .destinos-slider__arrow--next { right: 4px; }
 }
 @media (max-width: 768px) {
   .header__nav { display: none; }
@@ -2441,6 +2534,7 @@ section .section-title, section .section-subtitle { text-align: center; }
   .historia__grid { grid-template-columns: 1fr; gap: 36px; }
   .encomendas__grid { grid-template-columns: 1fr; gap: 32px; }
   .encomendas__visual { order: -1; }
+  .destinos-slider__arrow { width: 40px; height: 40px; top: 38%; }
 }
 @media (max-width: 480px) {
   .selos__grid { grid-template-columns: 1fr; }

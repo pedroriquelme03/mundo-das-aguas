@@ -142,3 +142,79 @@ export interface ContatoLead {
 
 /** Alias legado usado pelo CRUD de compras. */
 export type ExcursaoInputLegacy = ExcursaoComprasInput;
+
+/* ---------- Páginas legais ---------- */
+export type PaginaLegalTipo = 'privacidade' | 'termos';
+
+export interface PaginaLegal {
+  id: string;
+  tipo: PaginaLegalTipo;
+  titulo: string;
+  slug: string;
+  atualizacao: string | null;
+  conteudo: string;
+  ativo: boolean;
+  ordem: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export type PaginaLegalInput = Omit<PaginaLegal, 'id' | 'created_at' | 'updated_at'>;
+
+/* ---------- General Settings ---------- */
+export interface SiteSettings {
+  id: 'general';
+  site_title: string;
+  tagline: string;
+  site_icon_path: string | null;
+  site_language: string;
+  timezone: string;
+  date_format: string;
+  time_format: string;
+  week_starts_on: number;
+  login_url: string;
+  updated_at?: string;
+}
+
+export type SiteSettingsInput = Omit<SiteSettings, 'id' | 'updated_at'>;
+
+/* ---------- Contato do site ---------- */
+export interface SiteContact {
+  id: 'general';
+  empresa: string;
+  email: string;
+  telefone_agencia: string;
+  whatsapp_comercial: string;
+  whatsapp_comercial_label: string;
+  whatsapp_emergencial: string;
+  whatsapp_emergencial_label: string;
+  endereco_linha1: string;
+  endereco_linha2: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  mapa_url: string;
+  horario_atendimento: string;
+  mensagem_wa_comercial: string;
+  mensagem_wa_emergencial: string;
+  updated_at?: string;
+}
+
+export type SiteContactInput = Omit<SiteContact, 'id' | 'updated_at'>;
+
+/* ---------- Bio / Links ---------- */
+export type BioLinkEstilo = 'padrao' | 'whatsapp';
+
+export interface BioLink {
+  id: string;
+  titulo: string;
+  url: string;
+  estilo: BioLinkEstilo;
+  nova_aba: boolean;
+  ordem: number;
+  ativo: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export type BioLinkInput = Omit<BioLink, 'id' | 'created_at' | 'updated_at'>;

@@ -1,5 +1,6 @@
 // Pacotes Turísticos (Seção 6 da Home) — lê de public.excursoes com destaque_home.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { renderDestinosSlider } from './destinos-slider.js';
 
 const cfg = window.MDA_SUPABASE || {};
 const grid = document.getElementById('pacotesTuristicosGrid');
@@ -7,8 +8,8 @@ if (!grid || !cfg.url || !cfg.anonKey) {
   // página sem o container
 } else {
   const supabase = createClient(cfg.url, cfg.anonKey);
-  const limit = parseInt(grid.dataset.limit || '6', 10);
-  const WA = '5545999677835';
+  const limit = parseInt(grid.dataset.limit || '12', 10);
+  const WA = (window.MDA_CONTACT && window.MDA_CONTACT.whatsapp_comercial) || '5545999677835';
 
   const CAT = {
     compras: 'Compras',
@@ -40,7 +41,8 @@ if (!grid || !cfg.url || !cfg.anonKey) {
       ? `<img src="${esc(foto)}" alt="${esc(ex.nome)}" loading="lazy">`
       : `<div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div>`;
     const faixa = ex.faixa_destaque ? `<span class="destino-card__faixa">${esc(ex.faixa_destaque)}</span>` : '';
-    const href = `pages/excursao.html?slug=${encodeURIComponent(ex.slug)}`;
+    const base = location.pathname.includes('/pages/') ? '' : 'pages/';
+    const href = `${base}excursao.html?slug=${encodeURIComponent(ex.slug)}`;
     const wa = ex.link_reserva || `https://wa.me/${WA}?text=${encodeURIComponent('Olá! Gostaria de informações sobre: ' + ex.nome)}`;
 
     return `
@@ -83,7 +85,7 @@ if (!grid || !cfg.url || !cfg.anonKey) {
         grid.innerHTML = '<div class="destinos__empty">Em breve novos pacotes turísticos. Fale conosco no WhatsApp para consultar as próximas saídas.</div>';
         return;
       }
-      grid.innerHTML = data.map(cardHtml).join('');
+      renderDestinosSlider(grid, data.map(cardHtml).join(''));
     } catch (err) {
       grid.innerHTML = `<div class="destinos__empty">Não foi possível carregar os pacotes. ${esc(err.message)}</div>`;
     }

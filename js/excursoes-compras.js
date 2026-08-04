@@ -1,15 +1,16 @@
 // Excursões de Compras (Seção 4 da Home) — renderização dinâmica a partir do Supabase.
 // Os cards são cadastrados/editados no painel administrativo (admin/).
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { renderDestinosSlider } from './destinos-slider.js';
 
 const cfg = window.MDA_SUPABASE || {};
 const grid = document.getElementById('excursoesComprasGrid');
 
 if (grid && cfg.url && cfg.anonKey) {
   const supabase = createClient(cfg.url, cfg.anonKey);
-  const limit = parseInt(grid.dataset.limit || '6', 10);
+  const limit = parseInt(grid.dataset.limit || '12', 10);
 
-  const WA_COMERCIAL = '5545999677835';
+  const WA_COMERCIAL = (window.MDA_CONTACT && window.MDA_CONTACT.whatsapp_comercial) || '5545999677835';
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -17,7 +18,7 @@ if (grid && cfg.url && cfg.anonKey) {
 
   function fmtDate(d) {
     if (!d) return 'a definir';
-    const parts = String(d).split('-'); // YYYY-MM-DD
+    const parts = String(d).split('-');
     if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
     return d;
   }
@@ -78,7 +79,7 @@ if (grid && cfg.url && cfg.anonKey) {
         grid.innerHTML = '<div class="destinos__empty">Em breve novas excursões de compras. Fale com a gente no WhatsApp para consultar as próximas saídas.</div>';
         return;
       }
-      grid.innerHTML = data.map(cardHtml).join('');
+      renderDestinosSlider(grid, data.map(cardHtml).join(''));
     } catch (err) {
       console.error('[excursoes-compras] Falha ao carregar:', err);
       grid.innerHTML = '<div class="destinos__empty">Não foi possível carregar as excursões agora. Fale com a gente no WhatsApp para consultar as próximas saídas.</div>';

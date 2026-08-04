@@ -5,7 +5,11 @@ import type {
   FrotaVeiculo, FrotaInput,
   Depoimento, DepoimentoInput,
   BlogPost, BlogPostInput,
-  ContatoLead
+  ContatoLead,
+  SiteSettings, SiteSettingsInput,
+  PaginaLegal, PaginaLegalInput,
+  SiteContact, SiteContactInput,
+  BioLink, BioLinkInput
 } from './types';
 
 /* ---------- Storage ---------- */
@@ -41,6 +45,116 @@ export function fotoPublicUrl(path: string | null | undefined): string | null {
     return null;
   }
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+}
+
+export const MEDIA_FOLDERS = [
+  { id: 'compras', label: 'Compras (Home)' },
+  { id: 'excursoes', label: 'Excursões / Pacotes' },
+  { id: 'frota', label: 'Frota' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'settings', label: 'General Settings' },
+  { id: 'outros', label: 'Outros' }
+] as const;
+
+export type MediaFolderId = (typeof MEDIA_FOLDERS)[number]['id'];
+
+export interface StorageImage {
+  path: string;
+  name: string;
+  folder: MediaFolderId;
+  size: number | null;
+  updatedAt: string | null;
+  url: string;
+}
+
+export type MediaLibrary = Record<MediaFolderId, StorageImage[]>;
+
+const IMAGE_EXT = /\.(jpe?g|png|webp|gif|avif|svg)$/i;
+
+function isStorageFolder(item: { id: string | null }): boolean {
+  return item.id === null;
+}
+
+function toStorageImage(
+  folder: MediaFolderId,
+  name: string,
+  item: { metadata?: { size?: number } | null; updated_at?: string | null }
+): StorageImage {
+  const path = folder === 'outros' ? name : `${folder}/${name}`;
+  return {
+    path,
+    name,
+    folder,
+    size: item.metadata?.size ?? null,
+    updatedAt: item.updated_at ?? null,
+    url: supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl
+  };
+}
+
+/** Lista imagens do bucket, agrupadas pela pasta de upload (categoria de cadastro). */
+export async function listStorageImages(): Promise<MediaLibrary> {
+  const library: MediaLibrary = {
+    compras: [],
+    excursoes: [],
+    frota: [],
+    blog: [],
+    settings: [],
+    outros: []
+  };
+
+  const known = new Set(['compras', 'excursoes', 'frota', 'blog', 'settings']);
+
+  const { data: root, error } = await supabase.storage.from(BUCKET).list('', {
+    limit: 1000,
+    sortBy: { column: 'name', order: 'asc' }
+  });
+  if (error) throw error;
+
+  const extraFolders: string[] = [];
+
+  for (const item of root ?? []) {
+    if (isStorageFolder(item)) {
+      if (!known.has(item.name)) extraFolders.push(item.name);
+      continue;
+    }
+    if (IMAGE_EXT.test(item.name)) {
+      library.outros.push(toStorageImage('outros', item.name, item));
+    }
+  }
+
+  for (const folder of ['compras', 'excursoes', 'frota', 'blog', 'settings'] as const) {
+    const { data, error: err } = await supabase.storage.from(BUCKET).list(folder, {
+      limit: 1000,
+      sortBy: { column: 'created_at', order: 'desc' }
+    });
+    if (err) throw err;
+    for (const item of data ?? []) {
+      if (isStorageFolder(item) || !IMAGE_EXT.test(item.name)) continue;
+      library[folder].push(toStorageImage(folder, item.name, item));
+    }
+  }
+
+  for (const folder of extraFolders) {
+    const { data, error: err } = await supabase.storage.from(BUCKET).list(folder, {
+      limit: 1000,
+      sortBy: { column: 'created_at', order: 'desc' }
+    });
+    if (err) continue;
+    for (const item of data ?? []) {
+      if (isStorageFolder(item) || !IMAGE_EXT.test(item.name)) continue;
+      const path = `${folder}/${item.name}`;
+      library.outros.push({
+        path,
+        name: `${folder}/${item.name}`,
+        folder: 'outros',
+        size: item.metadata?.size ?? null,
+        updatedAt: item.updated_at ?? null,
+        url: supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl
+      });
+    }
+  }
+
+  return library;
 }
 
 /* ---------- Generic CRUD ---------- */
@@ -107,6 +221,147 @@ export function curriculoSignedUrl(path: string): Promise<string | null> {
     return data?.signedUrl ?? null;
   });
 }
+
+/* ---------- Usuários do painel (Edge Function) ---------- */
+export type AdminUserRow = {
+  id: string;
+  email: string;
+  role: 'admin' | 'editor' | 'leitor';
+  created_at?: string;
+  last_sign_in_at?: string | null;
+};
+
+async function callAdminUsers<T>(body: Record<string, unknown>): Promise<T> {
+  const { data, error } = await supabase.functions.invoke('admin-users', { body });
+  if (data && typeof data === 'object' && 'error' in data && (data as { error?: string }).error) {
+    throw new Error(String((data as { error: string }).error));
+  }
+  if (error) {
+    const ctx = (error as { context?: Response }).context;
+    if (ctx) {
+      try {
+        const j = await ctx.clone().json() as { error?: string };
+        if (j?.error) throw new Error(j.error);
+      } catch (e) {
+        if (e instanceof Error && e.message && e.message !== error.message) throw e;
+      }
+    }
+    throw new Error(error.message);
+  }
+  return data as T;
+}
+
+export const listAdminUsers = () =>
+  callAdminUsers<{ users: AdminUserRow[] }>({ action: 'list' }).then((d) => d.users);
+
+export const createAdminUser = (input: { email: string; password: string; role: string }) =>
+  callAdminUsers<{ user: AdminUserRow }>({ action: 'create', ...input });
+
+export const updateAdminUser = (input: {
+  id: string;
+  email?: string;
+  password?: string;
+  role?: string;
+}) => callAdminUsers<{ user: AdminUserRow }>({ action: 'update', ...input });
+
+export const deleteAdminUser = (id: string) =>
+  callAdminUsers<{ ok: boolean }>({ action: 'delete', id });
+
+/* ---------- General Settings ---------- */
+export const DEFAULT_SITE_SETTINGS: SiteSettingsInput = {
+  site_title: 'Mundo das Águas Turismo',
+  tagline: 'Fretamento, excursões e turismo rodoviário',
+  site_icon_path: null,
+  site_language: 'pt-BR',
+  timezone: 'America/Sao_Paulo',
+  date_format: 'd/m/Y',
+  time_format: 'H:i',
+  week_starts_on: 0,
+  login_url: '/admin/'
+};
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const { data, error } = await supabase
+    .from('site_settings')
+    .select('*')
+    .eq('id', 'general')
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) {
+    return { id: 'general', ...DEFAULT_SITE_SETTINGS };
+  }
+  return data as SiteSettings;
+}
+
+export async function saveSiteSettings(input: SiteSettingsInput): Promise<void> {
+  const { error } = await supabase
+    .from('site_settings')
+    .upsert({
+      id: 'general',
+      ...input,
+      updated_at: new Date().toISOString()
+    });
+  if (error) throw error;
+}
+
+/* ---------- Páginas legais ---------- */
+export const listPaginasLegais = () =>
+  listAll<PaginaLegal>('paginas_legais', [{ col: 'ordem' }, { col: 'titulo' }]);
+
+export const createPaginaLegal = (input: PaginaLegalInput) => insertRow('paginas_legais', input);
+export const updatePaginaLegal = (id: string, input: Partial<PaginaLegalInput>) =>
+  updateRow('paginas_legais', id, input);
+export const deletePaginaLegal = (id: string) => deleteRow('paginas_legais', id);
+
+/* ---------- Contato do site ---------- */
+export const DEFAULT_SITE_CONTACT: SiteContactInput = {
+  empresa: 'Mundo das Águas Turismo',
+  email: 'atendimento@mundodasaguas.com.br',
+  telefone_agencia: '(45) 3523-3060',
+  whatsapp_comercial: '5545999677835',
+  whatsapp_comercial_label: '(45) 99967-7835',
+  whatsapp_emergencial: '5545999648080',
+  whatsapp_emergencial_label: '(45) 99964-8080',
+  endereco_linha1: 'Av. Safira, 1375 — Parque Patriarca',
+  endereco_linha2: '',
+  cidade: 'Foz do Iguaçu',
+  estado: 'PR',
+  cep: '85854-000',
+  mapa_url: 'https://share.google/9oMqpcefoCuCh2cz4',
+  horario_atendimento: 'Segunda a Sexta, das 08h às 18h | Sábado, das 08h às 12h',
+  mensagem_wa_comercial: 'Olá! Gostaria de informações.',
+  mensagem_wa_emergencial: 'Olá! Preciso de suporte durante a viagem.'
+};
+
+export async function getSiteContact(): Promise<SiteContact> {
+  const { data, error } = await supabase
+    .from('site_contact')
+    .select('*')
+    .eq('id', 'general')
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) return { id: 'general', ...DEFAULT_SITE_CONTACT };
+  return data as SiteContact;
+}
+
+export async function saveSiteContact(input: SiteContactInput): Promise<void> {
+  const { error } = await supabase
+    .from('site_contact')
+    .upsert({
+      id: 'general',
+      ...input,
+      updated_at: new Date().toISOString()
+    });
+  if (error) throw error;
+}
+
+/* ---------- Bio / Links ---------- */
+export const listBioLinks = () =>
+  listAll<BioLink>('bio_links', [{ col: 'ordem' }, { col: 'titulo' }]);
+export const createBioLink = (input: BioLinkInput) => insertRow('bio_links', input);
+export const updateBioLink = (id: string, input: Partial<BioLinkInput>) =>
+  updateRow('bio_links', id, input);
+export const deleteBioLink = (id: string) => deleteRow('bio_links', id);
 
 /* ---------- Helpers ---------- */
 export function slugify(text: string): string {

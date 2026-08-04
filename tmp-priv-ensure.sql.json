@@ -1,0 +1,1 @@
+{"q":"insert into public.paginas_legais (tipo, titulo, slug, atualizacao, conteudo, ativo, ordem) values (\n  'privacidade',\n  convert_from(decode('UG9sw610aWNhIGRlIFByaXZhY2lkYWRlIGUgQ29va2llcw==', 'base64'), 'UTF8'),\n  'politica-privacidade',\n  convert_from(decode('TWFpbyBkZSAyMDI2', 'base64'), 'UTF8'),\n  '',\n  true, 1\n) on conflict (slug) do nothing;"}

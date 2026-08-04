@@ -207,28 +207,28 @@
         <div class="contact__info contact__info--rich">
           <div class="contact__info-item">
             <h4>WhatsApp Comercial</h4>
-            <p><a href="https://wa.me/5545999677835" target="_blank" rel="noopener">(45) 99967-7835</a></p>
+            <p><a href="https://wa.me/5545999677835" target="_blank" rel="noopener" data-mda-field="whatsapp_comercial_label">(45) 99967-7835</a></p>
           </div>
           <div class="contact__info-item">
             <h4>Emergencial 24h</h4>
-            <p><a href="https://wa.me/5545999648080" target="_blank" rel="noopener">(45) 99964-8080</a></p>
+            <p><a href="https://wa.me/5545999648080" target="_blank" rel="noopener" data-mda-field="whatsapp_emergencial_label">(45) 99964-8080</a></p>
           </div>
           <div class="contact__info-item">
             <h4>Agência</h4>
-            <p><a href="tel:+554535233060">(45) 3523-3060</a></p>
+            <p><a href="tel:+554535233060" data-mda-field="telefone_agencia">(45) 3523-3060</a></p>
           </div>
           <div class="contact__info-item">
             <h4>E-mail</h4>
-            <p><a href="mailto:atendimento@mundodasaguas.com.br">atendimento@mundodasaguas.com.br</a></p>
+            <p><a href="mailto:atendimento@mundodasaguas.com.br" data-mda-field="email">atendimento@mundodasaguas.com.br</a></p>
           </div>
           <div class="contact__info-item">
             <h4>Horário</h4>
-            <p>Seg a Sex: 08h às 18h<br>Sábado: 08h às 12h</p>
+            <p data-mda-field="horario_atendimento">Seg a Sex: 08h às 18h<br>Sábado: 08h às 12h</p>
           </div>
           <div class="contact__info-item">
             <h4>Endereço</h4>
-            <p>Av. Safira, 1375 — Parque Patriarca<br>Foz do Iguaçu – PR · CEP 85854-000</p>
-            <a href="https://share.google/9oMqpcefoCuCh2cz4" class="btn btn--outline btn--sm" target="_blank" rel="noopener" style="margin-top:8px">Como chegar</a>
+            <p data-mda-field="endereco">Av. Safira, 1375 — Parque Patriarca<br>Foz do Iguaçu – PR · CEP 85854-000</p>
+            <a href="https://share.google/9oMqpcefoCuCh2cz4" class="btn btn--outline btn--sm" target="_blank" rel="noopener" style="margin-top:8px" data-mda-field="mapa_url">Como chegar</a>
           </div>
         </div>
       </div>
@@ -251,14 +251,14 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
-        <div class="footer__contact">
+        <div class="footer__contact" data-mda-block="phones">
           <h4>Contato</h4>
           <p><strong>WhatsApp Comercial</strong><br>(45) 99967-7835</p>
           <p><strong>Emergencial 24h</strong><br>(45) 99964-8080</p>
           <p><strong>Agência</strong><br>(45) 3523-3060</p>
           <p>atendimento@mundodasaguas.com.br</p>
         </div>
-        <div class="footer__contact">
+        <div class="footer__contact" data-mda-block="address">
           <h4>Endereço</h4>
           <p>Mundo das Águas Turismo<br>Av. Safira, 1375 — Parque Patriarca<br>Foz do Iguaçu – PR<br>CEP 85854-000</p>
         </div>
@@ -284,12 +284,12 @@
           <a href="termos-uso.html">Termos de Uso</a>
           <a href="contato.html#form-trabalhe">Trabalhe Conosco</a>
           <a href="venda-veiculos.html">Venda de Veículos</a>
-          <a href="links.html">Links (bio Instagram)</a>
+          <a href="/bio">Links (bio Instagram)</a>
         </div>
       </div>
       <div class="footer__bottom">
         <p>&copy; 2026 Mundo das Águas Turismo. Todos os direitos reservados.</p>
-        <p class="footer__credit">Desenvolvido por <a href="https://pedroriquelme.com.br" target="_blank" rel="noopener noreferrer">Pedro Riquelme</a></p>
+        <p class="footer__credit">Desenvolvido por <a href="https://fozdev.com.br/" target="_blank" rel="noopener noreferrer">FozDev</a></p>
       </div>
     </div>
   </footer>
@@ -305,8 +305,8 @@
       bucket: 'excursoes',
       curriculosBucket: 'curriculos'
     };
-    window.MDA_CONTACT_LOADED_AT = Date.now();
   </script>
+  <script type="module" src="../js/site-contact.js"></script>
   <script type="module" src="../js/contato.js"></script>
   <script src="../js/main.js"></script>
 </body>

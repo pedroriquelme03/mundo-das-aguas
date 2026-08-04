@@ -10,7 +10,7 @@ console.log('==> Montando pasta public/ para o Vercel');
 rmSync(publicDir, { recursive: true, force: true });
 mkdirSync(publicDir, { recursive: true });
 
-const siteItems = ['index.html', 'css', 'js', 'pages', 'images', 'img'];
+const siteItems = ['index.html', 'css', 'js', 'pages', 'images', 'img', 'bio'];
 for (const item of siteItems) {
   const src = join(root, item);
   if (existsSync(src)) {

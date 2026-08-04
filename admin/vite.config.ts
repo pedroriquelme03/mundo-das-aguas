@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   base: '/admin/',
   server: { port: 5174, open: true },
+  optimizeDeps: {
+    include: ['cropperjs']
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,

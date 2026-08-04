@@ -149,9 +149,20 @@
         <h2 class="section-title">Viaje para os maiores polos comerciais do Brasil.</h2>
         <p class="section-subtitle">Saídas programadas para os principais destinos de compras, com embarques organizados e acompanhamento durante toda a viagem.</p>
 
-        <!-- Cards renderizados dinamicamente a partir do Supabase (gerenciáveis no painel admin) -->
-        <div class="destinos__grid" id="excursoesComprasGrid" data-limit="6">
-          <div class="destinos__empty">Carregando excursões de compras…</div>
+        <!-- Cards em carrossel (3 por vez no desktop) — gerenciáveis no painel admin -->
+        <div class="destinos-slider" id="excursoesComprasSlider">
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--prev" aria-label="Excursão anterior">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="destinos-slider__viewport">
+            <div class="destinos-slider__track" id="excursoesComprasGrid" data-limit="12">
+              <div class="destinos__empty">Carregando excursões de compras…</div>
+            </div>
+          </div>
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--next" aria-label="Próxima excursão">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="destinos-slider__dots" role="tablist" aria-label="Excursões de compras"></div>
         </div>
 
         <div class="destinos__cta">
@@ -187,9 +198,20 @@
         <h2 class="section-title">Pacotes Turísticos</h2>
         <p class="section-subtitle">Romarias, pescarias e excursões organizadas para diferentes destinos do Brasil e Mercosul. Escolha sua próxima viagem e consulte as próximas saídas.</p>
 
-        <!-- Cards dinâmicos a partir do Supabase (aba Excursões/Pacotes no admin, destaque_home) -->
-        <div class="destinos__grid" id="pacotesTuristicosGrid" data-limit="6">
-          <div class="destinos__empty">Carregando pacotes turísticos…</div>
+        <!-- Cards dinâmicos em carrossel (3 por vez) — destaque_home no admin -->
+        <div class="destinos-slider" id="pacotesTuristicosSlider">
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--prev" aria-label="Pacote anterior">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="destinos-slider__viewport">
+            <div class="destinos-slider__track" id="pacotesTuristicosGrid" data-limit="12">
+              <div class="destinos__empty">Carregando pacotes turísticos…</div>
+            </div>
+          </div>
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--next" aria-label="Próximo pacote">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="destinos-slider__dots" role="tablist" aria-label="Pacotes turísticos"></div>
         </div>
 
         <div class="destinos__cta">
@@ -350,14 +372,14 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
-        <div class="footer__contact">
+        <div class="footer__contact" data-mda-block="phones">
           <h4>Contato</h4>
           <p><strong>WhatsApp Comercial</strong><br>(45) 99967-7835</p>
           <p><strong>Emergencial 24h</strong><br>(45) 99964-8080</p>
           <p><strong>Agência</strong><br>(45) 3523-3060</p>
           <p>atendimento@mundodasaguas.com.br</p>
         </div>
-        <div class="footer__contact">
+        <div class="footer__contact" data-mda-block="address">
           <h4>Endereço</h4>
           <p>Mundo das Águas Turismo<br>Av. Safira, 1375 — Parque Patriarca<br>Foz do Iguaçu – PR<br>CEP 85854-000</p>
           <a href="https://share.google/9oMqpcefoCuCh2cz4" class="btn btn--outline btn--sm" target="_blank" rel="noopener" style="margin-top:8px;">Como chegar</a>
@@ -386,12 +408,12 @@
           <a href="pages/termos-uso.html">Termos de Uso</a>
           <a href="pages/contato.html">Trabalhe Conosco</a>
           <a href="pages/venda-veiculos.html">Venda de Veículos</a>
-          <a href="pages/links.html">Links (bio Instagram)</a>
+          <a href="/bio">Links (bio Instagram)</a>
         </div>
       </div>
       <div class="footer__bottom">
         <p>&copy; 2026 Mundo das Águas Turismo. Todos os direitos reservados.</p>
-        <p class="footer__credit">Desenvolvido por <a href="https://pedroriquelme.com.br" target="_blank" rel="noopener noreferrer">Pedro Riquelme</a></p>
+        <p class="footer__credit">Desenvolvido por <a href="https://fozdev.com.br/" target="_blank" rel="noopener noreferrer">FozDev</a></p>
       </div>
     </div>
   </footer>
@@ -409,6 +431,7 @@
       bucket: 'excursoes'
     };
   </script>
+  <script type="module" src="js/site-contact.js"></script>
   <script type="module" src="js/excursoes-compras.js"></script>
   <script type="module" src="js/pacotes-home.js"></script>
   <script type="module" src="js/depoimentos.js"></script>
