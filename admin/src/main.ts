@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase, supabaseConfigError } from './supabase';
 import {
   listExcursoes, createExcursao, updateExcursao, deleteExcursao,
   listExcursoesFull, createExcursaoFull, updateExcursaoFull, deleteExcursaoFull,
@@ -908,13 +908,21 @@ async function renderLeads(root: HTMLElement) {
 }
 
 /* ==================== BOOTSTRAP ---------------- */
-supabase.auth.onAuthStateChange((_event, session) => {
-  if (session) renderShell();
-  else renderLogin();
-});
+if (supabaseConfigError) {
+  app.innerHTML = `<div class="auth"><div class="card auth__card"><h1>Configuração incompleta</h1><p class="error">${esc(supabaseConfigError)}</p></div></div>`;
+} else {
+  supabase.auth.onAuthStateChange((_event, session) => {
+    if (session) renderShell();
+    else renderLogin();
+  });
 
-(async () => {
-  const { data } = await supabase.auth.getSession();
-  if (data.session) renderShell();
-  else renderLogin();
-})();
+  (async () => {
+    try {
+      const { data } = await supabase.auth.getSession();
+      if (data.session) renderShell();
+      else renderLogin();
+    } catch (err) {
+      app.innerHTML = `<div class="auth"><div class="card auth__card"><h1>Erro ao iniciar</h1><p class="error">${esc((err as Error).message)}</p></div></div>`;
+    }
+  })();
+}

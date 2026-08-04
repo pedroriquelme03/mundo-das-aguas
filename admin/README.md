@@ -14,15 +14,23 @@ Projeto Supabase: **Site Mundo das Aguas** (`yzfvqsftphsoylzpfrug`).
 | Blog | `blog_posts` | `pages/blog.html` e `pages/blog-artigo.html` |
 | Leads | `contato_leads` | Formulários de Contato |
 
-## Rodar
+## Deploy (Vercel)
 
-```bash
-cd admin
-npm install
-npm run dev
+O site estático e o painel ficam no mesmo projeto. O `vercel.json` na raiz:
+
+1. Roda `npm run build` dentro de `admin/`
+2. Copia o `dist` para `/admin/` (substitui o HTML fonte só no build)
+
+Variáveis obrigatórias no Vercel (**disponíveis no Build**):
+
+```
+VITE_SUPABASE_URL=https://yzfvqsftphsoylzpfrug.supabase.co
+VITE_SUPABASE_ANON_KEY=sb_publishable_...
 ```
 
-Abre em http://localhost:5174
+Depois de alterar variáveis, faça um **Redeploy**.
+
+URL do painel: `https://seu-dominio.vercel.app/admin/`
 
 ## Template de excursão
 

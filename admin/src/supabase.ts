@@ -1,13 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
 
-if (!url || !anonKey) {
-  throw new Error(
-    'Variáveis VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY ausentes. Crie o arquivo admin/.env (veja .env.example).'
-  );
-}
+export const supabaseConfigError =
+  !url || !anonKey
+    ? 'Variáveis VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY ausentes no build. Configure-as no Vercel e faça um novo deploy.'
+    : '';
 
-export const supabase = createClient(url, anonKey);
+export const supabase: SupabaseClient = createClient(
+  url || 'https://placeholder.supabase.co',
+  anonKey || 'placeholder'
+);
+
 export const BUCKET = 'excursoes';

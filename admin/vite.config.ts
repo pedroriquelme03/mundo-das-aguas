@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite';
 
-// base './' permite hospedar o painel em uma subpasta (ex.: /admin/).
+// base '/admin/' — assets absolutos corretos no Vercel (mundo-das-aguas.vercel.app/admin/)
 export default defineConfig({
-  base: './',
-  server: { port: 5174, open: true }
+  base: '/admin/',
+  server: { port: 5174, open: true },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    assetsDir: 'assets'
+  }
 });
