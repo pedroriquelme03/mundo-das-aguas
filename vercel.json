@@ -1,7 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "cd admin && npm install && npm run build && cp dist/index.html index.html && rm -rf assets && cp -r dist/assets assets",
+  "installCommand": "echo skip-root-install",
+  "buildCommand": "node scripts/vercel-build.mjs",
+  "outputDirectory": "public",
   "redirects": [
     {
       "source": "/admin",

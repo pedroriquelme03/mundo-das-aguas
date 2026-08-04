@@ -1,0 +1,8 @@
+# Build artifacts (Vercel)
+public/
+.vercel
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.local
