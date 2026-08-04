@@ -633,3 +633,52 @@ document.addEventListener('keydown', function (e) {
     document.body.style.overflow = '';
   }
 });
+
+// Galerias por ônibus (página Frota — Fase 2)
+document.querySelectorAll('[data-fleet-gallery]').forEach(function (gallery) {
+  var track = gallery.querySelector('.fleet-row__track');
+  var slides = gallery.querySelectorAll('.fleet-row__slide');
+  var prev = gallery.querySelector('.fleet-row__arrow--prev');
+  var next = gallery.querySelector('.fleet-row__arrow--next');
+  var dotsBox = gallery.querySelector('.fleet-row__dots');
+  if (!track || slides.length === 0) return;
+
+  var index = 0;
+  var total = slides.length;
+
+  function goTo(i) {
+    index = (i + total) % total;
+    track.style.transform = 'translateX(-' + index * 100 + '%)';
+    if (dotsBox) {
+      dotsBox.querySelectorAll('button').forEach(function (d, di) {
+        d.classList.toggle('active', di === index);
+      });
+    }
+  }
+
+  if (dotsBox) {
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Foto ' + (i + 1));
+      if (i === 0) dot.className = 'active';
+      (function (n) {
+        dot.addEventListener('click', function () { goTo(n); });
+      })(i);
+      dotsBox.appendChild(dot);
+    }
+  }
+
+  if (prev) prev.addEventListener('click', function () { goTo(index - 1); });
+  if (next) next.addEventListener('click', function () { goTo(index + 1); });
+
+  var startX = 0;
+  gallery.addEventListener('touchstart', function (e) {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  gallery.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].screenX - startX;
+    if (Math.abs(dx) < 40) return;
+    goTo(index + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+});

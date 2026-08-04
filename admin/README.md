@@ -5,7 +5,7 @@ Painel em **Vite + TypeScript** para gerenciar as **Excursões de Compras** exib
 
 ## Pré-requisitos
 - Node.js 18+
-- Projeto Supabase já criado (projeto `mundo-das-aguas`, ref `ayzrwkjijauyflsrmkoq`).
+- Projeto Supabase já criado (projeto `Site Mundo das Aguas`, ref `yzfvqsftphsoylzpfrug`).
 
 ## Configuração
 As credenciais já vêm preenchidas em `.env` (chave **publicável** — segura para o front,
@@ -29,7 +29,7 @@ Publique o conteúdo de `admin/dist` em qualquer host estático (ou em uma subpa
 ## Criar o usuário administrador (login)
 Por segurança, o usuário/senha do admin **não é criado automaticamente**. Crie uma vez:
 
-1. Acesse o painel do Supabase → projeto **mundo-das-aguas** → **Authentication → Users → Add user**.
+1. Acesse o painel do Supabase → projeto **Site Mundo das Aguas** → **Authentication → Users → Add user**.
 2. Informe **e-mail** e **senha** e confirme (marque "Auto Confirm User").
 3. Use esse e-mail/senha na tela de login do painel.
 
