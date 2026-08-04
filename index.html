@@ -30,8 +30,7 @@
             <a href="#excursoes-compras">Compras</a>
             <a href="#pacotes-turisticos">Turísticos</a>
             <a href="#encomendas">Encomendas</a>
-            <!-- TODO Fase 2: criar página de Reservas (hotéis, cruzeiros, aéreos) -->
-            <a href="pages/contato.html">Reservas</a>
+            <a href="pages/reservas.html">Reservas</a>
           </div>
         </div>
         <a href="pages/quem-somos.html" class="nav-link" data-nav="quem-somos">Quem Somos</a>
@@ -55,7 +54,7 @@
     <a href="#excursoes-compras" class="mobile-nav__link mobile-nav__sublink">Compras</a>
     <a href="#pacotes-turisticos" class="mobile-nav__link mobile-nav__sublink">Turísticos</a>
     <a href="#encomendas" class="mobile-nav__link mobile-nav__sublink">Encomendas</a>
-    <a href="pages/contato.html" class="mobile-nav__link mobile-nav__sublink">Reservas</a>
+    <a href="pages/reservas.html" class="mobile-nav__link mobile-nav__sublink">Reservas</a>
     <a href="pages/quem-somos.html" class="mobile-nav__link">Quem Somos</a>
     <a href="pages/blog.html" class="mobile-nav__link">Blog</a>
     <a href="pages/contato.html" class="mobile-nav__link">Contato</a>
@@ -69,8 +68,7 @@
     <!-- ===================== SEÇÃO 1 — HERO ===================== -->
     <section class="hero" id="home">
       <div class="hero__bg">
-        <!-- TODO: banner rotativo com imagem por aba (Fretamento/Compras/Pescaria/Pacotes) — cadastrar imagens -->
-        <img src="images/hero-cataratas.jpg" alt="Viagens em grupo pelo Brasil e Mercosul" loading="eager">
+        <img id="heroBgImg" src="images/hero-cataratas.jpg" alt="Viagens em grupo pelo Brasil e Mercosul" loading="eager">
         <div class="hero__overlay"></div>
       </div>
       <div class="container hero__content hero__content--center">
@@ -191,48 +189,13 @@
         <h2 class="section-title">Pacotes Turísticos</h2>
         <p class="section-subtitle">Romarias, pescarias e excursões organizadas para diferentes destinos do Brasil e Mercosul. Escolha sua próxima viagem e consulte as próximas saídas.</p>
 
-        <!-- TODO Fase 2: tornar gerenciável no painel admin. Por ora, cards estáticos (mesmo padrão visual). -->
-        <div class="destinos__grid">
-          <article class="destino-card">
-            <div class="destino-card__media"><span class="destino-card__faixa">Próxima saída</span><span class="destino-card__cat">Romaria</span><div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div></div>
-            <div class="destino-card__body">
-              <h3 class="destino-card__title">Santuário de Aparecida</h3>
-              <p class="destino-card__local">Aparecida – SP</p>
-              <div class="destino-card__meta">
-                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>Saída:</strong> a definir</span>
-                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Retorno:</strong> a definir</span>
-              </div>
-              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre o pacote para Aparecida." class="btn btn--outline" target="_blank" rel="noopener">Saiba mais</a>
-            </div>
-          </article>
-          <article class="destino-card">
-            <div class="destino-card__media"><span class="destino-card__faixa">Novidade</span><span class="destino-card__cat">Turismo</span><div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div></div>
-            <div class="destino-card__body">
-              <h3 class="destino-card__title">Gramado e Canela</h3>
-              <p class="destino-card__local">Serra Gaúcha – RS</p>
-              <div class="destino-card__meta">
-                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>Saída:</strong> a definir</span>
-                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Retorno:</strong> a definir</span>
-              </div>
-              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre o pacote para Gramado e Canela." class="btn btn--outline" target="_blank" rel="noopener">Saiba mais</a>
-            </div>
-          </article>
-          <article class="destino-card">
-            <div class="destino-card__media"><span class="destino-card__faixa">Últimas vagas</span><span class="destino-card__cat">Pescaria</span><div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div></div>
-            <div class="destino-card__body">
-              <h3 class="destino-card__title">Pescaria na Argentina</h3>
-              <p class="destino-card__local">Argentina</p>
-              <div class="destino-card__meta">
-                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>Saída:</strong> a definir</span>
-                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Retorno:</strong> a definir</span>
-              </div>
-              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre a pescaria na Argentina." class="btn btn--outline" target="_blank" rel="noopener">Saiba mais</a>
-            </div>
-          </article>
+        <!-- Cards dinâmicos a partir do Supabase (aba Excursões/Pacotes no admin, destaque_home) -->
+        <div class="destinos__grid" id="pacotesTuristicosGrid" data-limit="6">
+          <div class="destinos__empty">Carregando pacotes turísticos…</div>
         </div>
 
         <div class="destinos__cta">
-          <a href="pages/servicos.html#turisticos" class="btn btn--primary btn--lg">Ver todos os pacotes turísticos</a>
+          <a href="pages/servicos.html#pacotes" class="btn btn--primary btn--lg">Ver todos os pacotes turísticos</a>
         </div>
       </div>
     </section>
@@ -424,7 +387,8 @@
           <a href="pages/politica-privacidade.html">Política de Privacidade</a>
           <a href="pages/termos-uso.html">Termos de Uso</a>
           <a href="pages/contato.html">Trabalhe Conosco</a>
-          <a href="pages/contato.html">Venda de Veículos</a>
+          <a href="pages/venda-veiculos.html">Venda de Veículos</a>
+          <a href="pages/links.html">Links (bio Instagram)</a>
         </div>
       </div>
       <div class="footer__bottom">
@@ -448,6 +412,8 @@
     };
   </script>
   <script type="module" src="js/excursoes-compras.js"></script>
+  <script type="module" src="js/pacotes-home.js"></script>
+  <script type="module" src="js/depoimentos.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artigo — Mundo das Águas Turismo">
+  <title>Artigo | Mundo das Águas Turismo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="blog">
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <img src="../images/logogomarca-mundo.png" alt="Turismo Mundo das Águas" class="header__logo-img" width="220" height="56">
+      </a>
+      <nav class="header__nav" id="mainNav">
+        <a href="frota.html" class="nav-link" data-nav="frota">Nossa Frota</a>
+        <div class="nav-item nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-haspopup="true" aria-expanded="false">
+            Serviços
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dropdown__menu">
+            <a href="servicos.html#compras">Compras</a>
+            <a href="servicos.html#pacotes">Turísticos</a>
+            <a href="servicos.html#encomendas">Encomendas</a>
+            <a href="reservas.html">Reservas</a>
+          </div>
+        </div>
+        <a href="quem-somos.html" class="nav-link" data-nav="quem-somos">Quem Somos</a>
+        <a href="blog.html" class="nav-link active" data-nav="blog">Blog</a>
+        <a href="contato.html" class="nav-link" data-nav="contato">Contato</a>
+      </nav>
+      <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações." class="btn btn--whatsapp header__cta" target="_blank" rel="noopener">WhatsApp</a>
+      <button class="header__burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="frota.html" class="mobile-nav__link">Nossa Frota</a>
+    <a href="servicos.html" class="mobile-nav__link">Serviços</a>
+    <a href="servicos.html#compras" class="mobile-nav__link mobile-nav__sublink">Compras</a>
+    <a href="servicos.html#pacotes" class="mobile-nav__link mobile-nav__sublink">Turísticos</a>
+    <a href="servicos.html#encomendas" class="mobile-nav__link mobile-nav__sublink">Encomendas</a>
+    <a href="reservas.html" class="mobile-nav__link mobile-nav__sublink">Reservas</a>
+    <a href="quem-somos.html" class="mobile-nav__link">Quem Somos</a>
+    <a href="blog.html" class="mobile-nav__link">Blog</a>
+    <a href="contato.html" class="mobile-nav__link">Contato</a>
+  </div>
+
+  <div id="artigoRoot">
+    <section class="page-banner">
+      <div class="page-banner__bg"><div class="page-banner__overlay"></div></div>
+      <div class="container page-banner__content"><p>Carregando artigo…</p></div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border:0;padding:24px 0">
+        <p>&copy; 2026 Mundo das Águas Turismo.</p>
+        <p class="footer__credit"><a href="blog.html">← Voltar ao Blog</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.MDA_SUPABASE = {
+      url: 'https://yzfvqsftphsoylzpfrug.supabase.co',
+      anonKey: 'sb_publishable_Lz0LkyFfYkaIwJg4QsEtEg_JLIQYrMf',
+      bucket: 'excursoes'
+    };
+  </script>
+  <script type="module" src="../js/blog-artigo.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -30,28 +30,37 @@ document.addEventListener('DOMContentLoaded', function () {
       fretamento: {
         label: 'Fretamento',
         whatsappIntro: 'fretamento',
-        destinos: ['Empresas e eventos', 'Igrejas e caravanas', 'Escolas', 'Excursões', 'Roteiro personalizado']
+        destinos: ['Empresas e eventos', 'Igrejas e caravanas', 'Escolas', 'Excursões', 'Roteiro personalizado'],
+        image: 'images/hero-cataratas.jpg',
+        alt: 'Fretamento de ônibus para grupos'
       },
       compras: {
         label: 'Compras',
         whatsappIntro: 'excursões de compras',
-        destinos: ['Brás', 'Bom Retiro', '25 de Março', 'Goiânia', 'Monte Sião']
+        destinos: ['Brás', 'Bom Retiro', '25 de Março', 'Goiânia', 'Monte Sião'],
+        image: 'images/1e3e4754-71f8-4e86-b633-8f290a406d4c.JPG',
+        alt: 'Excursões de compras'
       },
       pescaria: {
         label: 'Pescaria',
         whatsappIntro: 'pescarias',
-        destinos: ['Corumbá', 'Argentina', 'Patagônia']
+        destinos: ['Corumbá', 'Argentina', 'Patagônia'],
+        image: 'images/24d2b9ed-3e24-4ce9-8ae6-9b00d731045d.JPG',
+        alt: 'Pescarias em grupo'
       },
       pacotes: {
         label: 'Pacotes Turísticos',
         whatsappIntro: 'pacotes turísticos',
-        destinos: ['Balneário Camboriú', 'Gramado e Canela', 'Piratuba Thermas', 'Aparecida', 'Romarias']
+        destinos: ['Balneário Camboriú', 'Gramado e Canela', 'Piratuba Thermas', 'Aparecida', 'Romarias'],
+        image: 'images/496e72c4-95a3-49ae-961f-3f407bb1e736.JPG',
+        alt: 'Pacotes turísticos'
       }
     };
     var tabs = document.querySelectorAll('.hero-search__tab');
     var input = document.getElementById('heroSearchInput');
     var datalist = document.getElementById('heroDestinosList');
     var form = document.getElementById('heroSearchForm');
+    var heroImg = document.getElementById('heroBgImg');
     var activeCategory = 'fretamento';
     if (!tabs.length || !input || !form) return;
 
@@ -72,6 +81,14 @@ document.addEventListener('DOMContentLoaded', function () {
           opt.value = dest;
           datalist.appendChild(opt);
         });
+      }
+      if (heroImg && data.image && heroImg.getAttribute('src') !== data.image) {
+        heroImg.classList.add('is-fading');
+        setTimeout(function () {
+          heroImg.src = data.image;
+          heroImg.alt = data.alt || data.label;
+          heroImg.classList.remove('is-fading');
+        }, 220);
       }
     }
 
