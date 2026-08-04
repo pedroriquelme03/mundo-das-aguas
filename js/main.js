@@ -27,27 +27,32 @@ document.addEventListener('DOMContentLoaded', function () {
   // Hero search — categorias e destinos
   (function () {
     var heroData = {
-      compras: {
-        label: 'Compras',
-        whatsappIntro: 'excursões de compras',
-        destinos: ['Paraguai', 'Brás', 'Goiânia', '25 de Março']
-      },
-      turismo: {
-        label: 'Turismo',
-        whatsappIntro: 'excursões e viagens de turismo',
-        destinos: ['Aparecida', 'Gramado', 'Foz do Iguaçu', 'Praias', 'Pescarias']
-      },
       fretamento: {
         label: 'Fretamento',
         whatsappIntro: 'fretamento',
-        destinos: ['Empresas e eventos', 'Igrejas e caravanas', 'Escolas', 'Roteiro personalizado']
+        destinos: ['Empresas e eventos', 'Igrejas e caravanas', 'Escolas', 'Excursões', 'Roteiro personalizado']
+      },
+      compras: {
+        label: 'Compras',
+        whatsappIntro: 'excursões de compras',
+        destinos: ['Brás', 'Bom Retiro', '25 de Março', 'Goiânia', 'Monte Sião']
+      },
+      pescaria: {
+        label: 'Pescaria',
+        whatsappIntro: 'pescarias',
+        destinos: ['Corumbá', 'Argentina', 'Patagônia']
+      },
+      pacotes: {
+        label: 'Pacotes Turísticos',
+        whatsappIntro: 'pacotes turísticos',
+        destinos: ['Balneário Camboriú', 'Gramado e Canela', 'Piratuba Thermas', 'Aparecida', 'Romarias']
       }
     };
     var tabs = document.querySelectorAll('.hero-search__tab');
     var input = document.getElementById('heroSearchInput');
     var datalist = document.getElementById('heroDestinosList');
     var form = document.getElementById('heroSearchForm');
-    var activeCategory = 'compras';
+    var activeCategory = 'fretamento';
     if (!tabs.length || !input || !form) return;
 
     function setCategory(cat) {
@@ -87,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
       window.open('https://wa.me/5545999677835?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     });
 
-    setCategory('compras');
+    setCategory('fretamento');
   })();
 
   // Flip cards — toque em dispositivos sem hover

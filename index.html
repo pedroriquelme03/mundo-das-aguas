@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mundo das Águas Turismo - Especialistas em excursões rodoviárias, fretamentos e roteiros nacionais e Mercosul desde 1997. Foz do Iguaçu - PR.">
-  <meta name="keywords" content="excursões, fretamentos, turismo rodoviário, viagens em grupo, Foz do Iguaçu, Mercosul, Paraguai, compras, pescaria, romaria">
-  <title>Mundo das Águas Turismo | Excursões, Fretamentos e Roteiros - Foz do Iguaçu</title>
+  <meta name="description" content="Mundo das Águas Turismo - Fretamento, excursões de compras e turismo rodoviário para grupos há quase 30 anos. Frota própria com Internet Starlink. Foz do Iguaçu - PR.">
+  <meta name="keywords" content="fretamento, excursões de compras, turismo rodoviário, viagens em grupo, Foz do Iguaçu, Brasil e Mercosul, pescaria, romaria, pacotes turísticos">
+  <title>Mundo das Águas Turismo | Fretamento, Excursões de Compras e Turismo Rodoviário</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,10 +20,21 @@
         <img src="images/logogomarca-mundo.png" alt="Turismo Mundo das Águas" class="header__logo-img" width="220" height="56">
       </a>
       <nav class="header__nav" id="mainNav">
-        <a href="index.html" class="nav-link active" data-nav="home">Home</a>
+        <a href="pages/frota.html" class="nav-link" data-nav="frota">Nossa Frota</a>
+        <div class="nav-item nav-dropdown">
+          <button type="button" class="nav-dropdown__toggle" aria-haspopup="true" aria-expanded="false">
+            Serviços
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dropdown__menu">
+            <a href="#excursoes-compras">Compras</a>
+            <a href="#pacotes-turisticos">Turísticos</a>
+            <a href="#encomendas">Encomendas</a>
+            <!-- TODO Fase 2: criar página de Reservas (hotéis, cruzeiros, aéreos) -->
+            <a href="pages/contato.html">Reservas</a>
+          </div>
+        </div>
         <a href="pages/quem-somos.html" class="nav-link" data-nav="quem-somos">Quem Somos</a>
-        <a href="pages/servicos.html" class="nav-link" data-nav="servicos">Serviços</a>
-        <a href="pages/frota.html" class="nav-link" data-nav="frota">Frota</a>
         <a href="pages/blog.html" class="nav-link" data-nav="blog">Blog</a>
         <a href="pages/contato.html" class="nav-link" data-nav="contato">Contato</a>
       </nav>
@@ -39,10 +50,13 @@
 
   <!-- MOBILE NAV -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="index.html" class="mobile-nav__link">Home</a>
+    <a href="pages/frota.html" class="mobile-nav__link">Nossa Frota</a>
+    <a href="pages/contato.html" class="mobile-nav__link">Serviços</a>
+    <a href="#excursoes-compras" class="mobile-nav__link mobile-nav__sublink">Compras</a>
+    <a href="#pacotes-turisticos" class="mobile-nav__link mobile-nav__sublink">Turísticos</a>
+    <a href="#encomendas" class="mobile-nav__link mobile-nav__sublink">Encomendas</a>
+    <a href="pages/contato.html" class="mobile-nav__link mobile-nav__sublink">Reservas</a>
     <a href="pages/quem-somos.html" class="mobile-nav__link">Quem Somos</a>
-    <a href="pages/servicos.html" class="mobile-nav__link">Serviços</a>
-    <a href="pages/frota.html" class="mobile-nav__link">Frota</a>
     <a href="pages/blog.html" class="mobile-nav__link">Blog</a>
     <a href="pages/contato.html" class="mobile-nav__link">Contato</a>
     <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre excursões e viagens." class="btn btn--whatsapp mobile-nav__wa" target="_blank" rel="noopener">
@@ -52,21 +66,23 @@
   </div>
 
   <main>
-    <!-- HERO -->
+    <!-- ===================== SEÇÃO 1 — HERO ===================== -->
     <section class="hero" id="home">
       <div class="hero__bg">
-        <img src="images/hero-cataratas.jpg" alt="Cataratas do Iguaçu — Foz do Iguaçu" loading="eager">
+        <!-- TODO: banner rotativo com imagem por aba (Fretamento/Compras/Pescaria/Pacotes) — cadastrar imagens -->
+        <img src="images/hero-cataratas.jpg" alt="Viagens em grupo pelo Brasil e Mercosul" loading="eager">
         <div class="hero__overlay"></div>
       </div>
       <div class="container hero__content hero__content--center">
-        <h1>Especialistas em excursões e experiências em grupo</h1>
-        <p class="hero__subtitle">Enquanto você vive a experiência, nós cuidamos do caminho.</p>
+        <h1>Fretamento, excursões de compras e turismo rodoviário para grupos.</h1>
+        <p class="hero__subtitle">Há quase 30 anos organizando viagens pelo Brasil e Mercosul com frota própria, conforto e segurança para empresas, organizadores e passageiros.</p>
 
         <div class="hero-search" id="heroSearch">
           <div class="hero-search__tabs" role="tablist" aria-label="Categorias de serviços">
-            <button type="button" class="hero-search__tab active" role="tab" aria-selected="true" data-category="compras">Compras</button>
-            <button type="button" class="hero-search__tab" role="tab" aria-selected="false" data-category="turismo">Turismo</button>
-            <button type="button" class="hero-search__tab" role="tab" aria-selected="false" data-category="fretamento">Fretamento</button>
+            <button type="button" class="hero-search__tab active" role="tab" aria-selected="true" data-category="fretamento">Fretamento</button>
+            <button type="button" class="hero-search__tab" role="tab" aria-selected="false" data-category="compras">Compras</button>
+            <button type="button" class="hero-search__tab" role="tab" aria-selected="false" data-category="pescaria">Pescaria</button>
+            <button type="button" class="hero-search__tab" role="tab" aria-selected="false" data-category="pacotes">Pacotes Turísticos</button>
           </div>
           <form class="hero-search__bar" id="heroSearchForm" role="search">
             <label for="heroSearchInput" class="sr-only">Destino ou roteiro</label>
@@ -79,119 +95,188 @@
         </div>
 
         <div class="hero__badges">
-          <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Viagens nacionais e Mercosul</span>
-          <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Estrutura preparada</span>
+          <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Frota própria com Internet Starlink</span>
+          <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Atendimento durante toda a viagem</span>
           <span class="badge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Experiência desde 1997</span>
         </div>
       </div>
     </section>
 
-    <!-- SEGMENTATION -->
-    <section class="segment" id="segmento">
+    <!-- ===================== SEÇÃO 2 — SELOS DE DESTAQUE ===================== -->
+    <hr class="section-divider section-divider--orange">
+    <section class="selos sec-warm">
       <div class="container">
-        <h2 class="section-title">Diferentes formas de viajar e organizar experiências</h2>
-        <div class="segment__grid">
-          <div class="segment__card">
-            <div class="segment__card-img">
-              <img src="img/frota/frota (3).jpg" alt="Quero Viajar" loading="lazy">
+        <div class="selos__grid">
+          <div class="selo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Desde 1997</div>
+          <div class="selo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frota própria</div>
+          <div class="selo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Brasil e Mercosul</div>
+          <div class="selo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Atendimento durante toda a viagem</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SEÇÃO 3 — NOSSA FROTA ===================== -->
+    <hr class="section-divider section-divider--blue">
+    <section class="frota-home sec-blue" id="nossa-frota">
+      <div class="container">
+        <span class="section-tag">Nossa Frota</span>
+        <h2 class="section-title">Conheça a frota que acompanha cada viagem.</h2>
+        <p class="section-subtitle">Ônibus preparados para viagens de curta e longa distância, com conforto, segurança e internet Starlink durante o trajeto.</p>
+
+        <div class="destaques">
+          <span class="destaque-chip">Frota própria</span>
+          <span class="destaque-chip">Veículos para diferentes grupos</span>
+          <span class="destaque-chip">Internet Starlink</span>
+          <span class="destaque-chip">Viagens nacionais e Mercosul</span>
+          <span class="destaque-chip">Atendimento durante a excursão</span>
+        </div>
+
+        <div class="frota-home__gallery">
+          <!-- TODO: cadastrar fotos da frota (destaque para o ônibus 1210, detalhes em laranja) -->
+          <figure><div class="img-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Ônibus 1210 em destaque</div><figcaption>Ônibus 1210 em destaque</figcaption></figure>
+          <figure><div class="img-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Frota completa</div><figcaption>Frota completa</figcaption></figure>
+          <figure><div class="img-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Interior dos veículos</div><figcaption>Interior dos veículos</figcaption></figure>
+          <figure><div class="img-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Poltronas</div><figcaption>Poltronas</figcaption></figure>
+          <figure><div class="img-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Bagageiros</div><figcaption>Bagageiros</figcaption></figure>
+          <figure><div class="img-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Motoristas e embarques</div><figcaption>Motoristas e embarques</figcaption></figure>
+        </div>
+
+        <a href="pages/frota.html" class="btn btn--primary btn--lg">Conhecer nossa frota</a>
+      </div>
+    </section>
+
+    <!-- ===================== SEÇÃO 4 — EXCURSÕES DE COMPRAS (DINÂMICA) ===================== -->
+    <hr class="section-divider section-divider--orange">
+    <section class="destinos sec-white" id="excursoes-compras">
+      <div class="container">
+        <span class="section-tag section-tag--warm">Excursões de Compras</span>
+        <h2 class="section-title">Viaje para os maiores polos comerciais do Brasil.</h2>
+        <p class="section-subtitle">Saídas programadas para os principais destinos de compras, com embarques organizados e acompanhamento durante toda a viagem.</p>
+
+        <!-- Cards renderizados dinamicamente a partir do Supabase (gerenciáveis no painel admin) -->
+        <div class="destinos__grid" id="excursoesComprasGrid" data-limit="6">
+          <div class="destinos__empty">Carregando excursões de compras…</div>
+        </div>
+
+        <div class="destinos__cta">
+          <a href="pages/servicos.html#compras" class="btn btn--primary btn--lg">Ver todas as excursões de compras</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SEÇÃO 5 — BRASIL E MERCOSUL ===================== -->
+    <hr class="section-divider section-divider--blue">
+    <section class="mercosul sec-blue">
+      <div class="container">
+        <h2 class="mercosul__title">Experiência em viagens pelo Brasil e Mercosul.</h2>
+        <p class="mercosul__subtitle">Grupos atendidos em roteiros nacionais e internacionais, com experiência em diferentes destinos da América do Sul.</p>
+        <div class="mercosul__flags">
+          <span class="mercosul__flag"><span class="flag">🇧🇷</span> Brasil</span>
+          <span class="mercosul__flag"><span class="flag">🇦🇷</span> Argentina</span>
+          <span class="mercosul__flag"><span class="flag">🇨🇱</span> Chile</span>
+          <span class="mercosul__flag"><span class="flag">🇵🇪</span> Peru</span>
+          <span class="mercosul__flag"><span class="flag">🇺🇾</span> Uruguai</span>
+          <span class="mercosul__flag"><span class="flag">🇧🇴</span> Bolívia</span>
+          <span class="mercosul__flag"><span class="flag">🇨🇴</span> Colômbia</span>
+        </div>
+        <p class="mercosul__note">Fretamentos, excursões e roteiros organizados para diferentes destinos.</p>
+      </div>
+    </section>
+
+    <!-- ===================== SEÇÃO 6 — PACOTES TURÍSTICOS ===================== -->
+    <hr class="section-divider section-divider--orange">
+    <section class="destinos sec-white" id="pacotes-turisticos">
+      <div class="container">
+        <span class="section-tag section-tag--warm">Pacotes Turísticos</span>
+        <h2 class="section-title">Pacotes Turísticos</h2>
+        <p class="section-subtitle">Romarias, pescarias e excursões organizadas para diferentes destinos do Brasil e Mercosul. Escolha sua próxima viagem e consulte as próximas saídas.</p>
+
+        <!-- TODO Fase 2: tornar gerenciável no painel admin. Por ora, cards estáticos (mesmo padrão visual). -->
+        <div class="destinos__grid">
+          <article class="destino-card">
+            <div class="destino-card__media"><span class="destino-card__faixa">Próxima saída</span><span class="destino-card__cat">Romaria</span><div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div></div>
+            <div class="destino-card__body">
+              <h3 class="destino-card__title">Santuário de Aparecida</h3>
+              <p class="destino-card__local">Aparecida – SP</p>
+              <div class="destino-card__meta">
+                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>Saída:</strong> a definir</span>
+                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Retorno:</strong> a definir</span>
+              </div>
+              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre o pacote para Aparecida." class="btn btn--outline" target="_blank" rel="noopener">Saiba mais</a>
             </div>
-            <div class="segment__card-body">
-              <h3>Quero Viajar</h3>
-              <p>Excursões, viagens organizadas, compras, pescarias, turismo religioso e roteiros nacionais e Mercosul.</p>
-              <a href="pages/servicos.html" class="btn btn--outline">Ver excursões</a>
+          </article>
+          <article class="destino-card">
+            <div class="destino-card__media"><span class="destino-card__faixa">Novidade</span><span class="destino-card__cat">Turismo</span><div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div></div>
+            <div class="destino-card__body">
+              <h3 class="destino-card__title">Gramado e Canela</h3>
+              <p class="destino-card__local">Serra Gaúcha – RS</p>
+              <div class="destino-card__meta">
+                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>Saída:</strong> a definir</span>
+                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Retorno:</strong> a definir</span>
+              </div>
+              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre o pacote para Gramado e Canela." class="btn btn--outline" target="_blank" rel="noopener">Saiba mais</a>
             </div>
+          </article>
+          <article class="destino-card">
+            <div class="destino-card__media"><span class="destino-card__faixa">Últimas vagas</span><span class="destino-card__cat">Pescaria</span><div class="img-placeholder"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Foto do destino</div></div>
+            <div class="destino-card__body">
+              <h3 class="destino-card__title">Pescaria na Argentina</h3>
+              <p class="destino-card__local">Argentina</p>
+              <div class="destino-card__meta">
+                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> <strong>Saída:</strong> a definir</span>
+                <span class="destino-card__meta-row"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <strong>Retorno:</strong> a definir</span>
+              </div>
+              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre a pescaria na Argentina." class="btn btn--outline" target="_blank" rel="noopener">Saiba mais</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="destinos__cta">
+          <a href="pages/servicos.html#turisticos" class="btn btn--primary btn--lg">Ver todos os pacotes turísticos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SEÇÃO 7 — NOSSA HISTÓRIA ===================== -->
+    <hr class="section-divider section-divider--blue">
+    <section class="historia sec-white" id="nossa-historia">
+      <div class="container">
+        <div class="historia__grid">
+          <div class="historia__content">
+            <span class="section-tag">Nossa História</span>
+            <h2>Há quase 30 anos levando pessoas aos seus destinos com segurança e confiança.</h2>
+            <p>Desde 1997, a Mundo das Águas transforma quilômetros em experiências, organizando excursões, fretamentos e viagens em grupo para diferentes destinos do Brasil e Mercosul.</p>
+            <p>A Mundo das Águas nasceu em Foz do Iguaçu com o propósito de oferecer viagens organizadas, seguras e bem planejadas. Ao longo de quase três décadas, conquistou a confiança de milhares de passageiros, grupos, empresas, igrejas e organizadores de excursões, tornando-se referência em turismo rodoviário, fretamentos e excursões de compras.</p>
+            <div class="historia__diferenciais">
+              <span class="destaque-chip">Frota própria</span>
+              <span class="destaque-chip">Atendimento humanizado</span>
+              <span class="destaque-chip">Internet Starlink</span>
+              <span class="destaque-chip">Viagens nacionais e Mercosul</span>
+              <span class="destaque-chip">Equipe experiente</span>
+            </div>
+            <a href="pages/quem-somos.html" class="btn btn--primary btn--lg">Conheça nossa história</a>
           </div>
-          <div class="segment__card">
-            <div class="segment__card-img">
-              <img src="img/frota/frota (5).jpg" alt="Organizar Excursão" loading="lazy">
+          <div class="historia__aside">
+            <div class="historia__indicadores">
+              <div class="indicador"><span class="indicador__num">1997</span><span class="indicador__label">Desde</span></div>
+              <div class="indicador"><span class="indicador__num">30</span><span class="indicador__label">Ônibus na frota</span></div>
+              <div class="indicador"><span class="indicador__num">+5 mil</span><span class="indicador__label">Passageiros transportados</span></div>
+              <div class="indicador"><span class="indicador__num">+1.000</span><span class="indicador__label">Viagens realizadas</span></div>
+              <div class="indicador"><span class="indicador__num">🌎</span><span class="indicador__label">Brasil e Mercosul</span></div>
+              <div class="indicador"><span class="indicador__num">~30</span><span class="indicador__label">Anos de experiência</span></div>
             </div>
-            <div class="segment__card-body">
-              <h3>Quero Organizar uma Excursão</h3>
-              <p>Fretamentos, caravanas, viagens corporativas, escolas, igrejas e excursões personalizadas.</p>
-              <a href="pages/servicos.html#organizadores" class="btn btn--outline">Organizar excursão</a>
-            </div>
+            <p class="historia__note">* Números de frota, passageiros e viagens a confirmar antes da publicação.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROVA OPERACIONAL -->
-    <section class="proof">
+    <!-- ===================== SEÇÃO 8 — DEPOIMENTOS ===================== -->
+    <hr class="section-divider section-divider--orange">
+    <section class="testimonials sec-blue" id="depoimentos">
       <div class="container">
-        <h2 class="section-title">Cuidado e experiência em cada detalhe da viagem</h2>
-        <p class="section-subtitle">Embarques organizados, equipe preparada e acompanhamento durante toda a experiência.</p>
-        <div class="proof__grid">
-          <div class="proof__item">
-            <div class="proof__icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-            </div>
-            <h3>Antes da estrada, existe preparação</h3>
-            <p>Equipe, embarque e orientação para tornar cada saída mais organizada e confortável.</p>
-          </div>
-          <div class="proof__item">
-            <div class="proof__icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 5 20 16 16 13 16 8"/><line x1="1" y1="20" x2="22" y2="20"/></svg>
-            </div>
-            <h3>Estrutura preparada para diferentes roteiros</h3>
-            <p>Veículos, motoristas e operação preparados para viagens nacionais e Mercosul.</p>
-          </div>
-          <div class="proof__item">
-            <div class="proof__icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <h3>Uma experiência mais leve para quem viaja</h3>
-            <p>Acompanhamento próximo para que passageiros e organizadores aproveitem melhor cada destino.</p>
-          </div>
-        </div>
-        <p class="proof__quote">Enquanto você aproveita a viagem, nossa equipe cuida do caminho.</p>
-      </div>
-    </section>
-
-    <!-- ATALHOS -->
-    <section class="page-links">
-      <div class="container">
-        <h2 class="section-title">Conheça a Mundo das Águas</h2>
-        <p class="section-subtitle">Navegue pelas seções do site e encontre excursões, frota, dicas de viagem e canais de contato.</p>
-        <div class="page-links__grid">
-          <a href="pages/quem-somos.html" class="page-links__card">
-            <h3>Quem Somos</h3>
-            <p>Nossa história, missão e mais de 27 anos de experiência em turismo rodoviário.</p>
-            <span>Saiba mais &rarr;</span>
-          </a>
-          <a href="pages/servicos.html" class="page-links__card">
-            <h3>Serviços</h3>
-            <p>Excursões, fretamentos, compras, turismo religioso, pescarias e viagens corporativas.</p>
-            <span>Ver serviços &rarr;</span>
-          </a>
-          <a href="pages/frota.html" class="page-links__card">
-            <h3>Frota</h3>
-            <p>Ônibus leito, semi-leito e executivo para grupos de todos os portes.</p>
-            <span>Conhecer frota &rarr;</span>
-          </a>
-          <a href="pages/blog.html" class="page-links__card">
-            <h3>Blog</h3>
-            <p>Dicas, roteiros e informações para sua próxima viagem.</p>
-            <span>Ler artigos &rarr;</span>
-          </a>
-          <a href="pages/contato.html" class="page-links__card">
-            <h3>Contato</h3>
-            <p>WhatsApp, telefone e atendimento para excursões e fretamentos.</p>
-            <span>Falar conosco &rarr;</span>
-          </a>
-          <a href="pages/servicos.html#organizadores" class="page-links__card">
-            <h3>Organizar Excursão</h3>
-            <p>Você reúne as pessoas — nós ajudamos com transporte e operação.</p>
-            <span>Para organizadores &rarr;</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEPOIMENTOS -->
-    <section class="testimonials">
-      <div class="container">
-        <h2 class="section-title">Experiências de quem viajou com a Mundo das Águas</h2>
-        <p class="section-subtitle">Histórias e experiências compartilhadas por passageiros, caravanas e organizadores.</p>
+        <h2 class="section-title">Quem viaja com a Mundo das Águas recomenda.</h2>
+        <p class="section-subtitle">Conheça a experiência de passageiros, grupos e organizadores que confiaram na Mundo das Águas para realizar suas viagens.</p>
         <div class="testimonials-slider" id="testimonialsSlider">
           <button type="button" class="testimonials-slider__arrow testimonials-slider__arrow--prev" id="testimonialsPrev" aria-label="Avaliação anterior">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -203,7 +288,7 @@
                 <p>"Já viajamos várias vezes com a Mundo das Águas. As saídas são organizadas e a equipe sempre nos atende muito bem."</p>
                 <div class="testimonial-card__author">
                   <strong>Maria</strong>
-                  <span>Foz do Iguaçu &middot; Excursão para o Paraguai</span>
+                  <span>Foz do Iguaçu &middot; Compras no Brás</span>
                 </div>
               </div>
               <div class="testimonial-card">
@@ -211,7 +296,7 @@
                 <p>"A viagem foi muito tranquila do início ao retorno. Nossa caravana foi muito bem acompanhada."</p>
                 <div class="testimonial-card__author">
                   <strong>João</strong>
-                  <span>Cascavel &middot; Aparecida do Norte</span>
+                  <span>Cascavel &middot; Romaria para Aparecida</span>
                 </div>
               </div>
               <div class="testimonial-card">
@@ -219,7 +304,7 @@
                 <p>"A equipe nos ajudou bastante durante toda a organização da excursão."</p>
                 <div class="testimonial-card__author">
                   <strong>Carlos</strong>
-                  <span>Toledo &middot; Excursão personalizada</span>
+                  <span>Toledo &middot; Fretamento empresarial</span>
                 </div>
               </div>
               <div class="testimonial-card">
@@ -227,7 +312,7 @@
                 <p>"Foi uma experiência muito boa para nosso grupo. Tudo ocorreu conforme combinado."</p>
                 <div class="testimonial-card__author">
                   <strong>Marcelo</strong>
-                  <span>Medianeira &middot; Pesca Argentina</span>
+                  <span>Medianeira &middot; Pescaria na Argentina</span>
                 </div>
               </div>
             </div>
@@ -238,16 +323,59 @@
           <div class="testimonials-slider__dots" id="testimonialsDots" role="tablist" aria-label="Avaliações"></div>
         </div>
 
+        <div class="testimonials__review">
+          <p>Gostou da sua experiência conosco?</p>
+          <a href="https://g.page/r/CRxmu1251KfWEAE/review" class="btn btn--google btn--lg" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#F59E0B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Faça sua avaliação no Google
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SEÇÃO 9 — ENCOMENDAS (SP -> FOZ) ===================== -->
+    <hr class="section-divider section-divider--blue">
+    <section class="encomendas sec-white" id="encomendas">
+      <div class="container">
+        <div class="encomendas__grid">
+          <div class="encomendas__content">
+            <span class="section-tag section-tag--warm">Encomendas</span>
+            <h2>Encomendas de São Paulo para Foz do Iguaçu e região.</h2>
+            <p>Aproveite nossas viagens para enviar compras, mercadorias e encomendas com praticidade, segurança e acompanhamento durante o transporte.</p>
+            <div class="encomendas__rota">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              São Paulo – SP&nbsp; →&nbsp; Foz do Iguaçu e região
+            </div>
+            <ul class="encomendas__list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Transporte seguro</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Atendimento via WhatsApp</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Equipe preparada</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Coleta e entrega conforme programação</li>
+            </ul>
+            <div class="encomendas__ctas">
+              <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar o envio de uma encomenda de São Paulo para Foz do Iguaçu." class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Solicitar envio de encomenda
+              </a>
+              <a href="pages/contato.html" class="btn btn--outline btn--lg">Como funciona o envio</a>
+            </div>
+          </div>
+          <div class="encomendas__visual">
+            <!-- TODO: composição com ônibus da frota / encomendas / mapa SP → Foz -->
+            <div class="img-placeholder"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Imagem: transporte de encomendas SP → Foz</div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- CTA FINAL -->
+    <hr class="section-divider section-divider--orange">
     <section class="cta-final">
       <div class="container">
         <h2>Sua próxima viagem começa aqui</h2>
-        <p>Experiências organizadas para quem deseja viajar com mais praticidade, segurança e acompanhamento durante todo o caminho.</p>
+        <p>Fretamento, excursões de compras e turismo rodoviário organizados para quem deseja viajar com mais praticidade, segurança e acompanhamento durante todo o caminho.</p>
         <div class="cta-final__btns">
-          <a href="pages/servicos.html#organizadores" class="btn btn--white btn--lg">Organizar minha excursão</a>
+          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar um orçamento." class="btn btn--white btn--lg" target="_blank" rel="noopener">Solicitar orçamento</a>
           <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre excursões e viagens." class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Falar no WhatsApp
@@ -261,43 +389,42 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
-        <div class="footer__brand">
-          <a href="index.html" class="footer__logo">
-            <img src="images/logogomarca-mundo.png" alt="Turismo Mundo das Águas" class="footer__logo-img" width="220" height="56">
-          </a>
-          <p>Especialistas em turismo rodoviário e logística de grupos desde 1997.</p>
-          <p>Foz do Iguaçu - PR</p>
+        <div class="footer__contact">
+          <h4>Contato</h4>
+          <p><strong>WhatsApp Comercial</strong><br>(45) 99967-7835</p>
+          <p><strong>Emergencial 24h</strong><br>(45) 99964-8080</p>
+          <p><strong>Agência</strong><br>(45) 3523-3060</p>
+          <p>atendimento@mundodasaguas.com.br</p>
+        </div>
+        <div class="footer__contact">
+          <h4>Endereço</h4>
+          <p>Mundo das Águas Turismo<br>Av. Safira, 1375 — Parque Patriarca<br>Foz do Iguaçu – PR<br>CEP 85854-000</p>
+          <a href="https://share.google/9oMqpcefoCuCh2cz4" class="btn btn--outline btn--sm" target="_blank" rel="noopener" style="margin-top:8px;">Como chegar</a>
         </div>
         <div class="footer__links">
           <h4>Navegação</h4>
           <a href="index.html">Home</a>
           <a href="pages/quem-somos.html">Quem Somos</a>
+          <a href="pages/frota.html">Nossa Frota</a>
           <a href="pages/servicos.html">Serviços</a>
-          <a href="pages/frota.html">Frota</a>
           <a href="pages/blog.html">Blog</a>
           <a href="pages/contato.html">Contato</a>
         </div>
         <div class="footer__links">
           <h4>Serviços</h4>
-          <a href="pages/servicos.html">Excursões</a>
-          <a href="pages/servicos.html">Fretamentos</a>
-          <a href="pages/servicos.html">Compras</a>
-          <a href="pages/servicos.html">Turismo Religioso</a>
+          <a href="pages/servicos.html">Fretamento</a>
+          <a href="#excursoes-compras">Excursões de Compras</a>
+          <a href="#pacotes-turisticos">Pacotes Turísticos</a>
           <a href="pages/servicos.html">Pescarias</a>
-          <a href="pages/servicos.html">Encomendas</a>
+          <a href="pages/servicos.html">Romarias</a>
+          <a href="#encomendas">Encomendas</a>
         </div>
         <div class="footer__links">
           <h4>Institucional</h4>
           <a href="pages/politica-privacidade.html">Política de Privacidade</a>
           <a href="pages/termos-uso.html">Termos de Uso</a>
-          <a href="pages/venda-veiculos.html">Venda de Veículos</a>
-        </div>
-        <div class="footer__contact">
-          <h4>Contato</h4>
-          <p>WhatsApp: (45) 99967-7835</p>
-          <p>Telefone: (45) 3523-3060</p>
-          <p>atendimento@mundodasaguas.com.br</p>
-          <p>Seg a Sex: 08h às 18h | Sáb: 08h às 12h</p>
+          <a href="pages/contato.html">Trabalhe Conosco</a>
+          <a href="pages/contato.html">Venda de Veículos</a>
         </div>
       </div>
       <div class="footer__bottom">
@@ -307,11 +434,20 @@
     </div>
   </footer>
 
-  <!-- WHATSAPP FLOATING -->
-  <a href="https://wa.me/5545999677835?text=Olá! Gostaria de informações sobre excursões e viagens." class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <!-- WHATSAPP FLUTUANTE — Emergencial 24h (suporte durante a viagem) -->
+  <a href="https://wa.me/5545999648080?text=Olá! Preciso de suporte durante a viagem." class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp Emergencial 24h">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
+  <!-- Config Supabase (chave publicável — segura para uso público com RLS) -->
+  <script>
+    window.MDA_SUPABASE = {
+      url: 'https://ayzrwkjijauyflsrmkoq.supabase.co',
+      anonKey: 'sb_publishable_xd2iCczUABgUK3OKeaInfg_gprq9t5N',
+      bucket: 'excursoes'
+    };
+  </script>
+  <script type="module" src="js/excursoes-compras.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

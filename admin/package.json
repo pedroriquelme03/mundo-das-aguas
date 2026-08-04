@@ -1,0 +1,19 @@
+{
+  "name": "mundo-das-aguas-admin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Painel administrativo da Mundo das Águas (Excursões de Compras).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.8"
+  }
+}

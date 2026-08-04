@@ -11,6 +11,12 @@
   --primary-light: #E8F4F8;
   --accent: #0E86A8;
   --accent-light: #14A3CC;
+  /* Identidade dos ônibus: azul + laranja + amarelo */
+  --orange: #F58220;
+  --orange-dark: #D96C0B;
+  --orange-light: #FDEBD8;
+  --yellow: #F9B233;
+  --yellow-light: #FFF3D6;
   --whatsapp: #25D366;
   --whatsapp-dark: #1DA851;
   --text: #1a1a2e;
@@ -1761,4 +1767,367 @@ section .section-title, section .section-subtitle { text-align: center; }
 @media (max-width: 600px) {
   .page-banner { min-height: 220px; padding: 100px 0 40px; }
   .page-links__grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   FASE 1 — NOVA IDENTIDADE (azul + laranja + amarelo)
+   ============================================================ */
+
+/* Separadores temáticos entre seções (cores intercaladas) */
+.section-divider {
+  height: 6px;
+  border: none;
+  margin: 0;
+}
+.section-divider--blue   { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.section-divider--orange { background: linear-gradient(90deg, var(--orange), var(--yellow)); }
+.section-divider--yellow { background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+
+/* Fundos alternados por tema */
+.sec-white { background: var(--bg); }
+.sec-blue  { background: var(--primary-light); }
+.sec-warm  { background: var(--yellow-light); }
+
+/* Selo/etiqueta de seção com destaque laranja */
+.section-tag--warm { color: var(--orange-dark); }
+
+/* Placeholder de imagem (fotos serão cadastradas depois / no painel) */
+.img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  background: repeating-linear-gradient(45deg, #f1f5f8, #f1f5f8 12px, #e9eef2 12px, #e9eef2 24px);
+  color: var(--text-muted);
+  font-size: .8rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+}
+.img-placeholder svg { opacity: .6; }
+
+/* ---------- Header: dropdown de Serviços ---------- */
+.nav-item { position: relative; display: flex; align-items: center; }
+.nav-dropdown { position: relative; }
+.nav-dropdown__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 0;
+}
+.nav-dropdown__toggle:hover, .nav-dropdown:hover .nav-dropdown__toggle { color: var(--primary); }
+.nav-dropdown__toggle svg { transition: transform var(--transition); }
+.nav-dropdown:hover .nav-dropdown__toggle svg { transform: rotate(180deg); }
+.nav-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 220px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+  z-index: 1001;
+}
+.nav-dropdown:hover .nav-dropdown__menu,
+.nav-dropdown:focus-within .nav-dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown__menu a {
+  display: block;
+  padding: 10px 14px;
+  font-size: .88rem;
+  color: var(--text-light);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+}
+.nav-dropdown__menu a:hover { background: var(--primary-light); color: var(--primary); }
+.mobile-nav__sublink { padding-left: 32px !important; font-size: 1rem !important; color: var(--text-light) !important; }
+
+/* ---------- Seção 2: Selos de destaque ---------- */
+.selos { padding: 28px 0; }
+.selos__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.selo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: .95rem;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.selo svg { color: var(--orange); flex-shrink: 0; }
+
+/* ---------- Destaques (chips) reutilizável ---------- */
+.destaques {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 24px 0 8px;
+}
+.destaque-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--orange-light);
+  color: var(--orange-dark);
+  border-radius: 40px;
+  font-size: .85rem;
+  font-weight: 600;
+}
+.destaque-chip svg { flex-shrink: 0; }
+
+/* ---------- Seção 3: Nossa Frota (home) ---------- */
+.frota-home { padding: 80px 0; }
+.frota-home__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 36px 0 32px;
+}
+.frota-home__gallery .img-placeholder { aspect-ratio: 4 / 3; min-height: 0; }
+.frota-home__gallery figure { margin: 0; }
+.frota-home__gallery figcaption {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ---------- Seções 4 & 6: cards de destino (padrão único) ---------- */
+.destinos { padding: 80px 0; }
+.destinos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+.destino-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.destino-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.destino-card__media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--bg-light);
+}
+.destino-card__media img { width: 100%; height: 100%; object-fit: cover; }
+.destino-card__faixa {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: var(--orange);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.destino-card__cat {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: rgba(11,79,108,.92);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 40px;
+}
+.destino-card__body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.destino-card__title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+.destino-card__local { font-size: .85rem; color: var(--text-muted); margin-bottom: 14px; }
+.destino-card__meta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.destino-card__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .85rem;
+  color: var(--text-light);
+}
+.destino-card__meta-row svg { color: var(--accent); flex-shrink: 0; }
+.destino-card__meta-row strong { color: var(--text); font-weight: 600; }
+.destino-card .btn { margin-top: auto; }
+.destinos__cta { margin-top: 40px; }
+.destinos__empty {
+  grid-column: 1 / -1;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  font-size: .95rem;
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------- Seção 5: Brasil e Mercosul (faixa fina) ---------- */
+.mercosul { padding: 44px 0; }
+.mercosul__title { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 800; color: var(--primary); margin-bottom: 6px; }
+.mercosul__subtitle { color: var(--text-light); max-width: 640px; margin: 0 auto 24px; font-size: .98rem; }
+.mercosul__flags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mercosul__flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.mercosul__flag .flag { font-size: 1.2rem; line-height: 1; }
+.mercosul__note { font-style: italic; color: var(--text-light); font-size: .95rem; }
+
+/* ---------- Seção 7: Nossa História ---------- */
+.historia { padding: 90px 0; }
+.historia__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  text-align: left;
+}
+.historia__content h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 18px; color: var(--text); }
+.historia__content p { color: var(--text-light); margin-bottom: 16px; font-size: .97rem; }
+.historia__indicadores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.indicador {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.indicador__num { display: block; font-size: 1.5rem; font-weight: 800; color: var(--primary); line-height: 1.1; }
+.indicador__label { font-size: .82rem; color: var(--text-muted); margin-top: 4px; }
+.historia__note { font-size: .8rem; color: var(--text-muted); font-style: italic; margin-top: 18px; }
+.historia__diferenciais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 26px;
+}
+
+/* ---------- Botão avaliação Google ---------- */
+.btn--google {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.btn--google:hover { border-color: var(--orange); color: var(--orange-dark); transform: translateY(-1px); }
+.btn--google svg { flex-shrink: 0; }
+.testimonials__review { margin-top: 40px; }
+.testimonials__review p { margin-bottom: 16px; font-weight: 600; color: var(--text); }
+
+/* ---------- Seção 9: Encomendas SP -> Foz ---------- */
+.encomendas { padding: 84px 0; }
+.encomendas__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  text-align: left;
+}
+.encomendas__content h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); margin-bottom: 12px; }
+.encomendas__content > p { color: var(--text-light); margin-bottom: 20px; }
+.encomendas__rota {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  margin-bottom: 22px;
+  font-size: .95rem;
+}
+.encomendas__rota svg { color: var(--orange); }
+.encomendas__list { display: grid; gap: 12px; margin-bottom: 24px; }
+.encomendas__list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .92rem;
+  color: var(--text-light);
+}
+.encomendas__list svg { color: var(--whatsapp); flex-shrink: 0; }
+.encomendas__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.encomendas__visual .img-placeholder { aspect-ratio: 4 / 3; }
+
+/* ---------- Responsivo Fase 1 ---------- */
+@media (max-width: 1024px) {
+  .selos__grid { grid-template-columns: repeat(2, 1fr); }
+  .destinos__grid { grid-template-columns: repeat(2, 1fr); }
+  .frota-home__gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .header__nav { display: none; }
+  .selos__grid { grid-template-columns: 1fr 1fr; }
+  .destinos__grid { grid-template-columns: 1fr; }
+  .frota-home__gallery { grid-template-columns: 1fr 1fr; }
+  .historia__grid { grid-template-columns: 1fr; gap: 36px; }
+  .encomendas__grid { grid-template-columns: 1fr; gap: 32px; }
+  .encomendas__visual { order: -1; }
+}
+@media (max-width: 480px) {
+  .selos__grid { grid-template-columns: 1fr; }
+  .historia__indicadores { grid-template-columns: 1fr; }
 }
