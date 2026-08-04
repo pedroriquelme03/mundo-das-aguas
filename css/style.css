@@ -393,10 +393,13 @@ section .section-title, section .section-subtitle { text-align: center; }
   font-size: .85rem;
   color: rgba(255,255,255,.9);
   background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
   padding: 8px 14px;
   border-radius: 40px;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
+.badge svg { flex-shrink: 0; opacity: .95; }
 
 /* SEGMENTATION */
 .segment {
