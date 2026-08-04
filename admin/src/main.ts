@@ -21,13 +21,23 @@ const app = document.getElementById('app')!;
 
 type ModuleId = 'compras' | 'excursoes' | 'frota' | 'depoimentos' | 'blog' | 'leads';
 
-const MODULES: { id: ModuleId; label: string }[] = [
-  { id: 'compras', label: 'Compras (Home)' },
-  { id: 'excursoes', label: 'Excursões / Pacotes' },
-  { id: 'frota', label: 'Frota' },
-  { id: 'depoimentos', label: 'Depoimentos' },
-  { id: 'blog', label: 'Blog' },
-  { id: 'leads', label: 'Leads (Contato)' }
+const ICON = {
+  compras: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
+  excursoes: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11h18"/><path d="M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><circle cx="7.5" cy="16.5" r="1.5"/><circle cx="16.5" cy="16.5" r="1.5"/><path d="M5 16h2"/><path d="M17 16h2"/></svg>',
+  frota: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+  depoimentos: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  blog: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
+  leads: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>',
+  logout: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>'
+};
+
+const MODULES: { id: ModuleId; label: string; group: string; icon: string }[] = [
+  { id: 'compras', label: 'Compras (Home)', group: 'Conteúdo', icon: ICON.compras },
+  { id: 'excursoes', label: 'Excursões / Pacotes', group: 'Conteúdo', icon: ICON.excursoes },
+  { id: 'frota', label: 'Frota', group: 'Conteúdo', icon: ICON.frota },
+  { id: 'depoimentos', label: 'Depoimentos', group: 'Conteúdo', icon: ICON.depoimentos },
+  { id: 'blog', label: 'Blog', group: 'Conteúdo', icon: ICON.blog },
+  { id: 'leads', label: 'Leads (Contato)', group: 'Atendimento', icon: ICON.leads }
 ];
 
 const CAT_LABEL: Record<ExcursaoCategoria, string> = {
@@ -112,31 +122,78 @@ function renderLogin(errorMsg = '') {
 
 /* ---------------- SHELL ---------------- */
 function renderShell() {
+  const groups = [...new Set(MODULES.map((m) => m.group))];
+  const currentLabel = MODULES.find((m) => m.id === currentModule)?.label || '';
+
   app.innerHTML = `
-    <header class="topbar">
-      <div>
-        <strong>Mundo das Águas</strong>
-        <span class="muted"> · Painel Administrativo</span>
+    <div class="layout">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+          <strong>Mundo das Águas</strong>
+          <span>Painel</span>
+        </div>
+        <nav class="sidebar__nav" id="sideNav">
+          ${groups.map((group) => `
+            <p class="sidebar__group">${esc(group)}</p>
+            ${MODULES.filter((m) => m.group === group).map((m) => `
+              <button type="button" class="sidebar__link${m.id === currentModule ? ' active' : ''}" data-mod="${m.id}">
+                <span class="sidebar__icon" aria-hidden="true">${m.icon}</span>
+                <span>${esc(m.label)}</span>
+              </button>
+            `).join('')}
+          `).join('')}
+        </nav>
+        <div class="sidebar__foot">
+          <button type="button" class="sidebar__link sidebar__link--muted" id="logoutBtn">
+            <span class="sidebar__icon" aria-hidden="true">${ICON.logout}</span>
+            <span>Sair</span>
+          </button>
+        </div>
+      </aside>
+      <div class="layout__main">
+        <header class="topbar">
+          <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu">☰</button>
+          <div class="topbar__title">
+            <strong id="pageTitle">${esc(currentLabel)}</strong>
+            <span class="muted">Administração do site</span>
+          </div>
+        </header>
+        <main class="wrap" id="moduleRoot"><p class="muted">Carregando…</p></main>
       </div>
-      <button class="btn btn--ghost" id="logoutBtn">Sair</button>
-    </header>
-    <nav class="tabs" id="tabs">
-      ${MODULES.map((m) => `
-        <button type="button" class="tabs__btn${m.id === currentModule ? ' active' : ''}" data-mod="${m.id}">${m.label}</button>
-      `).join('')}
-    </nav>
-    <main class="wrap" id="moduleRoot"><p class="muted">Carregando…</p></main>
+    </div>
+    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
     <div id="modalRoot"></div>`;
 
   document.getElementById('logoutBtn')!.addEventListener('click', () => supabase.auth.signOut());
-  document.getElementById('tabs')!.querySelectorAll<HTMLButtonElement>('[data-mod]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      currentModule = btn.dataset.mod as ModuleId;
-      document.querySelectorAll('.tabs__btn').forEach((b) => b.classList.toggle('active', (b as HTMLElement).dataset.mod === currentModule));
-      void renderModule();
-    });
+
+  const setActive = (id: ModuleId) => {
+    currentModule = id;
+    document.querySelectorAll('.sidebar__link[data-mod]').forEach((b) =>
+      b.classList.toggle('active', (b as HTMLElement).dataset.mod === id));
+    const title = document.getElementById('pageTitle');
+    if (title) title.textContent = MODULES.find((m) => m.id === id)?.label || '';
+    closeMobileSidebar();
+    void renderModule();
+  };
+
+  document.getElementById('sideNav')!.querySelectorAll<HTMLButtonElement>('[data-mod]').forEach((btn) => {
+    btn.addEventListener('click', () => setActive(btn.dataset.mod as ModuleId));
   });
+
+  const backdrop = document.getElementById('sidebarBackdrop')!;
+  document.getElementById('sidebarToggle')!.addEventListener('click', () => {
+    document.body.classList.toggle('sidebar-open');
+    backdrop.hidden = !document.body.classList.contains('sidebar-open');
+  });
+  backdrop.addEventListener('click', closeMobileSidebar);
+
   void renderModule();
+}
+
+function closeMobileSidebar() {
+  document.body.classList.remove('sidebar-open');
+  const backdrop = document.getElementById('sidebarBackdrop');
+  if (backdrop) backdrop.hidden = true;
 }
 
 async function renderModule() {
