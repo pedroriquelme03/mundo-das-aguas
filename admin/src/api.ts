@@ -9,6 +9,7 @@ import type {
   SiteSettings, SiteSettingsInput,
   PaginaLegal, PaginaLegalInput,
   SiteContact, SiteContactInput,
+  SiteMedia,
   BioLink, BioLinkInput
 } from './types';
 
@@ -40,10 +41,10 @@ export async function removeFoto(path: string | null | undefined): Promise<void>
 export function fotoPublicUrl(path: string | null | undefined): string | null {
   if (!path) return null;
   if (/^https?:\/\//i.test(path)) return path;
-  // Caminhos locais do site (ex.: img/onibus/...)
-  if (path.startsWith('img/') || path.startsWith('../img/') || path.startsWith('/img/')) {
-    return null;
-  }
+  // Caminhos locais do site (fallback até migrar para Storage)
+  if (path.startsWith('/')) return path;
+  if (path.startsWith('img/') || path.startsWith('images/')) return '/' + path;
+  if (path.startsWith('../img/')) return path.replace(/^\.\./, '');
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
@@ -52,6 +53,7 @@ export const MEDIA_FOLDERS = [
   { id: 'excursoes', label: 'Excursões / Pacotes' },
   { id: 'frota', label: 'Frota' },
   { id: 'blog', label: 'Blog' },
+  { id: 'paginas', label: 'Páginas / Banners' },
   { id: 'settings', label: 'General Settings' },
   { id: 'outros', label: 'Outros' }
 ] as const;
@@ -98,11 +100,12 @@ export async function listStorageImages(): Promise<MediaLibrary> {
     excursoes: [],
     frota: [],
     blog: [],
+    paginas: [],
     settings: [],
     outros: []
   };
 
-  const known = new Set(['compras', 'excursoes', 'frota', 'blog', 'settings']);
+  const known = new Set(['compras', 'excursoes', 'frota', 'blog', 'paginas', 'settings']);
 
   const { data: root, error } = await supabase.storage.from(BUCKET).list('', {
     limit: 1000,
@@ -122,7 +125,7 @@ export async function listStorageImages(): Promise<MediaLibrary> {
     }
   }
 
-  for (const folder of ['compras', 'excursoes', 'frota', 'blog', 'settings'] as const) {
+  for (const folder of ['compras', 'excursoes', 'frota', 'blog', 'paginas', 'settings'] as const) {
     const { data, error: err } = await supabase.storage.from(BUCKET).list(folder, {
       limit: 1000,
       sortBy: { column: 'created_at', order: 'desc' }
@@ -352,6 +355,28 @@ export async function saveSiteContact(input: SiteContactInput): Promise<void> {
       ...input,
       updated_at: new Date().toISOString()
     });
+  if (error) throw error;
+}
+
+/* ---------- Mídias institucionais ---------- */
+export async function listSiteMedia(): Promise<SiteMedia[]> {
+  const { data, error } = await supabase
+    .from('site_media')
+    .select('*')
+    .order('grupo', { ascending: true })
+    .order('ordem', { ascending: true });
+  if (error) throw error;
+  return (data || []) as SiteMedia[];
+}
+
+export async function updateSiteMedia(
+  chave: string,
+  input: Partial<Pick<SiteMedia, 'image_path' | 'alt_text' | 'caption' | 'titulo' | 'ordem'>>
+): Promise<void> {
+  const { error } = await supabase
+    .from('site_media')
+    .update({ ...input, updated_at: new Date().toISOString() })
+    .eq('chave', chave);
   if (error) throw error;
 }
 

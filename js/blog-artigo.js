@@ -6,17 +6,17 @@ const root = document.getElementById('artigoRoot');
 const slug = new URLSearchParams(location.search).get('slug')?.trim() || '';
 
 const CAT_LABEL = {
-  fretamento: 'Fretamento B2B',
-  compras: 'Compras',
-  romarias: 'Romarias',
-  pescarias: 'Pescarias',
-  pacotes: 'Pacotes',
-  dicas: 'Dicas',
-  institucional: 'Institucional'
+ fretamento: 'Fretamento B2B',
+ compras: 'Compras',
+ romarias: 'Romarias',
+ pescarias: 'Pescarias',
+ pacotes: 'Pacotes',
+ dicas: 'Dicas',
+ institucional: 'Institucional'
 };
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
-  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+ ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 function fmtDate(d) {
   if (!d) return '';
@@ -42,76 +42,76 @@ function renderContent(text) {
     if (t.startsWith('- ')) {
       const items = t.split('\n').map((l) => l.replace(/^- /, '').trim()).filter(Boolean);
       return `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>`;
-    }
+ }
     return `<p>${esc(t).replace(/\n/g, '<br>')}</p>`;
-  }).join('');
+ }).join('');
 }
 
 function render(post, related) {
   const capa = fotoUrl(post.imagem_path);
   const cat = CAT_LABEL[post.categoria] || post.categoria;
-  document.title = `${post.titulo} | Mundo das Águas Turismo`;
+ document.title = `${post.titulo} | Mundo das Águas Turismo`;
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.setAttribute('content', post.resumo || post.titulo);
 
-  root.innerHTML = `
-    <section class="page-banner">
-      <div class="page-banner__bg">
-        ${capa ? `<img src="${esc(capa)}" alt="${esc(post.titulo)}" loading="eager">` : ''}
-        <div class="page-banner__overlay"></div>
-      </div>
-      <div class="container page-banner__content">
-        <span class="section-tag">${esc(cat)}</span>
-        <h1>${esc(post.titulo)}</h1>
-        <p class="blog-artigo__meta">
-          ${post.tempo_leitura ? `${post.tempo_leitura} min de leitura` : ''}
-          ${post.data_publicacao ? ` · ${fmtDate(post.data_publicacao)}` : ''}
-        </p>
-      </div>
-    </section>
+ root.innerHTML = `
+ <section class="page-banner">
+ <div class="page-banner__bg">
+ ${capa ? `<img src="${esc(capa)}" alt="${esc(post.titulo)}" loading="eager">` : ''}
+ <div class="page-banner__overlay"></div>
+ </div>
+ <div class="container page-banner__content">
+ <span class="section-tag">${esc(cat)}</span>
+ <h1>${esc(post.titulo)}</h1>
+ <p class="blog-artigo__meta">
+ ${post.tempo_leitura ? `${post.tempo_leitura} min de leitura` : ''}
+ ${post.data_publicacao ? ` · ${fmtDate(post.data_publicacao)}` : ''}
+ </p>
+ </div>
+ </section>
 
-    <main class="page-main">
-      <article class="blog-artigo">
-        <div class="container blog-artigo__wrap">
-          ${post.resumo ? `<p class="blog-artigo__intro">${esc(post.resumo)}</p>` : ''}
-          <div class="blog-artigo__content">${renderContent(post.conteudo)}</div>
+ <main class="page-main">
+ <article class="blog-artigo">
+ <div class="container blog-artigo__wrap">
+ ${post.resumo ? `<p class="blog-artigo__intro">${esc(post.resumo)}</p>` : ''}
+ <div class="blog-artigo__content">${renderContent(post.conteudo)}</div>
 
-          <div class="blog-banner-cta blog-banner-cta--inline">
-            <div>
-              <h3>Gostou do conteúdo?</h3>
-              <p>Fale com a equipe e planeje sua próxima viagem com a Mundo das Águas.</p>
-            </div>
-            <a href="https://wa.me/5545999677835?text=${encodeURIComponent('Olá! Li o artigo "' + post.titulo + '" e quero mais informações.')}" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          </div>
+ <div class="blog-banner-cta blog-banner-cta--inline">
+ <div>
+ <h3>Gostou do conteúdo?</h3>
+ <p>Fale com a equipe e planeje sua próxima viagem com a Mundo das Águas.</p>
+ </div>
+ <a href="https://wa.me/5545999677835?text=${encodeURIComponent('Olá! Li o artigo "' + post.titulo + '" e quero mais informações.')}" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener">Falar no WhatsApp</a>
+ </div>
 
-          ${related.length ? `
-          <aside class="blog-related">
-            <h2>Artigos relacionados</h2>
-            <div class="blog__grid blog__grid--related">
-              ${related.map((r) => `
-                <a class="blog-mais__item" href="/blog/artigo?slug=${encodeURIComponent(r.slug)}">
-                  <span class="blog-card__cat">${esc(CAT_LABEL[r.categoria] || r.categoria)}</span>
-                  <strong>${esc(r.titulo)}</strong>
-                </a>`).join('')}
-            </div>
-          </aside>` : ''}
+ ${related.length ? `
+ <aside class="blog-related">
+ <h2>Artigos relacionados</h2>
+ <div class="blog__grid blog__grid--related">
+ ${related.map((r) => `
+ <a class="blog-mais__item" href="/blog/artigo?slug=${encodeURIComponent(r.slug)}">
+ <span class="blog-card__cat">${esc(CAT_LABEL[r.categoria] || r.categoria)}</span>
+ <strong>${esc(r.titulo)}</strong>
+ </a>`).join('')}
+ </div>
+ </aside>` : ''}
 
-          <p style="margin-top:28px"><a href="/blog" class="btn btn--outline">← Voltar ao Blog</a></p>
-        </div>
-      </article>
-    </main>`;
+ <p style="margin-top:28px"><a href="/blog" class="btn btn--outline">Voltar ao Blog</a></p>
+ </div>
+ </article>
+ </main>`;
 }
 
 function renderError(msg) {
-  root.innerHTML = `
-    <section class="page-banner">
-      <div class="page-banner__bg"><div class="page-banner__overlay"></div></div>
-      <div class="container page-banner__content">
-        <h1>Artigo não encontrado</h1>
-        <p>${esc(msg)}</p>
-        <a href="/blog" class="btn btn--white" style="margin-top:16px">Voltar ao Blog</a>
-      </div>
-    </section>`;
+ root.innerHTML = `
+ <section class="page-banner">
+ <div class="page-banner__bg"><div class="page-banner__overlay"></div></div>
+ <div class="container page-banner__content">
+ <h1>Artigo não encontrado</h1>
+ <p>${esc(msg)}</p>
+ <a href="/blog" class="btn btn--white" style="margin-top:16px">Voltar ao Blog</a>
+ </div>
+ </section>`;
 }
 
 async function load() {
@@ -121,25 +121,25 @@ async function load() {
 
   const supabase = createClient(cfg.url, cfg.anonKey);
   const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('slug', slug)
-    .eq('ativo', true)
-    .maybeSingle();
+ .from('blog_posts')
+ .select('*')
+ .eq('slug', slug)
+ .eq('ativo', true)
+ .maybeSingle();
 
   if (error) { renderError(error.message); return; }
   if (!data) { renderError('Não encontramos este artigo.'); return; }
 
   const { data: related } = await supabase
-    .from('blog_posts')
-    .select('slug,titulo,categoria')
-    .eq('ativo', true)
-    .eq('categoria', data.categoria)
-    .neq('id', data.id)
-    .order('ordem', { ascending: true })
-    .limit(3);
+ .from('blog_posts')
+ .select('slug,titulo,categoria')
+ .eq('ativo', true)
+ .eq('categoria', data.categoria)
+ .neq('id', data.id)
+ .order('ordem', { ascending: true })
+ .limit(3);
 
-  render(data, related || []);
+ render(data, related || []);
 }
 
 load();

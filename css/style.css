@@ -3136,3 +3136,81 @@ section .section-title, section .section-subtitle { text-align: center; }
   .whatsapp-float::before { animation: none; }
   * { scroll-behavior: auto !important; }
 }
+
+/* ============================================================
+   IMAGENS — galeria da Frota (home) e Encomendas
+   ============================================================ */
+.frota-home__gallery figure {
+  margin: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.frota-home__gallery figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-sm);
+  transition: transform .6s cubic-bezier(.22,.61,.36,1);
+}
+.frota-home__gallery figure:hover img { transform: scale(1.06); }
+
+.encomendas__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  transition: transform .6s cubic-bezier(.22,.61,.36,1);
+}
+.encomendas__visual { overflow: hidden; border-radius: var(--radius); }
+.encomendas__visual:hover .encomendas__img { transform: scale(1.04); }
+
+/* ============================================================
+   SELOS — animação "glass shine" (padrão 21st) + ícone pop + glow
+   ============================================================ */
+.selo {
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s, background .3s, border-color .3s;
+}
+.selo svg { transition: transform .35s cubic-bezier(.34,1.56,.64,1); }
+/* brilho que percorre o vidro */
+.selo::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.js-anim:not(.anim-reduced) .selo.is-in::after {
+  animation: seloShine 1s ease-out .25s;
+}
+.js-anim:not(.anim-reduced) .selo.is-in svg {
+  animation: seloIconPop .6s cubic-bezier(.34,1.56,.64,1) .2s both;
+}
+.selo:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,.22);
+  border-color: var(--orange);
+  box-shadow: 0 14px 34px rgba(0,0,0,.28), 0 0 0 1px rgba(245,130,32,.4);
+}
+.selo:hover svg { transform: scale(1.18) rotate(-4deg); color: var(--yellow); }
+.selo:hover::after { animation: seloShine .8s ease-out; }
+@keyframes seloShine {
+  from { left: -60%; }
+  to   { left: 130%; }
+}
+@keyframes seloIconPop {
+  0%   { transform: scale(.4); opacity: 0; }
+  60%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selo::after { display: none; }
+  .selo svg { transition: none; }
+}

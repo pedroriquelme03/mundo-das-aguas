@@ -202,6 +202,24 @@ export interface SiteContact {
 
 export type SiteContactInput = Omit<SiteContact, 'id' | 'updated_at'>;
 
+/* ---------- Mídias institucionais do site ---------- */
+export interface SiteMedia {
+  chave: string;
+  grupo: string;
+  titulo: string;
+  image_path: string | null;
+  alt_text: string;
+  caption: string;
+  ordem: number;
+  updated_at?: string;
+}
+
+export type SiteMediaInput = Omit<SiteMedia, 'chave' | 'updated_at'> & {
+  image_path?: string | null;
+  alt_text?: string;
+  caption?: string;
+};
+
 /* ---------- Bio / Links ---------- */
 export type BioLinkEstilo = 'padrao' | 'whatsapp';
 

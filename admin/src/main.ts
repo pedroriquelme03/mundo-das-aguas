@@ -10,11 +10,12 @@ import {
   listAdminUsers, createAdminUser, updateAdminUser, deleteAdminUser,
   getSiteSettings, saveSiteSettings, DEFAULT_SITE_SETTINGS,
   getSiteContact, saveSiteContact, DEFAULT_SITE_CONTACT,
+  listSiteMedia, updateSiteMedia,
   listBioLinks, createBioLink, updateBioLink, deleteBioLink,
   slugify, linesToArray, arrayToLines
 } from './api';
 import type { StorageImage, AdminUserRow } from './api';
-import type { SiteSettings, SiteContact, SiteContactInput, BioLink, BioLinkInput, BioLinkEstilo } from './types';
+import type { SiteSettings, SiteContact, SiteContactInput, SiteMedia, BioLink, BioLinkInput, BioLinkEstilo } from './types';
 import {
   canWrite, canManageUsers, setSessionUser, getRole, getUserEmail, getUserId,
   ROLE_LABEL, ROLE_HINT, type PainelRole
@@ -35,7 +36,7 @@ import type {
 const app = document.getElementById('app')!;
 const LOGO_URL = `${import.meta.env.BASE_URL}images/logogomarca-mundo.png`;
 
-type ModuleId = 'compras' | 'excursoes' | 'frota' | 'depoimentos' | 'blog' | 'leads' | 'biblioteca' | 'midia' | 'usuarios' | 'settings' | 'contato' | 'bio';
+type ModuleId = 'compras' | 'excursoes' | 'frota' | 'depoimentos' | 'blog' | 'leads' | 'biblioteca' | 'midia' | 'usuarios' | 'settings' | 'contato' | 'bio' | 'siteMedia';
 
 const ICON = {
   compras: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
@@ -60,6 +61,7 @@ const MODULES: { id: ModuleId; label: string; group: string; icon: string }[] = 
   { id: 'depoimentos', label: 'Depoimentos', group: 'Conteúdo', icon: ICON.depoimentos },
   { id: 'blog', label: 'Blog', group: 'Conteúdo', icon: ICON.blog },
   { id: 'bio', label: 'Bio / Links', group: 'Conteúdo', icon: ICON.bio },
+  { id: 'siteMedia', label: 'Imagens do site', group: 'Conteúdo', icon: ICON.biblioteca },
   { id: 'leads', label: 'Leads (Contato)', group: 'Atendimento', icon: ICON.leads },
   { id: 'biblioteca', label: 'Mídias', group: 'Ferramentas', icon: ICON.biblioteca },
   { id: 'midia', label: 'Otimizar imagens', group: 'Ferramentas', icon: ICON.midia },
@@ -274,6 +276,7 @@ async function renderModule() {
     else if (currentModule === 'midia') await renderMidia(root);
     else if (currentModule === 'usuarios') await renderUsuarios(root);
     else if (currentModule === 'contato') await renderContato(root);
+    else if (currentModule === 'siteMedia') await renderSiteMedia(root);
     else if (currentModule === 'settings') await renderSettings(root);
   } catch (err) {
     root.innerHTML = `<div class="card error">Erro: ${esc((err as Error).message)}</div>`;
@@ -1494,6 +1497,118 @@ async function renderContato(root: HTMLElement) {
       btn.disabled = false;
       btn.textContent = 'Salvar alterações';
     }
+  });
+}
+
+const SITE_MEDIA_GROUP_LABEL: Record<string, string> = {
+  hero: 'Hero (Home)',
+  home_frota: 'Galeria Frota (Home)',
+  home: 'Home (outros)',
+  banners: 'Banners de página',
+  quem_somos: 'Quem Somos',
+  servicos: 'Serviços',
+  reservas: 'Reservas'
+};
+
+async function renderSiteMedia(root: HTMLElement) {
+  root.innerHTML = `<p class="muted">Carregando…</p>`;
+  let items: SiteMedia[];
+  try {
+    items = await listSiteMedia();
+  } catch (err) {
+    root.innerHTML = `<div class="card error">Erro: ${esc((err as Error).message)}</div>`;
+    return;
+  }
+
+  const writable = canWrite();
+  const groups = new Map<string, SiteMedia[]>();
+  for (const item of items) {
+    if (!groups.has(item.grupo)) groups.set(item.grupo, []);
+    groups.get(item.grupo)!.push(item);
+  }
+
+  const sections = [...groups.entries()].map(([grupo, rows]) => {
+    const cards = rows.map((row) => {
+      const url = fotoPublicUrl(row.image_path);
+      const preview = url
+        ? `<img src="${esc(url)}" alt="" class="media-slot__preview">`
+        : `<div class="media-slot__empty">Sem imagem</div>`;
+      return `
+        <article class="card media-slot" data-chave="${esc(row.chave)}">
+          <div class="media-slot__thumb">${preview}</div>
+          <div class="media-slot__body">
+            <h3>${esc(row.titulo)}</h3>
+            <p class="muted" style="font-size:.78rem;margin:0 0 8px"><code>${esc(row.chave)}</code></p>
+            <label class="muted" style="font-size:.8rem">Texto alternativo (alt)</label>
+            <input type="text" name="alt_text" value="${esc(row.alt_text)}" ${writable ? '' : 'disabled'}>
+            <label class="muted" style="font-size:.8rem;margin-top:8px;display:block">Legenda (opcional)</label>
+            <input type="text" name="caption" value="${esc(row.caption)}" ${writable ? '' : 'disabled'}>
+            ${writable ? `
+            <div class="media-slot__actions">
+              <label class="btn btn--outline btn--sm">
+                Trocar imagem
+                <input type="file" accept="image/*" hidden data-upload="${esc(row.chave)}">
+              </label>
+              <button type="button" class="btn btn--primary btn--sm" data-save="${esc(row.chave)}">Salvar</button>
+            </div>` : ''}
+          </div>
+        </article>`;
+    }).join('');
+
+    return `
+      <section class="media-group">
+        <h3 class="settings-section-title">${esc(SITE_MEDIA_GROUP_LABEL[grupo] || grupo)}</h3>
+        <div class="media-slot-grid">${cards}</div>
+      </section>`;
+  }).join('');
+
+  root.innerHTML = `
+    <div class="section-head">
+      <h2>Imagens do site</h2>
+      ${writable ? '' : '<span class="role-hint muted">Somente leitura</span>'}
+    </div>
+    <p class="muted bib-intro">Hero, banners e galerias institucionais. Ao trocar a imagem, o arquivo vai para o Storage e o site passa a usar essa versão.</p>
+    ${sections || '<div class="card empty">Nenhum slot cadastrado.</div>'}`;
+
+  if (!writable) return;
+
+  root.querySelectorAll<HTMLInputElement>('input[data-upload]').forEach((input) => {
+    input.addEventListener('change', async () => {
+      const chave = input.dataset.upload!;
+      const file = await prepareImageFile(input.files?.[0]);
+      input.value = '';
+      if (!file) return;
+      try {
+        const oldPath = items.find((i) => i.chave === chave)?.image_path;
+        const newPath = await uploadFoto(file, 'paginas');
+        await updateSiteMedia(chave, { image_path: newPath });
+        if (oldPath && !oldPath.startsWith('/') && !oldPath.startsWith('img/') && !oldPath.startsWith('images/')) {
+          await removeFoto(oldPath).catch(() => undefined);
+        }
+        await renderSiteMedia(root);
+      } catch (err) {
+        alert('Erro no upload: ' + (err as Error).message);
+      }
+    });
+  });
+
+  root.querySelectorAll<HTMLButtonElement>('button[data-save]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const chave = btn.dataset.save!;
+      const card = root.querySelector(`[data-chave="${chave}"]`) as HTMLElement | null;
+      if (!card) return;
+      const alt = (card.querySelector('input[name="alt_text"]') as HTMLInputElement).value.trim();
+      const caption = (card.querySelector('input[name="caption"]') as HTMLInputElement).value.trim();
+      btn.disabled = true;
+      try {
+        await updateSiteMedia(chave, { alt_text: alt, caption });
+        btn.textContent = 'Salvo';
+        setTimeout(() => { btn.textContent = 'Salvar'; btn.disabled = false; }, 1200);
+      } catch (err) {
+        alert('Erro ao salvar: ' + (err as Error).message);
+        btn.disabled = false;
+      }
+    });
   });
 }
 
