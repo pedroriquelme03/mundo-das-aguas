@@ -7,7 +7,6 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/admin", "destination": "/admin/", "permanent": false },
     { "source": "/pages/links.html", "destination": "/bio", "permanent": true },
     { "source": "/pages/links", "destination": "/bio", "permanent": true },
     { "source": "/links", "destination": "/bio", "permanent": true },
