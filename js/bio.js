@@ -62,20 +62,20 @@ function resolveUrl(url) {
 function render(rows) {
   if (!list) return;
   if (!rows.length) {
- list.innerHTML = '<p class="linktree__loading">Nenhum link disponível no momento.</p>';
+ list.innerHTML = '<p class="bio-links__loading">Nenhum link disponível no momento.</p>';
  return;
  }
  list.innerHTML = rows.map((r, i) => {
     const t = (r.titulo || '').toLowerCase();
     const isEmg = r.estilo === 'whatsapp' && /emerg|24/.test(t);
-    let cls = 'linktree__btn';
-    if (isEmg) cls += ' linktree__btn--emg';
- else if (r.estilo === 'whatsapp') cls += ' linktree__btn--wa';
+    let cls = 'bio-link';
+    if (isEmg) cls += ' bio-link--emg';
+ else if (r.estilo === 'whatsapp') cls += ' bio-link--wa';
     const target = r.nova_aba !== false ? ' target="_blank" rel="noopener"' : '';
     return `<a class="${cls}" style="--i:${i}" href="${esc(resolveUrl(r.url))}"${target}>` +
- `<span class="linktree__ico">${iconFor(r)}</span>` +
- `<span class="linktree__label">${esc(r.titulo)}</span>` +
- `<span class="linktree__chev">${CHEV}</span>` +
+ `<span class="bio-link__ico">${iconFor(r)}</span>` +
+ `<span class="bio-link__label">${esc(r.titulo)}</span>` +
+ `<span class="bio-link__chev">${CHEV}</span>` +
  `</a>`;
  }).join('');
 }

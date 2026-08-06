@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta name="description" content="Links Mundo das Águas Turismo, WhatsApp, site, frota, excursões e redes.">
- <title>Bio | Mundo das Águas Turismo</title>
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Links Mundo das Águas Turismo, WhatsApp, site, frota, excursões e redes.">
+  <title>Bio | Mundo das Águas Turismo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/bio.css">
 </head>
-<body class="linktree-page">
- <div class="linktree__aurora" aria-hidden="true"></div>
- <div class="linktree">
- <header class="linktree__head">
- <div class="linktree__avatar">
- <img src="/images/logogomarca-mundo.png" alt="Mundo das Águas Turismo" class="linktree__logo" width="200" height="52">
- </div>
- <h1 class="linktree__title">Mundo das Águas Turismo</h1>
- <p class="linktree__tag">Fretamento, excursões e turismo rodoviário</p>
- <span class="linktree__pill">
- <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
- Foz do Iguaçu, PR
- </span>
- </header>
- <nav class="linktree__list" id="bioLinks" aria-label="Links rápidos">
- <p class="linktree__loading">Carregando links…</p>
- </nav>
- <p class="linktree__foot">&copy; 2026 Mundo das Águas Turismo</p>
- </div>
- <script>
- window.MDA_SUPABASE = {
- url: 'https://yzfvqsftphsoylzpfrug.supabase.co',
- anonKey: 'sb_publishable_Lz0LkyFfYkaIwJg4QsEtEg_JLIQYrMf',
- bucket: 'excursoes'
- };
- </script>
- <script type="module" src="/js/bio.js"></script>
+<body class="bio-page">
+  <div class="bio-bg" aria-hidden="true">
+    <div class="bio-bg__band"></div>
+    <div class="bio-bg__glow bio-bg__glow--a"></div>
+    <div class="bio-bg__glow bio-bg__glow--b"></div>
+  </div>
+
+  <main class="bio">
+    <header class="bio-profile">
+      <div class="bio-profile__logo-wrap">
+        <img src="/images/logogomarca-mundo.png" alt="Mundo das Águas Turismo" class="bio-profile__logo" width="120" height="40">
+      </div>
+      <h1 class="bio-profile__title">Mundo das Águas Turismo</h1>
+      <p class="bio-profile__tag">Fretamento, excursões e turismo rodoviário</p>
+      <span class="bio-profile__loc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Foz do Iguaçu, PR
+      </span>
+    </header>
+
+    <nav class="bio-links" id="bioLinks" aria-label="Links rápidos">
+      <p class="bio-links__loading">Carregando links…</p>
+    </nav>
+
+    <p class="bio-foot">&copy; 2026 <strong>Mundo das Águas Turismo</strong></p>
+  </main>
+
+  <script>
+    window.MDA_SUPABASE = {
+      url: 'https://yzfvqsftphsoylzpfrug.supabase.co',
+      anonKey: 'sb_publishable_Lz0LkyFfYkaIwJg4QsEtEg_JLIQYrMf',
+      bucket: 'excursoes'
+    };
+  </script>
+  <script type="module" src="/js/bio.js"></script>
 </body>
 </html>
