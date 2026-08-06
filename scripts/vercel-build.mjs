@@ -18,6 +18,7 @@ const siteItems = [
   'images',
   'img',
   'bio',
+  'home2',
   'frota',
   'quem-somos',
   'blog',

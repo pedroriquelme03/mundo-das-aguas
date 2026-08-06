@@ -10,6 +10,7 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
  <link rel="stylesheet" href="css/style.css">
+ <link rel="stylesheet" href="css/home2.css">
 </head>
 <body data-page="home">
 
@@ -162,17 +163,30 @@
  <section class="destinos destinos--pacotes sec-blue" id="pacotes-turisticos">
  <div class="container">
  <span class="section-tag section-tag--warm">Pacotes Turísticos</span>
- <h2 class="section-title">Experiência em viagens pelo Brasil e Mercosul.</h2>
- <p class="section-subtitle">Romarias, pescarias e excursões organizadas para grupos, com roteiros nacionais e internacionais pela América do Sul. Escolha sua próxima viagem e consulte as próximas saídas.</p>
+ <h2 class="section-title">Descubra os próximos destinos da Mundo das Águas.</h2>
+ <p class="section-subtitle">Romarias, pescarias e excursões organizadas para grupos, com roteiros nacionais e internacionais pela América do Sul.</p>
 
- <div class="mercosul__flags mercosul__flags--inline" aria-label="Destinos atendidos">
- <span class="mercosul__flag">Brasil</span>
- <span class="mercosul__flag">Argentina</span>
- <span class="mercosul__flag">Chile</span>
- <span class="mercosul__flag">Peru</span>
- <span class="mercosul__flag">Uruguai</span>
- <span class="mercosul__flag">Bolívia</span>
- <span class="mercosul__flag">Colômbia</span>
+ <div class="h2-merco" id="mdaMap">
+ <div class="h2-merco__intro">
+ <h3>Experiência em viagens pelo Brasil e Mercosul</h3>
+ <p>Passe o mouse (ou toque) em um país para ver os serviços disponíveis.</p>
+ </div>
+ <div class="h2-map">
+ <div class="h2-map__chart" role="img" aria-label="Mapa interativo da América do Sul"></div>
+ <ul class="h2-map__legend" aria-label="Países atendidos">
+ <li><button type="button" data-focus="BR">Brasil</button></li>
+ <li><button type="button" data-focus="AR">Argentina</button></li>
+ <li><button type="button" data-focus="CL">Chile</button></li>
+ <li><button type="button" data-focus="PE">Peru</button></li>
+ <li><button type="button" data-focus="UY">Uruguai</button></li>
+ <li><button type="button" data-focus="BO">Bolívia</button></li>
+ <li><button type="button" data-focus="CO">Colômbia</button></li>
+ </ul>
+ </div>
+ <div class="h2-map__tip" hidden aria-hidden="true" role="tooltip">
+ <strong data-tip-name></strong>
+ <ul data-tip-list></ul>
+ </div>
  </div>
 
  <!-- Cards dinâmicos em carrossel (3 por vez) — destaque_home no admin -->
@@ -405,6 +419,11 @@
  </script>
  <script type="module" src="js/site-contact.js"></script>
  <script type="module" src="js/site-media.js"></script>
+ <script src="https://cdn.amcharts.com/lib/5/index.js" defer></script>
+ <script src="https://cdn.amcharts.com/lib/5/map.js" defer></script>
+ <script src="https://cdn.amcharts.com/lib/5/geodata/region/world/southAmericaLow.js" defer></script>
+ <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js" defer></script>
+ <script src="js/mapa-mercosul.js" defer></script>
  <script type="module" src="js/excursoes-compras.js"></script>
  <script type="module" src="js/pacotes-home.js"></script>
  <script type="module" src="js/depoimentos.js"></script>

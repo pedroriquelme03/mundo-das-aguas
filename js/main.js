@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
  label: 'Compras',
  whatsappIntro: 'excursões de compras',
  destinos: ['Brás', 'Bom Retiro', '25 de Março', 'Goiânia', 'Monte Sião'],
- image: '/images/hero-compras-bras.jpg',
- alt: 'Excursões de compras no Brás'
+ image: '/images/hero-cataratas.jpg',
+ alt: 'Excursões de compras Mundo das Águas'
  },
  pescaria: {
  label: 'Pescaria',
