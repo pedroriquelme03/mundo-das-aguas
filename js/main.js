@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
  }
  }
 
-  // Slider — Depoimentos / avaliações
+  // Slider — Depoimentos / avaliações (loop infinito)
  (function () {
     var track = document.getElementById('testimonialsTrack');
     var viewport = track && track.parentElement;
@@ -196,98 +196,98 @@ document.addEventListener('DOMContentLoaded', function () {
     var slider = document.getElementById('testimonialsSlider');
     if (!track || !viewport) return;
 
-    var cards = track.querySelectorAll('.testimonial-card');
-    var total = cards.length;
     var index = 0;
     var gap = 24;
     var autoTimer = null;
+
+    function cards() {
+      return track.querySelectorAll('.testimonial-card');
+    }
+
+    function total() {
+      return cards().length;
+    }
 
     function slidesPerView() {
       if (window.innerWidth >= 1024) return 3;
       if (window.innerWidth >= 768) return 2;
       return 1;
- }
+    }
 
     function maxIndex() {
-      return Math.max(0, total - slidesPerView());
- }
+      return Math.max(0, total() - slidesPerView());
+    }
+
+    function positions() {
+      return maxIndex() + 1;
+    }
 
     function slideStepPx() {
-      var card = cards[0];
-      if (!card) return viewport.offsetWidth;
-      return card.offsetWidth + gap;
- }
+      var list = cards();
+      if (!list[0]) return viewport.offsetWidth;
+      return list[0].offsetWidth + gap;
+    }
 
     function goTo(i) {
- index = Math.max(0, Math.min(i, maxIndex()));
- track.style.transform = 'translateX(-' + (index * slideStepPx()) + 'px)';
+      var n = positions();
+      if (n <= 1) index = 0;
+      else index = ((i % n) + n) % n;
+      track.style.transform = 'translateX(-' + (index * slideStepPx()) + 'px)';
       if (dotsContainer) {
- dotsContainer.querySelectorAll('.testimonials-slider__dot').forEach(function (dot, di) {
- dot.classList.toggle('active', di === index);
- dot.setAttribute('aria-selected', di === index ? 'true' : 'false');
- });
- }
- }
+        dotsContainer.querySelectorAll('.testimonials-slider__dot').forEach(function (dot, di) {
+          dot.classList.toggle('active', di === index);
+          dot.setAttribute('aria-selected', di === index ? 'true' : 'false');
+        });
+      }
+    }
 
     function next() { goTo(index + 1); }
     function prev() { goTo(index - 1); }
 
-    if (dotsContainer) {
- dotsContainer.innerHTML = '';
-      for (var d = 0; d <= maxIndex(); d++) {
+    function rebuildDots() {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      var n = positions();
+      for (var d = 0; d < n; d++) {
         var dot = document.createElement('button');
- dot.type = 'button';
- dot.className = 'testimonials-slider__dot' + (d === 0 ? ' active' : '');
- dot.setAttribute('role', 'tab');
- dot.setAttribute('aria-label', 'Grupo de avaliações ' + (d + 1));
- dot.setAttribute('aria-selected', d === 0 ? 'true' : 'false');
- (function (di) {
- dot.addEventListener('click', function () { goTo(di); resetAuto(); });
- })(d);
- dotsContainer.appendChild(dot);
- }
- }
+        dot.type = 'button';
+        dot.className = 'testimonials-slider__dot' + (d === index ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', 'Grupo de avaliações ' + (d + 1));
+        dot.setAttribute('aria-selected', d === index ? 'true' : 'false');
+        (function (di) {
+          dot.addEventListener('click', function () { goTo(di); resetAuto(); });
+        })(d);
+        dotsContainer.appendChild(dot);
+      }
+    }
 
     if (prevBtn) prevBtn.addEventListener('click', function () { prev(); resetAuto(); });
     if (nextBtn) nextBtn.addEventListener('click', function () { next(); resetAuto(); });
 
     function resetAuto() {
       if (autoTimer) clearInterval(autoTimer);
- autoTimer = setInterval(function () {
- goTo(index>= maxIndex() ? 0 : index + 1);
- }, 6000);
- }
+      if (positions() <= 1) return;
+      autoTimer = setInterval(function () {
+        goTo(index + 1);
+      }, 6000);
+    }
 
     if (slider) {
- slider.addEventListener('mouseenter', function () {
+      slider.addEventListener('mouseenter', function () {
         if (autoTimer) clearInterval(autoTimer);
- });
- slider.addEventListener('mouseleave', resetAuto);
- }
+      });
+      slider.addEventListener('mouseleave', resetAuto);
+    }
 
- window.addEventListener('resize', function () {
-      if (dotsContainer) {
-        var oldIndex = index;
- dotsContainer.innerHTML = '';
-        for (var d2 = 0; d2 <= maxIndex(); d2++) {
-          var dot2 = document.createElement('button');
- dot2.type = 'button';
- dot2.className = 'testimonials-slider__dot';
- dot2.setAttribute('role', 'tab');
- dot2.setAttribute('aria-label', 'Grupo de avaliações ' + (d2 + 1));
- (function (di) {
- dot2.addEventListener('click', function () { goTo(di); resetAuto(); });
- })(d2);
- dotsContainer.appendChild(dot2);
- }
- goTo(Math.min(oldIndex, maxIndex()));
- } else {
- goTo(Math.min(index, maxIndex()));
- }
- });
+    window.addEventListener('resize', function () {
+      rebuildDots();
+      goTo(index);
+    });
 
- goTo(0);
- resetAuto();
+    rebuildDots();
+    goTo(0);
+    resetAuto();
  })();
 
   // Carrossel — Para Organizadores (1 foto por vez, tamanho fixo)

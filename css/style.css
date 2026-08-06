@@ -2632,8 +2632,28 @@ section .section-title, section .section-subtitle { text-align: center; }
 }
 .btn--google:hover { border-color: var(--orange); color: var(--orange-dark); transform: translateY(-1px); }
 .btn--google svg { flex-shrink: 0; }
-.testimonials__review { margin-top: 40px; }
-.testimonials__review p { margin-bottom: 16px; font-weight: 600; color: var(--text); }
+.testimonials__review {
+  margin: 8px 0 28px;
+  text-align: center;
+}
+.testimonials__review p {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text);
+  font-size: .98rem;
+}
+.testimonials__review-link {
+  display: inline;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color .2s;
+}
+.testimonials__review-link:hover {
+  color: var(--orange-dark);
+}
 
 /* ---------- Seção 9: Encomendas SP -> Foz ---------- */
 .encomendas { padding: 84px 0; }
