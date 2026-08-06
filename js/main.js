@@ -31,29 +31,29 @@ document.addEventListener('DOMContentLoaded', function () {
  label: 'Fretamento',
  whatsappIntro: 'fretamento',
  destinos: ['Empresas e eventos', 'Igrejas e caravanas', 'Escolas', 'Excursões', 'Roteiro personalizado'],
- image: '/images/hero-cataratas.jpg',
- alt: 'Fretamento de ônibus para grupos'
+ image: '/images/hero-fretamento-frota.jpg',
+ alt: 'Frota própria Mundo das Águas'
  },
  compras: {
  label: 'Compras',
  whatsappIntro: 'excursões de compras',
  destinos: ['Brás', 'Bom Retiro', '25 de Março', 'Goiânia', 'Monte Sião'],
- image: '/images/1e3e4754-71f8-4e86-b633-8f290a406d4c.JPG',
- alt: 'Excursões de compras'
+ image: '/images/hero-compras-bras.jpg',
+ alt: 'Excursões de compras no Brás'
  },
  pescaria: {
  label: 'Pescaria',
  whatsappIntro: 'pescarias',
  destinos: ['Corumbá', 'Argentina', 'Patagônia'],
- image: '/images/24d2b9ed-3e24-4ce9-8ae6-9b00d731045d.JPG',
- alt: 'Pescarias em grupo'
+ image: '/images/hero-pescaria-rio.jpg',
+ alt: 'Pescarias em grupo no rio'
  },
  pacotes: {
  label: 'Pacotes Turísticos',
  whatsappIntro: 'pacotes turísticos',
  destinos: ['Balneário Camboriú', 'Gramado e Canela', 'Piratuba Thermas', 'Aparecida', 'Romarias'],
- image: '/images/496e72c4-95a3-49ae-961f-3f407bb1e736.JPG',
- alt: 'Pacotes turísticos'
+ image: '/images/hero-pacotes-gramado.jpg',
+ alt: 'Pacotes turísticos em Gramado'
  }
  };
     var tabs = document.querySelectorAll('.hero-search__tab');

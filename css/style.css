@@ -2171,15 +2171,16 @@ section .section-title, section .section-subtitle { text-align: center; }
    FASE 1 — NOVA IDENTIDADE (azul + laranja + amarelo)
    ============================================================ */
 
-/* Separadores temáticos entre seções (cores intercaladas) */
+/* Separadores entre seções — discretos (o contraste vem dos fundos) */
 .section-divider {
-  height: 6px;
+  height: 0;
   border: none;
   margin: 0;
+  display: none;
 }
-.section-divider--blue   { background: linear-gradient(90deg, var(--primary), var(--accent)); }
-.section-divider--orange { background: linear-gradient(90deg, var(--orange), var(--yellow)); }
-.section-divider--yellow { background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+.section-divider--blue,
+.section-divider--orange,
+.section-divider--yellow { background: none; }
 
 /* Fundos alternados por tema */
 .sec-white { background: var(--bg); }
@@ -2272,7 +2273,7 @@ section .section-title, section .section-subtitle { text-align: center; }
 }
 .selos__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
 .selo {
@@ -2323,19 +2324,56 @@ section .section-title, section .section-subtitle { text-align: center; }
 
 /* ---------- Seção 3: Nossa Frota (home) ---------- */
 .frota-home { padding: 80px 0; }
-.frota-home__gallery {
+.frota-home__split {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin: 36px 0 32px;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
 }
-.frota-home__gallery .img-placeholder { aspect-ratio: 4 / 3; min-height: 0; }
-.frota-home__gallery figure { margin: 0; }
-.frota-home__gallery figcaption {
-  font-size: .78rem;
-  color: var(--text-muted);
-  margin-top: 6px;
-  text-align: center;
+.frota-home__media {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: #dbe7f3;
+  aspect-ratio: 4 / 3;
+}
+.frota-home__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.frota-home__media:hover img { transform: scale(1.03); }
+.frota-home__content .section-tag { display: inline-block; }
+.frota-home__content .section-title {
+  margin-bottom: 12px;
+  text-align: left;
+}
+.frota-home__content .section-subtitle {
+  margin-bottom: 24px;
+  text-align: left;
+  max-width: none;
+}
+.frota-home__specs {
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.frota-home__specs li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.frota-home__specs svg {
+  color: var(--orange);
+  flex-shrink: 0;
 }
 
 /* ---------- Seções 4 & 6: cards de destino (padrão único) ---------- */
@@ -2505,16 +2543,17 @@ section .section-title, section .section-subtitle { text-align: center; }
   border-radius: var(--radius);
 }
 
-/* ---------- Seção 5: Brasil e Mercosul (faixa fina) ---------- */
-.mercosul { padding: 44px 0; }
-.mercosul__title { font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 800; color: var(--primary); margin-bottom: 6px; }
-.mercosul__subtitle { color: var(--text-light); max-width: 640px; margin: 0 auto 24px; font-size: .98rem; }
+/* ---------- Destinos / Brasil e Mercosul (flags dentro de Pacotes) ---------- */
 .mercosul__flags {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
   margin-bottom: 18px;
+}
+.mercosul__flags--inline {
+  margin: 8px auto 36px;
+  max-width: 820px;
 }
 .mercosul__flag {
   display: inline-flex;
@@ -2530,7 +2569,9 @@ section .section-title, section .section-subtitle { text-align: center; }
   box-shadow: var(--shadow);
 }
 .mercosul__flag .flag { font-size: 1.2rem; line-height: 1; }
-.mercosul__note { font-style: italic; color: var(--text-light); font-size: .95rem; }
+.destinos--pacotes .mercosul__flag {
+  background: rgba(255, 255, 255, .92);
+}
 
 /* ---------- Seção 7: Nossa História ---------- */
 .historia { padding: 90px 0; }
@@ -2616,19 +2657,19 @@ section .section-title, section .section-subtitle { text-align: center; }
 
 /* ---------- Responsivo Fase 1 ---------- */
 @media (max-width: 1024px) {
-  .selos__grid { grid-template-columns: repeat(2, 1fr); }
+  .selos__grid { grid-template-columns: repeat(3, 1fr); }
   .selos--bridge { margin-top: -48px; margin-bottom: -28px; }
   .frota-home.sec-blue { padding-top: 120px; }
   .destinos__grid { grid-template-columns: repeat(2, 1fr); }
-  .frota-home__gallery { grid-template-columns: repeat(2, 1fr); }
+  .frota-home__split { gap: 32px; }
   .destinos-slider__arrow--prev { left: 4px; }
   .destinos-slider__arrow--next { right: 4px; }
 }
 @media (max-width: 768px) {
   .header__nav { display: none; }
-  .selos__grid { grid-template-columns: 1fr 1fr; }
+  .selos__grid { grid-template-columns: 1fr; }
   .destinos__grid { grid-template-columns: 1fr; }
-  .frota-home__gallery { grid-template-columns: 1fr 1fr; }
+  .frota-home__split { grid-template-columns: 1fr; gap: 28px; }
   .historia__grid { grid-template-columns: 1fr; gap: 36px; }
   .encomendas__grid { grid-template-columns: 1fr; gap: 32px; }
   .encomendas__visual { order: -1; }
@@ -3067,10 +3108,9 @@ section .section-title, section .section-subtitle { text-align: center; }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Fluxo de cor nos separadores temáticos */
+/* Fluxo de cor nos separadores (desativado — contraste vem dos fundos) */
 .js-anim:not(.anim-reduced) .section-divider {
-  background-size: 200% 100%;
-  animation: dividerFlow 6s linear infinite;
+  animation: none;
 }
 @keyframes dividerFlow {
   from { background-position: 0% 50%; }
@@ -3138,22 +3178,8 @@ section .section-title, section .section-subtitle { text-align: center; }
 }
 
 /* ============================================================
-   IMAGENS — galeria da Frota (home) e Encomendas
+   IMAGENS — Encomendas
    ============================================================ */
-.frota-home__gallery figure {
-  margin: 0;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-.frota-home__gallery figure img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
-  border-radius: var(--radius-sm);
-  transition: transform .6s cubic-bezier(.22,.61,.36,1);
-}
-.frota-home__gallery figure:hover img { transform: scale(1.06); }
 
 .encomendas__img {
   width: 100%;
