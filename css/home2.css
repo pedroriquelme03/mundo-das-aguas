@@ -13,8 +13,31 @@
   text-align: left;
 }
 .h2 .h2-destinos,
-.h2 .h2-mercosul {
+.h2 .h2-mercosul,
+.h2 .testimonials {
   text-align: center;
+}
+
+/* Transição suave Depoimentos → Notícias (gradiente, sem linha) */
+.h2 .testimonials.sec-blue {
+  position: relative;
+  background: #e8f4f8;
+  padding-bottom: 140px;
+}
+.h2 .testimonials.sec-blue::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(180deg, #e8f4f8 0%, #f7f9fb 100%);
+}
+.h2 .h2-noticias {
+  background: #f7f9fb;
+  margin-top: 0;
+  padding-top: 64px;
 }
 
 /* ---------- HERO com carrossel ---------- */
