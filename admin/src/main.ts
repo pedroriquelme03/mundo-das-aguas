@@ -1445,6 +1445,34 @@ async function renderContato(root: HTMLElement) {
           </div>
         </div>
 
+        <h3 class="settings-section-title">Redes sociais</h3>
+        <div class="settings-row">
+          <label for="instagram_url">Instagram</label>
+          <div>
+            <input id="instagram_url" name="instagram_url" type="url" value="${esc(c.instagram_url)}" placeholder="https://instagram.com/...">
+            <p class="muted settings-help">Link do perfil usado na seção de redes da home.</p>
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="facebook_url">Facebook</label>
+          <div>
+            <input id="facebook_url" name="facebook_url" type="url" value="${esc(c.facebook_url)}" placeholder="https://facebook.com/...">
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="youtube_url">YouTube</label>
+          <div>
+            <input id="youtube_url" name="youtube_url" type="url" value="${esc(c.youtube_url)}" placeholder="https://youtube.com/...">
+          </div>
+        </div>
+        <div class="settings-row">
+          <label for="bio_url">Bio / Links</label>
+          <div>
+            <input id="bio_url" name="bio_url" type="text" value="${esc(c.bio_url)}" placeholder="/bio">
+            <p class="muted settings-help">Página de links (ex.: /bio). Pode ser URL absoluta.</p>
+          </div>
+        </div>
+
         <h3 class="settings-section-title">Endereço</h3>
         <div class="settings-row">
           <label for="endereco_linha1">Endereço</label>
@@ -1499,6 +1527,13 @@ async function renderContato(root: HTMLElement) {
       <p><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></p>
       <p>${esc(c.endereco_linha1)}${c.endereco_linha2 ? `<br>${esc(c.endereco_linha2)}` : ''}<br>${esc(c.cidade)} – ${esc(c.estado)}${c.cep ? `<br>CEP ${esc(c.cep)}` : ''}</p>
       <p class="muted">${esc(c.horario_atendimento)}</p>
+      ${(c.instagram_url || c.facebook_url || c.youtube_url || c.bio_url) ? `
+      <p style="margin-top:12px"><strong>Redes</strong><br>
+        ${c.instagram_url ? `<a href="${esc(c.instagram_url)}" target="_blank" rel="noopener">Instagram</a><br>` : ''}
+        ${c.facebook_url ? `<a href="${esc(c.facebook_url)}" target="_blank" rel="noopener">Facebook</a><br>` : ''}
+        ${c.youtube_url ? `<a href="${esc(c.youtube_url)}" target="_blank" rel="noopener">YouTube</a><br>` : ''}
+        ${c.bio_url ? `<a href="${esc(c.bio_url)}" target="_blank" rel="noopener">Bio / Links</a>` : ''}
+      </p>` : ''}
     </div>`;
 
   if (!writable) return;
@@ -1527,7 +1562,11 @@ async function renderContato(root: HTMLElement) {
         mapa_url: String(fd.get('mapa_url') || '').trim(),
         horario_atendimento: String(fd.get('horario_atendimento') || '').trim(),
         mensagem_wa_comercial: String(fd.get('mensagem_wa_comercial') || '').trim(),
-        mensagem_wa_emergencial: String(fd.get('mensagem_wa_emergencial') || '').trim()
+        mensagem_wa_emergencial: String(fd.get('mensagem_wa_emergencial') || '').trim(),
+        instagram_url: String(fd.get('instagram_url') || '').trim(),
+        facebook_url: String(fd.get('facebook_url') || '').trim(),
+        youtube_url: String(fd.get('youtube_url') || '').trim(),
+        bio_url: String(fd.get('bio_url') || '').trim() || '/bio'
       };
       if (input.whatsapp_comercial.length < 10 || input.whatsapp_emergencial.length < 10) {
         throw new Error('Números de WhatsApp inválidos. Use DDI + DDD + número.');
@@ -1546,13 +1585,24 @@ async function renderContato(root: HTMLElement) {
 }
 
 const SITE_MEDIA_GROUP_LABEL: Record<string, string> = {
-  hero: 'Hero (Home)',
+  hero: 'Hero da Home — fundos das abas',
   home_frota: 'Galeria Frota (Home)',
   home: 'Home (outros)',
   banners: 'Banners de página',
   quem_somos: 'Quem Somos',
   servicos: 'Serviços',
   reservas: 'Reservas'
+};
+
+const SITE_MEDIA_GROUP_HELP: Record<string, string> = {
+  hero: 'Cada imagem corresponde a uma aba da barra de busca no topo da home (Fretamento, Compras, Pescaria, Pacotes). Ao clicar na aba, o fundo troca para a foto cadastrada aqui.'
+};
+
+const HERO_TAB_LABEL: Record<string, string> = {
+  hero_fretamento: 'Fretamento',
+  hero_compras: 'Compras',
+  hero_pescaria: 'Pescaria',
+  hero_pacotes: 'Pacotes Turísticos'
 };
 
 async function renderSiteMedia(root: HTMLElement) {
@@ -1572,16 +1622,31 @@ async function renderSiteMedia(root: HTMLElement) {
     groups.get(item.grupo)!.push(item);
   }
 
-  const sections = [...groups.entries()].map(([grupo, rows]) => {
+  const groupOrder = ['hero', 'home_frota', 'home', 'banners', 'quem_somos', 'servicos', 'reservas'];
+  const orderedGroups = [
+    ...groupOrder.filter((g) => groups.has(g)),
+    ...[...groups.keys()].filter((g) => !groupOrder.includes(g))
+  ];
+
+  const sections = orderedGroups.map((grupo) => {
+    const rows = groups.get(grupo)!;
+    const help = SITE_MEDIA_GROUP_HELP[grupo]
+      ? `<p class="muted media-group__help">${esc(SITE_MEDIA_GROUP_HELP[grupo])}</p>`
+      : '';
     const cards = rows.map((row) => {
       const url = fotoPublicUrl(row.image_path);
       const preview = url
         ? `<img src="${esc(url)}" alt="" class="media-slot__preview">`
         : `<div class="media-slot__empty">Sem imagem</div>`;
+      const tabLabel = HERO_TAB_LABEL[row.chave];
+      const tabBadge = tabLabel
+        ? `<span class="media-slot__badge">Aba: ${esc(tabLabel)}</span>`
+        : '';
       return `
         <article class="card media-slot" data-chave="${esc(row.chave)}">
           <div class="media-slot__thumb">${preview}</div>
           <div class="media-slot__body">
+            ${tabBadge}
             <h3>${esc(row.titulo)}</h3>
             <p class="muted" style="font-size:.78rem;margin:0 0 8px"><code>${esc(row.chave)}</code></p>
             <label class="muted" style="font-size:.8rem">Texto alternativo (alt)</label>
@@ -1601,8 +1666,9 @@ async function renderSiteMedia(root: HTMLElement) {
     }).join('');
 
     return `
-      <section class="media-group">
+      <section class="media-group${grupo === 'hero' ? ' media-group--hero' : ''}">
         <h3 class="settings-section-title">${esc(SITE_MEDIA_GROUP_LABEL[grupo] || grupo)}</h3>
+        ${help}
         <div class="media-slot-grid">${cards}</div>
       </section>`;
   }).join('');
@@ -1612,7 +1678,7 @@ async function renderSiteMedia(root: HTMLElement) {
       <h2>Imagens do site</h2>
       ${writable ? '' : '<span class="role-hint muted">Somente leitura</span>'}
     </div>
-    <p class="muted bib-intro">Hero, banners e galerias institucionais. Ao trocar a imagem, o arquivo vai para o Storage e o site passa a usar essa versão.</p>
+    <p class="muted bib-intro">Hero, banners e galerias institucionais. Para trocar o fundo da home conforme a aba da busca, use a primeira seção abaixo.</p>
     ${sections || '<div class="card empty">Nenhum slot cadastrado.</div>'}`;
 
   if (!writable) return;

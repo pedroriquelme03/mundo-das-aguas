@@ -1,61 +1,48 @@
 // Home 2 — carrossel do hero + notícias (blog) dinâmicas.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { renderDestinosSlider } from './destinos-slider.js';
 
 const cfg = window.MDA_SUPABASE || {};
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-/* ---------------- Hero carrossel ---------------- */
+/* ---------------- Hero: fundo por aba da busca (main.js) ---------------- */
+/* O carrossel automático foi substituído pela barra de pesquisa. */
+
+/* ---------------- Luzes laranja: seguem o mouse (leve) ---------------- */
 (function () {
-  const slidesWrap = document.getElementById('h2HeroSlides');
-  if (!slidesWrap) return;
-  const slides = Array.from(slidesWrap.querySelectorAll('.h2-hero__slide'));
-  const titleEl = document.getElementById('h2HeroTitle');
-  const textEl = document.getElementById('h2HeroText');
-  const dotsWrap = document.getElementById('h2HeroDots');
-  const prev = document.getElementById('h2HeroPrev');
-  const next = document.getElementById('h2HeroNext');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(hover: none)').matches) return;
 
-  const copy = [
-    { title: 'Viaje em grande estilo <span>com frota própria e conforto.</span>',
-      text: 'Fretamento, excursões de compras e turismo rodoviário para grupos, pelo Brasil e Mercosul — com Internet Starlink e acompanhamento durante toda a viagem.' },
-    { title: 'Excursões de compras <span>para os maiores polos do Brasil.</span>',
-      text: 'Saídas programadas para Brás, Bom Retiro, Goiânia, Monte Sião e outros destinos, com embarques organizados.' },
-    { title: 'Pacotes e romarias <span>organizados do início ao fim.</span>',
-      text: 'Roteiros pelo Brasil e Mercosul com hospedagem, guia e toda a estrutura para o seu grupo viajar tranquilo.' }
-  ];
+  const sel = '.h2-band-sunset--soft, .h2-encomendas, .h2-merco, .h2-social';
+  const max = 28;
 
-  let i = 0, timer = null;
-  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  dotsWrap.innerHTML = slides.map((_, n) =>
-    `<button class="h2-hero__dot${n === 0 ? ' is-active' : ''}" data-n="${n}" aria-label="Slide ${n + 1}"></button>`).join('');
-  const dots = Array.from(dotsWrap.children);
-
-  function go(n) {
-    i = (n + slides.length) % slides.length;
-    slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
-    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
-    if (copy[i]) { titleEl.innerHTML = copy[i].title; textEl.textContent = copy[i].text; }
-  }
-  function start() { if (!reduce) { stop(); timer = setInterval(() => go(i + 1), 6000); } }
-  function stop() { if (timer) clearInterval(timer); }
-
-  prev && prev.addEventListener('click', () => { go(i - 1); start(); });
-  next && next.addEventListener('click', () => { go(i + 1); start(); });
-  dots.forEach((d) => d.addEventListener('click', () => { go(+d.dataset.n); start(); }));
-  document.getElementById('h2Hero').addEventListener('mouseenter', stop);
-  document.getElementById('h2Hero').addEventListener('mouseleave', start);
-
-  start();
+  document.querySelectorAll(sel).forEach((el) => {
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      const nx = ((e.clientX - r.left) / r.width) * 2 - 1;
+      const ny = ((e.clientY - r.top) / r.height) * 2 - 1;
+      el.style.setProperty('--glow-x', `${(nx * max).toFixed(1)}px`);
+      el.style.setProperty('--glow-y', `${(ny * max).toFixed(1)}px`);
+      el.style.setProperty('--glow-x2', `${(-nx * max * 0.7).toFixed(1)}px`);
+      el.style.setProperty('--glow-y2', `${(-ny * max * 0.7).toFixed(1)}px`);
+    });
+    el.addEventListener('pointerleave', () => {
+      el.style.setProperty('--glow-x', '0px');
+      el.style.setProperty('--glow-y', '0px');
+      el.style.setProperty('--glow-x2', '0px');
+      el.style.setProperty('--glow-y2', '0px');
+    });
+  });
 })();
 
-/* ---------------- Notícias (blog) ---------------- */
+/* ---------------- Notícias (blog) — carrossel como Pacotes ---------------- */
 (async function () {
-  const grid = document.getElementById('h2News');
-  if (!grid || !cfg.url || !cfg.anonKey) return;
+  const track = document.getElementById('h2News');
+  if (!track || !cfg.url || !cfg.anonKey) return;
 
   const CAT = { fretamento: 'Fretamento', compras: 'Compras', romarias: 'Romarias', pescarias: 'Pescarias', pacotes: 'Pacotes', dicas: 'Dicas', institucional: 'Institucional' };
+  const limit = parseInt(track.dataset.limit || '12', 10);
 
   function fmtDate(d) {
     if (!d) return '';
@@ -78,15 +65,15 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
       .select('slug, titulo, resumo, categoria, imagem_path, data_publicacao')
       .eq('ativo', true)
       .order('data_publicacao', { ascending: false })
-      .limit(3);
+      .limit(limit);
     if (error) throw error;
 
     if (!data || !data.length) {
-      grid.innerHTML = '<p class="destinos__empty">Em breve novos conteúdos no nosso blog.</p>';
+      track.innerHTML = '<p class="destinos__empty">Em breve novos conteúdos no nosso blog.</p>';
       return;
     }
 
-    grid.innerHTML = data.map((p) => {
+    const cardsHtml = data.map((p) => {
       const url = imgUrl(p.imagem_path);
       const media = url
         ? `<div class="h2-news-card__media"><img src="${esc(url)}" alt="${esc(p.titulo)}" loading="lazy"></div>`
@@ -102,8 +89,10 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
           </div>
         </a>`;
     }).join('');
+
+    renderDestinosSlider(track, cardsHtml);
   } catch (err) {
     console.error('[home2 notícias]', err);
-    grid.innerHTML = '<p class="destinos__empty">Não foi possível carregar as notícias agora.</p>';
+    track.innerHTML = '<p class="destinos__empty">Não foi possível carregar as notícias agora.</p>';
   }
 })();

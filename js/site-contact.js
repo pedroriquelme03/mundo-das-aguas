@@ -17,7 +17,11 @@ const FALLBACK = {
  mapa_url: 'https://share.google/9oMqpcefoCuCh2cz4',
  horario_atendimento: 'Segunda a Sexta, das 08h às 18h | Sábado, das 08h às 12h',
  mensagem_wa_comercial: 'Olá! Gostaria de informações.',
- mensagem_wa_emergencial: 'Olá! Preciso de suporte durante a viagem.'
+ mensagem_wa_emergencial: 'Olá! Preciso de suporte durante a viagem.',
+ instagram_url: '',
+ facebook_url: '',
+ youtube_url: '',
+ bio_url: '/bio'
 };
 
 const OLD_COMERCIAL = '5545999677835';
@@ -96,15 +100,11 @@ function applyContact(c) {
  <p>${esc(email)}</p>`;
  } else if (block.getAttribute('data-mda-block') === 'address' || title === 'endereço' || title === 'endereco') {
  block.setAttribute('data-mda-block', 'address');
-      const mapa = c.mapa_url
- ? `<a href="${esc(c.mapa_url)}" class="btn btn--outline btn--sm" target="_blank" rel="noopener" style="margin-top:8px;">Como chegar</a>`
- : '';
       const linha2 = c.endereco_linha2 ? `<br>${esc(c.endereco_linha2)}` : '';
       const cep = c.cep ? `<br>CEP ${esc(c.cep)}` : '';
  block.innerHTML = `
  <h4>Endereço</h4>
- <p>${esc(c.empresa)}<br>${esc(c.endereco_linha1)}${linha2}<br>${esc(c.cidade)}, ${esc(c.estado)}${cep}</p>
- ${mapa}`;
+ <p>${esc(c.empresa)}<br>${esc(c.endereco_linha1)}${linha2}<br>${esc(c.cidade)}, ${esc(c.estado)}${cep}</p>`;
  }
  });
 
@@ -136,6 +136,28 @@ function applyContact(c) {
  el.textContent = c[field];
  }
  });
+
+  // Redes sociais (Instagram, Facebook, YouTube, Bio)
+  const socialMap = {
+    instagram: c.instagram_url,
+    facebook: c.facebook_url,
+    youtube: c.youtube_url,
+    bio: c.bio_url || '/bio'
+  };
+  Object.entries(socialMap).forEach(([key, url]) => {
+    const href = String(url || '').trim();
+    if (!href) return;
+    document.querySelectorAll(`[data-mda-social="${key}"]`).forEach((a) => {
+      a.setAttribute('href', href);
+      if (/^https?:\/\//i.test(href)) {
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener');
+      } else {
+        a.removeAttribute('target');
+        a.removeAttribute('rel');
+      }
+    });
+  });
 
  window.MDA_CONTACT = c;
 }

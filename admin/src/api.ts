@@ -333,7 +333,11 @@ export const DEFAULT_SITE_CONTACT: SiteContactInput = {
   mapa_url: 'https://share.google/9oMqpcefoCuCh2cz4',
   horario_atendimento: 'Segunda a Sexta, das 08h às 18h | Sábado, das 08h às 12h',
   mensagem_wa_comercial: 'Olá! Gostaria de informações.',
-  mensagem_wa_emergencial: 'Olá! Preciso de suporte durante a viagem.'
+  mensagem_wa_emergencial: 'Olá! Preciso de suporte durante a viagem.',
+  instagram_url: '',
+  facebook_url: '',
+  youtube_url: '',
+  bio_url: '/bio'
 };
 
 export async function getSiteContact(): Promise<SiteContact> {

@@ -197,6 +197,10 @@ export interface SiteContact {
   horario_atendimento: string;
   mensagem_wa_comercial: string;
   mensagem_wa_emergencial: string;
+  instagram_url: string;
+  facebook_url: string;
+  youtube_url: string;
+  bio_url: string;
   updated_at?: string;
 }
 
