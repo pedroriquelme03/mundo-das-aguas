@@ -34,7 +34,7 @@ import type {
 } from './types';
 
 const app = document.getElementById('app')!;
-const LOGO_URL = `${import.meta.env.BASE_URL}images/logogomarca-mundo.png`;
+const LOGO_URL = '/images/logogomarca-mundo.png';
 
 type ModuleId = 'compras' | 'excursoes' | 'frota' | 'depoimentos' | 'blog' | 'leads' | 'biblioteca' | 'midia' | 'usuarios' | 'settings' | 'contato' | 'bio' | 'siteMedia';
 
@@ -214,7 +214,10 @@ async function renderShell() {
             <strong id="pageTitle">${esc(currentLabel)}</strong>
             <span class="muted">${!canWrite() ? 'Modo leitura' : 'Administração do site'}</span>
           </div>
-          <span class="role-badge role-badge--${role}">${esc(ROLE_LABEL[role])}</span>
+          <div class="topbar__actions">
+            <a class="topbar__site" href="/" target="_blank" rel="noopener">Ver site</a>
+            <span class="role-badge role-badge--${role}">${esc(ROLE_LABEL[role])}</span>
+          </div>
         </header>
         <main class="wrap" id="moduleRoot"><p class="muted">Carregando…</p></main>
         <footer class="admin-footer">
@@ -313,6 +316,44 @@ function closeModal() {
   if (modalRoot) modalRoot.innerHTML = '';
 }
 
+type ToastKind = 'success' | 'error';
+
+function ensureToastHost(): HTMLElement {
+  let host = document.getElementById('toastHost');
+  if (!host) {
+    host = document.createElement('div');
+    host.id = 'toastHost';
+    host.className = 'toast-host';
+    host.setAttribute('aria-live', 'polite');
+    document.body.appendChild(host);
+  }
+  return host;
+}
+
+function showToast(message: string, kind: ToastKind = 'success') {
+  const host = ensureToastHost();
+  const el = document.createElement('div');
+  el.className = `toast toast--${kind}`;
+  el.setAttribute('role', 'status');
+  el.innerHTML = `<span class="toast__msg">${esc(message)}</span><button type="button" class="toast__close" aria-label="Fechar">×</button>`;
+  host.appendChild(el);
+  requestAnimationFrame(() => el.classList.add('is-in'));
+  let closed = false;
+  const dismiss = () => {
+    if (closed) return;
+    closed = true;
+    el.classList.remove('is-in');
+    el.classList.add('is-out');
+    setTimeout(() => el.remove(), 220);
+  };
+  el.querySelector('.toast__close')!.addEventListener('click', dismiss);
+  setTimeout(dismiss, 3200);
+}
+
+function notifySaved(message = 'Alteração salva com sucesso.') {
+  showToast(message, 'success');
+}
+
 function confirmDelete(title: string, name: string, onOk: () => Promise<void>) {
   const modalRoot = document.getElementById('modalRoot')!;
   modalRoot.innerHTML = `
@@ -333,6 +374,7 @@ function confirmDelete(title: string, name: string, onOk: () => Promise<void>) {
     try {
       await onOk();
       closeModal();
+      notifySaved('Excluído com sucesso.');
       await renderModule();
     } catch (err) {
       alert('Erro ao excluir: ' + (err as Error).message);
@@ -443,6 +485,7 @@ function openComprasForm(row?: ExcursaoCompras) {
       if (isEdit && row) await updateExcursao(row.id, input);
       else await createExcursao(input);
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       errEl.textContent = 'Erro: ' + (err as Error).message;
@@ -600,6 +643,7 @@ function openExcursaoFullForm(row?: Excursao) {
       if (isEdit && row) await updateExcursaoFull(row.id, input);
       else await createExcursaoFull(input);
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       errEl.textContent = 'Erro: ' + (err as Error).message;
@@ -773,6 +817,7 @@ function openFrotaForm(row?: FrotaVeiculo) {
       if (isEdit && row) await updateFrota(row.id, input);
       else await createFrota(input);
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       errEl.textContent = 'Erro: ' + (err as Error).message;
@@ -857,6 +902,7 @@ function openDepoimentoForm(row?: Depoimento) {
       if (isEdit && row) await updateDepoimento(row.id, input);
       else await createDepoimento(input);
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       errEl.textContent = 'Erro: ' + (err as Error).message;
@@ -987,6 +1033,7 @@ function openBlogForm(row?: BlogPost) {
       if (isEdit && row) await updateBlog(row.id, input);
       else await createBlog(input);
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       errEl.textContent = 'Erro: ' + (err as Error).message;
@@ -1101,6 +1148,7 @@ function openBioForm(row?: BioLink) {
       if (isEdit && row) await updateBioLink(row.id, input);
       else await createBioLink(input);
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       errEl.textContent = 'Erro: ' + (err as Error).message;
@@ -1439,7 +1487,6 @@ async function renderContato(root: HTMLElement) {
         ${writable ? `
         <div class="settings-actions">
           <button type="submit" class="btn btn--primary" id="contatoSaveBtn">Salvar alterações</button>
-          <span class="muted" id="contatoSaved" hidden>Contato salvo.</span>
         </div>` : ''}
       </fieldset>
     </form>
@@ -1486,11 +1533,9 @@ async function renderContato(root: HTMLElement) {
         throw new Error('Números de WhatsApp inválidos. Use DDI + DDD + número.');
       }
       await saveSiteContact(input);
-      const msg = document.getElementById('contatoSaved')!;
-      msg.hidden = false;
+      notifySaved();
       btn.disabled = false;
       btn.textContent = 'Salvar alterações';
-      setTimeout(() => { msg.hidden = true; }, 2500);
       await renderContato(root);
     } catch (err) {
       alert('Erro ao salvar: ' + (err as Error).message);
@@ -1585,6 +1630,7 @@ async function renderSiteMedia(root: HTMLElement) {
         if (oldPath && !oldPath.startsWith('/') && !oldPath.startsWith('img/') && !oldPath.startsWith('images/')) {
           await removeFoto(oldPath).catch(() => undefined);
         }
+        notifySaved('Imagem atualizada.');
         await renderSiteMedia(root);
       } catch (err) {
         alert('Erro no upload: ' + (err as Error).message);
@@ -1602,6 +1648,7 @@ async function renderSiteMedia(root: HTMLElement) {
       btn.disabled = true;
       try {
         await updateSiteMedia(chave, { alt_text: alt, caption });
+        notifySaved();
         btn.textContent = 'Salvo';
         setTimeout(() => { btn.textContent = 'Salvar'; btn.disabled = false; }, 1200);
       } catch (err) {
@@ -1719,7 +1766,6 @@ async function renderSettings(root: HTMLElement) {
       ${writable ? `
         <div class="settings-actions">
           <button type="submit" class="btn btn--primary">Salvar alterações</button>
-          <span class="muted" id="settingsSaved" hidden>Configurações salvas.</span>
         </div>` : ''}
     </form>`;
 
@@ -1770,10 +1816,8 @@ async function renderSettings(root: HTMLElement) {
       };
       await saveSiteSettings(next);
       applyPanelLanguage(next.site_language);
-      const msg = document.getElementById('settingsSaved')!;
-      msg.hidden = false;
+      notifySaved();
       btn.disabled = false; btn.textContent = 'Salvar alterações';
-      setTimeout(() => { msg.hidden = true; }, 2500);
     } catch (err) {
       alert('Erro ao salvar: ' + (err as Error).message);
       btn.disabled = false; btn.textContent = 'Salvar alterações';
@@ -1897,6 +1941,7 @@ function openUsuarioForm(row?: AdminUserRow) {
         await createAdminUser({ email, password, role });
       }
       closeModal();
+      notifySaved();
       await renderModule();
     } catch (err) {
       alert('Erro: ' + (err as Error).message);
@@ -1930,7 +1975,6 @@ async function renderMidia(root: HTMLElement) {
         <label class="check"><input type="checkbox" name="applyOnUpload" ${s.applyOnUpload ? 'checked' : ''}> Aplicar crop/WebP automaticamente nos uploads</label>
         <p class="muted" style="font-size:.8rem">Sugestões: capas 16:9 · 1600px · 80–85%. Frota 4:3 · 1400px.</p>
         <button type="submit" class="btn btn--primary">Salvar configuração</button>
-        <p class="muted" id="midiaSaved" hidden>Configuração salva neste navegador.</p>
       </form>
 
       <div class="card midia-card">
@@ -1961,9 +2005,7 @@ async function renderMidia(root: HTMLElement) {
       applyOnUpload: fd.get('applyOnUpload') === 'on'
     };
     saveImageSettings(next);
-    const msg = document.getElementById('midiaSaved')!;
-    msg.hidden = false;
-    setTimeout(() => { msg.hidden = true; }, 2500);
+    notifySaved('Configuração salva neste navegador.');
   });
 
   document.getElementById('midiaFile')!.addEventListener('change', async (e) => {

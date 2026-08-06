@@ -203,7 +203,7 @@
       setTimeout(boot, 50);
       return;
     }
-    document.querySelectorAll('#h2Map, #mdaMap').forEach(initRoot);
+    document.querySelectorAll('#h2Map').forEach(initRoot);
   }
 
   if (document.readyState === 'loading') {
