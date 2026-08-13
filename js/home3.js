@@ -1,5 +1,6 @@
 // Home 3 — caixa de busca (→ orçamento no WhatsApp) + notícias do blog.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { renderDestinosSlider } from './destinos-slider.js';
 
 const cfg = window.MDA_SUPABASE || {};
 const WA = (window.MDA_CONTACT && window.MDA_CONTACT.whatsapp_comercial) || '5545999677835';
@@ -11,13 +12,37 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
   const form = document.getElementById('h3Search');
   if (!form) return;
   const tabs = form.querySelectorAll('.h3-search__tab');
+  const heroImg = document.getElementById('h3HeroBg');
   let cat = 'fretamento';
   const LABEL = { fretamento: 'fretamento', compras: 'excursão de compras', pescaria: 'pescaria', pacotes: 'pacote turístico' };
+  const HERO_BG = {
+    fretamento: { src: '/img/frota/FROTA%20(77).jpg', alt: 'Frota própria Mundo das Águas' },
+    compras: { src: '/img/ChatGPT%20Image%206%20de%20ago.%20de%202026%2C%2014_39_08.png', alt: 'Excursão de compras' },
+    pescaria: { src: '/img/ChatGPT%20Image%206%20de%20ago.%20de%202026%2C%2014_39_05.png', alt: 'Excursão de pescaria' },
+    pacotes: { src: '/img/Gramado-2.jpg', alt: 'Pacotes turísticos' }
+  };
+
+  Object.values(HERO_BG).forEach((item) => {
+    const preload = new Image();
+    preload.src = item.src;
+  });
+
+  function setHeroBg(key) {
+    const item = HERO_BG[key];
+    if (!heroImg || !item || heroImg.getAttribute('src') === item.src) return;
+    heroImg.classList.add('is-fading');
+    window.setTimeout(() => {
+      heroImg.src = item.src;
+      heroImg.alt = item.alt;
+      heroImg.classList.remove('is-fading');
+    }, 220);
+  }
 
   tabs.forEach((t) => t.addEventListener('click', () => {
     tabs.forEach((x) => { x.classList.remove('is-active'); x.setAttribute('aria-selected', 'false'); });
     t.classList.add('is-active'); t.setAttribute('aria-selected', 'true');
     cat = t.dataset.cat;
+    setHeroBg(cat);
   }));
 
   form.addEventListener('submit', (e) => {
@@ -34,11 +59,12 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
   });
 })();
 
-/* ---------------- Notícias (blog) ---------------- */
+/* ---------------- Notícias (blog) — carrossel com setas ---------------- */
 (async function () {
-  const grid = document.getElementById('h3News');
-  if (!grid || !cfg.url || !cfg.anonKey) return;
+  const track = document.getElementById('h3News');
+  if (!track || !cfg.url || !cfg.anonKey) return;
   const CAT = { fretamento: 'Fretamento', compras: 'Compras', romarias: 'Romarias', pescarias: 'Pescarias', pacotes: 'Pacotes', dicas: 'Dicas', institucional: 'Institucional' };
+  const limit = parseInt(track.dataset.limit || '12', 10);
 
   const fmtDate = (d) => { if (!d) return ''; const p = String(d).split('-'); return p.length === 3 ? `${p[2]}/${p[1]}/${p[0]}` : d; };
   const imgUrl = (path) => {
@@ -55,11 +81,11 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
       .select('slug, titulo, resumo, categoria, imagem_path, data_publicacao')
       .eq('ativo', true)
       .order('data_publicacao', { ascending: false })
-      .limit(3);
+      .limit(limit);
     if (error) throw error;
-    if (!data || !data.length) { grid.innerHTML = '<p class="destinos__empty">Em breve novos conteúdos no nosso blog.</p>'; return; }
+    if (!data || !data.length) { track.innerHTML = '<p class="destinos__empty">Em breve novos conteúdos no nosso blog.</p>'; return; }
 
-    grid.innerHTML = data.map((p) => {
+    const cardsHtml = data.map((p) => {
       const url = imgUrl(p.imagem_path);
       const media = url ? `<div class="h3-news-card__media"><img src="${esc(url)}" alt="${esc(p.titulo)}" loading="lazy"></div>` : `<div class="h3-news-card__media"></div>`;
       return `
@@ -73,8 +99,10 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
           </div>
         </a>`;
     }).join('');
+
+    renderDestinosSlider(track, cardsHtml);
   } catch (err) {
     console.error('[home3 notícias]', err);
-    grid.innerHTML = '<p class="destinos__empty">Não foi possível carregar as notícias agora.</p>';
+    track.innerHTML = '<p class="destinos__empty">Não foi possível carregar as notícias agora.</p>';
   }
 })();

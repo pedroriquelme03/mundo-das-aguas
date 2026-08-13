@@ -25,8 +25,6 @@ const forms = document.querySelectorAll('.contact-form');
 function showForm(tipo) {
  typeBtns.forEach((b) => b.classList.toggle('active', b.dataset.form === tipo));
  forms.forEach((f) => f.classList.toggle('active', f.dataset.tipo === tipo));
-  const el = document.getElementById('form-' + tipo);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 typeBtns.forEach((btn) => {

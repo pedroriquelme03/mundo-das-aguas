@@ -2094,11 +2094,11 @@ section .section-title, section .section-subtitle { text-align: center; }
 /* ========== PÁGINAS INTERNAS ========== */
 .page-banner {
   position: relative;
-  min-height: 280px;
+  min-height: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 0 56px;
+  padding: 140px 0 72px;
   overflow: hidden;
   background: var(--primary);
 }
@@ -2184,7 +2184,7 @@ section .section-title, section .section-subtitle { text-align: center; }
   .page-links__grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) {
-  .page-banner { min-height: 220px; padding: 100px 0 40px; }
+  .page-banner { min-height: 320px; padding: 110px 0 48px; }
   .page-links__grid { grid-template-columns: 1fr; }
 }
 
@@ -2428,7 +2428,8 @@ section .section-title, section .section-subtitle { text-align: center; }
   will-change: transform;
 }
 .destinos-slider__track > .destino-card,
-.destinos-slider__track > .h2-news-card {
+.destinos-slider__track > .h2-news-card,
+.destinos-slider__track > .h3-news-card {
   flex: 0 0 var(--destino-card-w, calc((100% - 48px) / 3));
   width: var(--destino-card-w, calc((100% - 48px) / 3));
   min-width: 0;

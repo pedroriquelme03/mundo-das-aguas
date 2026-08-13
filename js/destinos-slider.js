@@ -9,7 +9,7 @@ export function initDestinosSlider(root) {
   const dotsContainer = root.querySelector('.destinos-slider__dots');
   if (!viewport || !track) return;
 
-  const cards = () => Array.from(track.querySelectorAll('.destino-card, .h2-news-card'));
+  const cards = () => Array.from(track.querySelectorAll('.destino-card, .h2-news-card, .h3-news-card'));
   if (cards().length === 0) return;
 
   root.dataset.sliderReady = '1';

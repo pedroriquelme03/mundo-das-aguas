@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/home3.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body class="h3" data-page="home">
 
@@ -63,11 +64,11 @@
   <main>
     <!-- ===================== HERO BUSCA-PRIMEIRO ===================== -->
     <section class="h3-hero">
-      <div class="h3-hero__bg"><img src="/img/frota/FROTA%20(77).jpg" alt="Frota Mundo das Águas"></div>
+      <div class="h3-hero__bg"><img id="h3HeroBg" src="/img/frota/FROTA%20(77).jpg" alt="Frota Mundo das Águas"></div>
       <div class="container h3-hero__inner">
         <div class="h3-hero__copy">
           <h1 class="h3-hero__title">Encontre sua próxima viagem <b>em grande estilo.</b></h1>
-          <p class="h3-hero__text">Fretamento, excursões de compras, pescarias e pacotes turísticos pelo Brasil e Mercosul, com frota própria, Internet Starlink e acompanhamento em toda a viagem.</p>
+          <p class="h3-hero__text">Fretamento para organizadores de grupos, excursões de compras e pacotes turísticos pelo Brasil e Mercosul, com frota própria, Internet Starlink e acompanhamento em toda a viagem.</p>
         </div>
       </div>
       <div class="h3-hero__search">
@@ -99,12 +100,68 @@
       </div>
     </section>
 
-    <!-- ===================== OFERTAS — EXCURSÕES DE COMPRAS ===================== -->
+    <!-- ===================== 1. FRETAMENTO / ORGANIZADORES ===================== -->
+    <section class="h3-sec" id="organizadores">
+      <div class="container">
+        <div class="h3-banner-fret">
+          <div class="h3-banner-fret__media">
+            <img src="/img/frota/frota%20(3).jpg" alt="Frota própria Mundo das Águas" loading="lazy">
+          </div>
+          <div class="h3-banner-fret__panel">
+            <h2>Fretamento com frota própria e logística completa</h2>
+            <p>Transporte para empresas, igrejas, escolas, eventos e caravanas, com frota própria, planejamento e suporte operacional do embarque ao retorno.</p>
+            <ul class="h3-banner-fret__list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Frota própria e equipe experiente</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Logística e suporte 24h em viagem</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Orçamento sob medida para o grupo</li>
+            </ul>
+            <a href="https://wa.me/5545999677835?text=Olá! Sou organizador(a) de grupo e gostaria de um orçamento de fretamento." class="btn btn--white btn--lg" target="_blank" rel="noopener">Solicitar orçamento de fretamento</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SELOS ===================== -->
+    <section class="h3-strip">
+      <div class="container">
+        <div class="h3-strip__grid">
+          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Desde 1997</div>
+          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frota própria</div>
+          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg> Internet Starlink</div>
+          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Atendimento 24h</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== FROTA (apoio ao fretamento) ===================== -->
+    <section class="h3-sec h3-frota">
+      <span class="h3-frota__light h3-frota__light--a" aria-hidden="true"></span>
+      <span class="h3-frota__light h3-frota__light--b" aria-hidden="true"></span>
+      <span class="h3-frota__light h3-frota__light--c" aria-hidden="true"></span>
+      <div class="container">
+        <div class="h3-frota__grid">
+          <div class="h3-frota__content">
+            <h2>Conforto e tecnologia para cada excursão</h2>
+            <p>Veículos leito, semi-leito e executivo, preparados para viagens de curta e longa distância.</p>
+            <ul class="h3-frota__list">
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Internet Starlink</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ar-condicionado</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Motoristas experientes</li>
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Manutenção preventiva</li>
+            </ul>
+            <a href="/frota" class="btn btn--white btn--lg">Conhecer a frota</a>
+          </div>
+          <div class="h3-frota__media"><img src="/img/onibus/1210_frota_1210_externa_(1).jpeg" alt="Frota Mundo das Águas"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. EXCURSÕES DE COMPRAS ===================== -->
     <section class="h3-sec" id="excursoes-compras">
       <div class="container">
         <div class="h3-sec__head h3-sec__head--center">
           <div class="h3-sec__head-main">
-            <h2>Próximas saídas organizadas</h2>
+            <h2>Próximas saídas de compras</h2>
             <p>Saídas programadas para os maiores polos comerciais do Brasil, com embarque e acompanhamento durante toda a viagem.</p>
           </div>
         </div>
@@ -122,35 +179,65 @@
       </div>
     </section>
 
-    <!-- ===================== SELOS ===================== -->
-    <section class="h3-strip">
+    <!-- ===================== 3. PACOTES TURÍSTICOS + MAPA ===================== -->
+    <section class="h3-sec h3-sec--tint" id="pacotes-turisticos">
       <div class="container">
-        <div class="h3-strip__grid">
-          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Desde 1997</div>
-          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frota própria</div>
-          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg> Internet Starlink</div>
-          <div class="h3-strip__item"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Atendimento 24h</div>
+        <div class="h3-sec__head h3-sec__head--center">
+          <div class="h3-sec__head-main">
+            <h2>Pacotes turísticos e roteiros</h2>
+            <p>Romarias, pescarias e pacotes pelo Brasil e Mercosul, com estrutura e planejamento do início ao fim.</p>
+          </div>
+        </div>
+        <div class="destinos-slider" id="pacotesTuristicosSlider">
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--prev" aria-label="Anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="destinos-slider__viewport">
+            <div class="destinos-slider__track" id="pacotesTuristicosGrid" data-limit="12"><div class="destinos__empty">Carregando…</div></div>
+          </div>
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--next" aria-label="Próximo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="destinos-slider__dots" role="tablist" aria-label="Pacotes turísticos"></div>
+        </div>
+        <div class="h3-sec__more">
+          <a href="/servicos#pacotes" class="btn btn--outline">Ver todos</a>
+        </div>
+
+        <div class="h3-locator" id="h3Locator">
+          <div class="h3-locator__head">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><circle cx="11" cy="11" r="2.5"/></svg>
+            <span>Encontre um destino</span>
+          </div>
+          <div class="h3-locator__body">
+            <aside class="h3-locator__panel">
+              <h3>Encontre o destino Mundo das Águas mais próximo a você</h3>
+              <p>Pesquise ou escolha um país para ver as rotas e serviços disponíveis.</p>
+              <label class="h3-locator__search">
+                <span class="sr-only">Pesquise um destino</span>
+                <input type="search" id="h3LocatorSearch" placeholder="Pesquise um destino" autocomplete="off">
+              </label>
+              <ul class="h3-locator__list" id="h3LocatorList" aria-label="Destinos atendidos"></ul>
+            </aside>
+            <div class="h3-locator__map" id="h3LocatorMap" role="region" aria-label="Mapa de destinos"></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== DESTINOS POR CATEGORIA (tiles) ===================== -->
-    <section class="h3-sec h3-sec--tint">
+    <!-- ===================== INTERESSES / CATEGORIAS ===================== -->
+    <section class="h3-sec">
       <div class="container">
         <div class="h3-sec__head h3-sec__head--center"><div class="h3-sec__head-main"><h2>Para onde você quer viajar?</h2></div></div>
         <div class="h3-tiles">
-          <a class="h3-tile" href="/servicos#compras"><img src="/img/frota/FROTA%20(77).jpg" alt="Excursões de compras"><div class="h3-tile__body"><h3>Compras</h3><span>Brás, Bom Retiro, Goiânia, Monte Sião</span></div></a>
+          <a class="h3-tile" href="/frota"><img src="/img/frota/FROTA%20(77).jpg" alt="Fretamento"><div class="h3-tile__body"><h3>Fretamento</h3><span>Empresas, igrejas, escolas e grupos</span></div></a>
+          <a class="h3-tile" href="/servicos#compras"><img src="/img/ChatGPT%20Image%206%20de%20ago.%20de%202026%2C%2014_39_08.png" alt="Excursões de compras"><div class="h3-tile__body"><h3>Compras</h3><span>Brás, Bom Retiro, Goiânia, Monte Sião</span></div></a>
+          <a class="h3-tile" href="/servicos#pacotes"><img src="/img/Gramado-2.jpg" alt="Pacotes turísticos"><div class="h3-tile__body"><h3>Pacotes</h3><span>Serra Gaúcha, praias e parques</span></div></a>
           <a class="h3-tile" href="/servicos#pacotes"><img src="/img/Santu%C3%A1rio_Nacional_de_Aparecida_(SP).jpg" alt="Romarias"><div class="h3-tile__body"><h3>Romarias</h3><span>Aparecida e destinos religiosos</span></div></a>
-          <a class="h3-tile" href="/servicos#pacotes"><img src="/images/hero-pescaria-rio.jpg" alt="Pescarias"><div class="h3-tile__body"><h3>Pescarias</h3><span>Corumbá, Argentina, Patagônia</span></div></a>
-          <a class="h3-tile" href="/servicos#pacotes"><img src="/images/hero-pacotes-gramado.jpg" alt="Turismo Nacional"><div class="h3-tile__body"><h3>Turismo Nacional</h3><span>Serra Gaúcha, praias e parques</span></div></a>
+          <a class="h3-tile" href="/servicos#pacotes"><img src="/img/ChatGPT%20Image%206%20de%20ago.%20de%202026%2C%2014_39_05.png" alt="Pescarias"><div class="h3-tile__body"><h3>Pescarias</h3><span>Corumbá, Argentina, Patagônia</span></div></a>
           <a class="h3-tile" href="/servicos#internacional"><img src="/images/1e3e4754-71f8-4e86-b633-8f290a406d4c.JPG" alt="Mercosul"><div class="h3-tile__body"><h3>Mercosul</h3><span>Argentina, Chile, Uruguai e mais</span></div></a>
-          <a class="h3-tile" href="/frota"><img src="/img/onibus/1210_frota_1210_externa_(1).jpeg" alt="Fretamento"><div class="h3-tile__body"><h3>Fretamento</h3><span>Empresas, igrejas, escolas e grupos</span></div></a>
         </div>
       </div>
     </section>
 
-    <!-- ===================== PARA QUEM QUER VIAJAR ===================== -->
-    <section class="h3-sec h3-split-sec" id="quero-viajar">
+    <!-- ===================== PARA QUEM QUER VIAJAR (B2C) ===================== -->
+    <section class="h3-sec h3-split-sec h3-sec--tint" id="quero-viajar">
       <div class="container">
         <div class="h3-split">
           <div class="h3-split__content">
@@ -168,106 +255,21 @@
       </div>
     </section>
 
-    <!-- ===================== PARA ORGANIZADORES DE GRUPOS (B2B) ===================== -->
-    <section class="h3-sec h3-split-sec h3-split-sec--b2b" id="organizadores">
-      <div class="container">
-        <div class="h3-split h3-split--reverse">
-          <div class="h3-split__content">
-            <h2>Fretamento com frota própria e logística completa</h2>
-            <p>Transporte para empresas, igrejas, escolas, eventos e caravanas, com frota própria, planejamento e suporte operacional do embarque ao retorno.</p>
-            <ul class="h3-split__list">
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Frota própria e equipe experiente</li>
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Logística e suporte 24h em viagem</li>
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Orçamento sob medida para o grupo</li>
-            </ul>
-            <a href="https://wa.me/5545999677835?text=Olá! Sou organizador(a) de grupo e gostaria de um orçamento de fretamento." class="btn btn--orange btn--lg" target="_blank" rel="noopener">Solicitar orçamento de fretamento</a>
-          </div>
-          <div class="h3-split__media"><img src="/img/frota/frota%20(1).jpg" alt="Frota própria Mundo das Águas" loading="lazy"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PACOTES + MERCOSUL ===================== -->
-    <section class="h3-sec h3-sec--tint" id="pacotes-turisticos">
-      <div class="container">
-        <div class="h3-sec__head h3-sec__head--center">
-          <div class="h3-sec__head-main">
-            <h2>Roteiros organizados para grupos</h2>
-            <p>Romarias, pescarias e pacotes turísticos pelo Brasil e Mercosul, com estrutura e planejamento do início ao fim.</p>
-          </div>
-        </div>
-        <div class="destinos-slider" id="pacotesTuristicosSlider">
-          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--prev" aria-label="Anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-          <div class="destinos-slider__viewport">
-            <div class="destinos-slider__track" id="pacotesTuristicosGrid" data-limit="12"><div class="destinos__empty">Carregando…</div></div>
-          </div>
-          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--next" aria-label="Próximo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
-          <div class="destinos-slider__dots" role="tablist" aria-label="Pacotes turísticos"></div>
-        </div>
-        <div class="h3-sec__more">
-          <a href="/servicos#pacotes" class="btn btn--outline">Ver todos</a>
-        </div>
-
-        <div class="h3-map" id="h2Map">
-          <div class="h3-map__copy">
-            <h3>Rotas que já fazem parte da nossa história</h3>
-            <p>Passe o mouse (ou toque) em um país no mapa para ver os serviços disponíveis em cada destino.</p>
-            <ul class="h2-map__legend" aria-label="Países atendidos">
-              <li><button type="button" data-focus="BR">Brasil</button></li>
-              <li><button type="button" data-focus="AR">Argentina</button></li>
-              <li><button type="button" data-focus="CL">Chile</button></li>
-              <li><button type="button" data-focus="PE">Peru</button></li>
-              <li><button type="button" data-focus="UY">Uruguai</button></li>
-              <li><button type="button" data-focus="BO">Bolívia</button></li>
-              <li><button type="button" data-focus="CO">Colômbia</button></li>
-            </ul>
-            <a href="/servicos#pacotes" class="btn btn--outline btn--lg">Explorar pacotes</a>
-          </div>
-          <div class="h3-map__stage">
-            <span class="h3-map__light h3-map__light--a" aria-hidden="true"></span>
-            <span class="h3-map__light h3-map__light--b" aria-hidden="true"></span>
-            <span class="h3-map__light h3-map__light--c" aria-hidden="true"></span>
-            <div class="h2-map__chart" role="img" aria-label="Mapa interativo da América do Sul"></div>
-          </div>
-          <div class="h2-map__tip" hidden aria-hidden="true" role="tooltip">
-            <strong data-tip-name></strong>
-            <ul data-tip-list></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== FROTA DESTAQUE ===================== -->
-    <section class="h3-sec h3-frota">
-      <span class="h3-frota__light h3-frota__light--a" aria-hidden="true"></span>
-      <span class="h3-frota__light h3-frota__light--b" aria-hidden="true"></span>
-      <span class="h3-frota__light h3-frota__light--c" aria-hidden="true"></span>
-      <div class="container">
-        <div class="h3-frota__grid">
-          <div class="h3-frota__media"><img src="/img/onibus/1210_frota_1210_externa_(1).jpeg" alt="Frota Mundo das Águas"></div>
-          <div class="h3-frota__content">
-            <h2>Conforto e tecnologia para cada excursão</h2>
-            <p>Veículos leito, semi-leito e executivo, preparados para viagens de curta e longa distância.</p>
-            <ul class="h3-frota__list">
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Internet Starlink</li>
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Ar-condicionado</li>
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Motoristas experientes</li>
-              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Manutenção preventiva</li>
-            </ul>
-            <a href="/frota" class="btn btn--white btn--lg">Conhecer a frota</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===================== NOTÍCIAS ===================== -->
-    <section class="h3-sec h3-sec--tint">
+    <section class="h3-sec">
       <div class="container">
         <div class="h3-sec__head">
           <div class="h3-sec__head-main"><h2>Notícias e dicas de viagem</h2></div>
           <a href="/blog" class="btn btn--outline">Ver todas</a>
         </div>
-        <div class="h3-news-grid" id="h3News"><p class="destinos__empty">Carregando notícias…</p></div>
+        <div class="destinos-slider h3-news-slider" id="h3NewsSlider">
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--prev" aria-label="Notícia anterior"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="destinos-slider__viewport">
+            <div class="destinos-slider__track" id="h3News" data-limit="12"><p class="destinos__empty">Carregando notícias…</p></div>
+          </div>
+          <button type="button" class="destinos-slider__arrow destinos-slider__arrow--next" aria-label="Próxima notícia"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="destinos-slider__dots" role="tablist" aria-label="Notícias"></div>
+        </div>
       </div>
     </section>
 
@@ -277,10 +279,10 @@
         <img src="/images/hero-cataratas.jpg" alt="">
       </div>
       <div class="container">
-        <h2>Vamos organizar sua próxima viagem?</h2>
-        <p>Fale com nossa equipe e receba um orçamento sem compromisso para fretamento, excursões ou pacotes.</p>
+        <h2>Vamos organizar a próxima excursão do seu grupo?</h2>
+        <p>Fale com nossa equipe e receba um orçamento sem compromisso para fretamento, saídas de compras ou pacotes turísticos.</p>
         <div class="cta-final__btns" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-          <a href="https://wa.me/5545999677835?text=Olá! Gostaria de solicitar um orçamento." class="btn btn--white btn--lg" target="_blank" rel="noopener">Solicitar orçamento</a>
+          <a href="https://wa.me/5545999677835?text=Olá! Sou organizador(a) de grupo e gostaria de um orçamento." class="btn btn--white btn--lg" target="_blank" rel="noopener">Solicitar orçamento</a>
           <a href="/contato" class="btn btn--outline btn--lg" style="color:#fff;border-color:#fff">Fale conosco</a>
         </div>
       </div>
@@ -339,11 +341,8 @@
   <script type="module" src="/js/excursoes-compras.js"></script>
   <script type="module" src="/js/pacotes-home.js"></script>
   <script type="module" src="/js/home3.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/index.js" defer></script>
-  <script src="https://cdn.amcharts.com/lib/5/map.js" defer></script>
-  <script src="https://cdn.amcharts.com/lib/5/geodata/region/world/southAmericaLow.js" defer></script>
-  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js" defer></script>
-  <script src="/js/mapa-mercosul.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+  <script src="/js/h3-locator-map.js" defer></script>
   <script type="module" src="/js/home3-motion.js"></script>
   <script src="/js/main.js"></script>
 </body>
