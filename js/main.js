@@ -714,3 +714,22 @@ document.querySelectorAll('[data-fleet-gallery]').forEach(function (gallery) {
  goTo(index + (dx < 0 ? 1 : -1));
  }, { passive: true });
 });
+
+/* CTA slideshow (home + páginas internas) */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.cta-final__bg, #h3CtaBg').forEach(function (bg) {
+    var slides = Array.prototype.slice.call(bg.querySelectorAll('img'));
+    if (slides.length < 2) return;
+    var index = slides.findIndex(function (img) { return img.classList.contains('is-active'); });
+    if (index < 0) {
+      index = 0;
+      slides[0].classList.add('is-active');
+    }
+    window.setInterval(function () {
+      slides[index].classList.remove('is-active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('is-active');
+    }, 5000);
+  });
+})();

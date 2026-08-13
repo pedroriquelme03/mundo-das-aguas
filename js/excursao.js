@@ -147,6 +147,11 @@ function render(ex, related) {
  </section>
 
  <section class="cta-final">
+ <div class="cta-final__bg" aria-hidden="true">
+ <img class="is-active" src="/images/beto-carrero-world-parque.jpg" alt="">
+ <img src="/images/images.jpg" alt="">
+ <img src="/images/banner-41.jpg" alt="">
+ </div>
  <div class="container">
  <h2>Reserve sua vaga</h2>
  <p>${esc(ex.nome)}, ${esc(periodo)}</p>
