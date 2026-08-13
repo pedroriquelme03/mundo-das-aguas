@@ -70,6 +70,10 @@
       })
     );
 
+    if (chartEl.closest('.h3-map__stage')) {
+      root.container.set('background', am5.Rectangle.new(root, { fillOpacity: 0 }));
+    }
+
     const polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, {
         geoJSON: am5geodata_region_world_southAmericaLow
