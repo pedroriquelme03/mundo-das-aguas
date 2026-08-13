@@ -20,6 +20,7 @@ const siteItems = [
   'bio',
   'home2',
   'home3',
+  'home1',
   'frota',
   'quem-somos',
   'blog',

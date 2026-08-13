@@ -1827,9 +1827,10 @@ section .section-title, section .section-subtitle { text-align: center; }
 
 /* FOOTER */
 .footer {
-  background: var(--text);
+  background: var(--primary-dark);
   color: rgba(255,255,255,.7);
   padding: 60px 0 0;
+  border-top: 4px solid var(--orange);
 }
 .footer__grid {
   display: grid;

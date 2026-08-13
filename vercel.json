@@ -38,6 +38,8 @@
     { "source": "/pages/blog-dicas-viagem.html", "destination": "/blog/dicas-viagem", "permanent": true },
     { "source": "/pages/blog-mercosul.html", "destination": "/blog/mercosul", "permanent": true },
     { "source": "/pages/blog-paraguai.html", "destination": "/blog/paraguai", "permanent": true },
-    { "source": "/pages/blog-pescaria.html", "destination": "/blog/pescaria", "permanent": true }
+    { "source": "/pages/blog-pescaria.html", "destination": "/blog/pescaria", "permanent": true },
+    { "source": "/home3", "destination": "/", "permanent": false },
+    { "source": "/home3/", "destination": "/", "permanent": false }
   ]
 }

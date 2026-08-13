@@ -106,3 +106,21 @@ const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) =>
     track.innerHTML = '<p class="destinos__empty">Não foi possível carregar as notícias agora.</p>';
   }
 })();
+
+/* ---------------- CTA final — slideshow de fundo ---------------- */
+(function () {
+  const bg = document.getElementById('h3CtaBg');
+  if (!bg) return;
+  const slides = Array.from(bg.querySelectorAll('img'));
+  if (slides.length < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let index = slides.findIndex((img) => img.classList.contains('is-active'));
+  if (index < 0) index = 0;
+
+  window.setInterval(() => {
+    slides[index].classList.remove('is-active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('is-active');
+  }, 5000);
+})();
