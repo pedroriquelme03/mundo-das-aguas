@@ -569,6 +569,23 @@
 .h3-encomendas__rota svg { color: var(--orange); flex-shrink: 0; }
 .h3-encomendas__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
+/* Transição suave Depoimentos → próxima seção (azul → branco) */
+.h3 .testimonials.sec-blue {
+  position: relative;
+  background: var(--primary-light);
+  padding-bottom: 140px;
+}
+.h3 .testimonials.sec-blue::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--primary-light) 0%, #fff 100%);
+}
+
 @media (max-width: 820px) {
   .h3-split { grid-template-columns: 1fr; gap: 30px; }
   .h3-split--reverse .h3-split__media { order: 0; }
